@@ -117,7 +117,6 @@ State* MyClient::recv_state()
 	while (true) 
 	{
 		recv(sockClient, start, 5, 0);
-	//	cout << start<<endl;
 		bool flag = true;
 		for(int i=0;i<5;i++)
 			if (start[i] != cpstart[i])
@@ -138,13 +137,11 @@ State* MyClient::recv_state()
 	istringstream is(number);
 	int len;
 	is >> len;
-	//cout << len << "!!!!"<<endl;
 	//接受状态
 	char *save;
 	save = new char[len + 1];
 	save[len] = '\0';
 	recv(sockClient, save, len, 0);
-	//cout << save << endl;
 	int aaal;
 	//将byte流的数据转换成实例
 	regex reg0("(.*);(.*);(.*);(.*);#(.*);(.*);(.*);#");
@@ -158,10 +155,8 @@ State* MyClient::recv_state()
 	istringstream iis(m0.str(1));
 	State* state = new State;
 	iis >> w;
-//	cout << "!!!!!!!!!!!!!!!!!!!!!~~~~~~~~~~~!!1" << w << "!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
 	state->winner = w % 10;
 	state->turn = w / 10;
-	//cout << "Winner is" << state->winner << endl;
 	//将resource和age实例化
 	for (int i = 0; i < 2; i++)
 	{
@@ -175,12 +170,9 @@ State* MyClient::recv_state()
 		iis >> temp;
 		int building_point;
 		iis >> building_point;
-//		cout << building_point;
 		_resource temp_resource(building_point, int_money);
 		state->resource[i] = temp_resource;
-	//	cout << "player"<<i<<"!!!"<<"building_point"<<state->resource[i].building_point <<"money"<<state->resource[i].resource << endl;
 		state->age[i] = (Age)age;
-	//	cout << "age"<<state->age[i] << endl;
 	}
 	//将building实例化
 	int unit_id, building_type, posx, posy, int_main;
@@ -206,10 +198,8 @@ State* MyClient::recv_state()
 			BuildingType q;
 			q = (BuildingType)building_type;
 			state->building[i].push_back(Building(q, hp, Position(posx, posy), i, unit_id, bool_main));
-		//	cout << q << " " << hp << " " << posx << " " << posy << " " <<i << " " << unit_id << " " << bool_main << endl;
 		}
 	}
-	//cout << "hhh" << endl;
 	int soldier_name;
 	for (int i = 0; i < 2; i++)
 	{
@@ -228,7 +218,6 @@ State* MyClient::recv_state()
 			SoldierName q;
 			q = (SoldierName)soldier_name;
 			state->soldier[i].push_back(Soldier(q, hp, Position(posx, posy), i, unit_id));
-		//	cout << q << " " << hp << " " << posx << " " << posy << " " << i << " " << unit_id << endl;
 		}
 	}
 	//resource[2] building[2] soldier[2] 储存了0 1玩家各自对应的全部信息

@@ -33,7 +33,7 @@ int main()
 	for (int i = 0; i < 50; i++)
 		c1.push_back(command1(i, 3));
 	for (int i = 0; i < 50; i++)
-		c2.push_back(command2(6, i + 10, 4, 4, 5, 5)); //�����õ�
+		c2.push_back(command2(6, i + 10, 4, 4, 5, 5)); 
 	cilent.start_connection();
 	map = cilent.map;
 	flag = cilent.flag;
@@ -51,28 +51,20 @@ int main()
 		if (state == laststate)
 			continue;
 		laststate = state;
-	/*	if (state->turn == 30)
-		{
-			int ee;
-			cin >> ee;
-		}*/
-	//	cout << "********************"<<state->winner <<"****************************"<< endl;
-		if (state->winner != 2)//������ʤ����
+		if (state->winner != 2)
 			break;
 		f_player();
 		cilent.send_command(_updateAge,c1,c2);
 		_updateAge = false;
-		c1.clear();//ע ���f_player()�ǿյ� ���ȥ��clear ����ᷢ��ָ�� û����
+		c1.clear();
 		c2.clear();
-		//Sleep(100);
-	//	cout << "********************************************************" << endl;
 	}
 	if (state->winner == 1)
 		cout << "Winner is 1" << endl;
 	else if (state->winner == 0)
 		cout << "Winner is 0" << endl;
 	else if (state->winner == 2)
-		cout << "draw" << endl;
+		cout << "Draw" << endl;
 	goon = false;
 	Sleep(1000);
 	delete sstate;
