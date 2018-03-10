@@ -28,6 +28,7 @@ void* Listen(void* arg)
 		state = s;
 		delete t;
 	}
+	return NULL;
 }
 
 int main()

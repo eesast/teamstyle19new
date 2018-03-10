@@ -153,7 +153,7 @@ State* MyClient::recv_state()
 	regex_match(s, m0, reg0);
 //m0.str(2/5) 储存了时代 资源 科技
 //m0.str(3/6) 储存了建筑的信息
-//m0.str(4/7) 储存了solider的信息
+//m0.str(4/7) 储存了soldier的信息
 	int w;
 	istringstream iis(m0.str(1));
 	State* state = new State;
@@ -210,28 +210,28 @@ State* MyClient::recv_state()
 		}
 	}
 	//cout << "hhh" << endl;
-	int solider_name;
+	int soldier_name;
 	for (int i = 0; i < 2; i++)
 	{
-		istringstream soliders(m0.str(4 + i * 3));
+		istringstream soldiers(m0.str(4 + i * 3));
 		while (true)
 		{
 			unit_id = -1;
-			soliders >> unit_id;
+			soldiers >> unit_id;
 			if (unit_id == -1)
 				break;
-			soliders >> solider_name;
-			soliders >> hp;
-			soliders >> posx;
-			soliders >> posy;
-			soliders >> temp;
-			SoliderName q;
-			q = (SoliderName)solider_name;
-			state->solider[i].push_back(Solider(q, hp, Position(posx, posy), i, unit_id));
+			soldiers >> soldier_name;
+			soldiers >> hp;
+			soldiers >> posx;
+			soldiers >> posy;
+			soldiers >> temp;
+			SoldierName q;
+			q = (SoldierName)soldier_name;
+			state->soldier[i].push_back(Soldier(q, hp, Position(posx, posy), i, unit_id));
 		//	cout << q << " " << hp << " " << posx << " " << posy << " " << i << " " << unit_id << endl;
 		}
 	}
-	//resource[2] building[2] solider[2] 储存了0 1玩家各自对应的全部信息
+	//resource[2] building[2] soldier[2] 储存了0 1玩家各自对应的全部信息
 	//Winner 储存当前游戏的胜利者
 	return state;
 }

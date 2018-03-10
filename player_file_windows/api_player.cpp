@@ -11,10 +11,10 @@ void updateAge()
 {
 	_updateAge = true;
 }
-void construct(BuildingType building_type, Position pos, Position solider_pos) //The solier position is not set now
+void construct(BuildingType building_type, Position pos, Position soldier_pos) //The solier position is not set now
 {
-	//solider position ÊÇ¸ÉÊ²Ã´µÄ£¿£¿£¿
-	c2.push_back(command2(int(building_type), 1, pos.x, pos.y,solider_pos.x,solider_pos.y));
+	//soldier position ï¿½Ç¸ï¿½Ê²Ã´ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½
+	c2.push_back(command2(int(building_type), 1, pos.x, pos.y,soldier_pos.x,soldier_pos.y));
 }
 void upgrade(int unit_id)
 {

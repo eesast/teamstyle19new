@@ -27,7 +27,7 @@ struct State
 	_resource resource[2];
 	Age age[2];
 	vector<Building> building[2];
-	vector<Solider> solider[2];
+	vector<Soldier> soldier[2];
 };
 
 struct command1

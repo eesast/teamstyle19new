@@ -10,7 +10,7 @@ using namespace std;
 
 MyClient::MyClient()
 {
-	//ÉèÖÃsocketµÄ»ù±¾²ÎÊý
+	//ï¿½ï¿½ï¿½ï¿½socketï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 /*	WSAStartup(MAKEWORD(2, 2), &wsaData);
 	sockClient = socket(AF_INET, SOCK_STREAM, 0);
 	addrServer.sin_addr.S_un.S_addr = inet_addr("127.0.0.1"); 
@@ -35,7 +35,7 @@ void MyClient::change_map(char* map0)
 	}
 }
 
-void MyClient::start_connection()  //Ïò·þÎñÆ÷·¢ÆðÁ¬½ÓÇëÇó
+void MyClient::start_connection()  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 {
 //	connect(sockClient, (SOCKADDR*)&addrServer, sizeof(SOCKADDR));	
     connect(sockClient,(struct sockaddr*)&addrServer,sizeof(struct sockaddr_in));
@@ -45,7 +45,7 @@ void MyClient::start_connection()  //Ïò·þÎñÆ÷·¢ÆðÁ¬½ÓÇëÇó
 	istringstream os(sflag);
 	os >> flag;
 	cout << "my flag is" << flag;
-	int size = 200 * 200;  //size¿ÉÒÔµ÷Õû
+	int size = 200 * 200;  //sizeï¿½ï¿½ï¿½Ôµï¿½ï¿½ï¿½
 	smap = new char[size + 1];
 	recv(sockClient, smap, size, 0);
 	smap[size] = '\0';
@@ -117,7 +117,7 @@ State* MyClient::recv_state()
 	char start[6];
 	start[5] = '\0';
 	char* cpstart = "start";
-	//µÈ´ýstartÃüÁî Ò»µ©½ÓÊÕµ½startÃüÁî¾Í¿ªÊ¼½ÓÊÜ×´Ì¬
+	//ï¿½È´ï¿½startï¿½ï¿½ï¿½ï¿½ Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½startï¿½ï¿½ï¿½ï¿½Í¿ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½×´Ì¬
 	while (true) 
 	{
 		recv(sockClient, start, 5, 0);
@@ -133,7 +133,7 @@ State* MyClient::recv_state()
 			break;
 	}
 
-	//½ÓÊÜ½ÓÏÂÀ´´«ÈëµÄstateÓÐ¶àÉÙ¸ö×Ö½Ú ´«À´µÄÊý×ÖÒ»¶¨ÊÇ9Î» ·ÇÊý×ÖÎ»ÓÃ#²¹Æë
+	//ï¿½ï¿½ï¿½Ü½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½stateï¿½Ð¶ï¿½ï¿½Ù¸ï¿½ï¿½Ö½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½9Î» ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½#ï¿½ï¿½ï¿½ï¿½
 	char number[10];
 	for (int i = 0; i < 9; i++)
 		number[i] = '#';
@@ -143,21 +143,21 @@ State* MyClient::recv_state()
 	int len;
 	is >> len;
 	//cout << len << "!!!!"<<endl;
-	//½ÓÊÜ×´Ì¬
+	//ï¿½ï¿½ï¿½ï¿½×´Ì¬
 	char *save;
 	save = new char[len + 1];
 	save[len] = '\0';
 	recv(sockClient, save, len, 0);
 	//cout << save << endl;
 
-	//½«byteÁ÷µÄÊý¾Ý×ª»»³ÉÊµÀý
+	//ï¿½ï¿½byteï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½
 	regex reg0("(.*);(.*);(.*);(.*);#(.*);(.*);(.*);#");
 	smatch m0;
 	string s(save);
 	regex_match(s, m0, reg0);
-//m0.str(2/5) ´¢´æÁËÊ±´ú ×ÊÔ´ ¿Æ¼¼
-//m0.str(3/6) ´¢´æÁË½¨ÖþµÄÐÅÏ¢
-//m0.str(4/7) ´¢´æÁËsoliderµÄÐÅÏ¢
+//m0.str(2/5) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ ï¿½ï¿½Ô´ ï¿½Æ¼ï¿½
+//m0.str(3/6) ï¿½ï¿½ï¿½ï¿½ï¿½Ë½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+//m0.str(4/7) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½soldierï¿½ï¿½ï¿½ï¿½Ï¢
 	int w;
 	istringstream iis(m0.str(1));
 	State* state = new State;
@@ -166,7 +166,7 @@ State* MyClient::recv_state()
 	state->winner = w % 10;
 	state->turn = w / 10;
 //	cout << "Winner is" << state->winner << endl;
-	//½«resourceºÍageÊµÀý»¯
+	//ï¿½ï¿½resourceï¿½ï¿½ageÊµï¿½ï¿½ï¿½ï¿½
 	for (int i = 0; i < 2; i++)
 	{
 		istringstream iis(m0.str(2+3*i));
@@ -187,7 +187,7 @@ State* MyClient::recv_state()
 		//cout << i << "!!" << state->age[i] << endl;
 	}
 	
-	//½«buildingÊµÀý»¯
+	//ï¿½ï¿½buildingÊµï¿½ï¿½ï¿½ï¿½
 	int unit_id, building_type, posx, posy, int_main;
 	double hp;
 	bool bool_main;
@@ -214,28 +214,28 @@ State* MyClient::recv_state()
 			//cout << q << " " << hp << " " << posx << " " << posy << " " <<i << " " << unit_id << " " << bool_main << endl;
 		}
 	}
-	int solider_name;
+	int soldier_name;
 	for (int i = 0; i < 2; i++)
 	{
-		istringstream soliders(m0.str(4 + i * 3));
+		istringstream soldiers(m0.str(4 + i * 3));
 		while (true)
 		{
 			unit_id = -1;
-			soliders >> unit_id;
+			soldiers >> unit_id;
 			if (unit_id == -1)
 				break;
-			soliders >> solider_name;
-			soliders >> hp;
-			soliders >> posx;
-			soliders >> posy;
-			soliders >> temp;
-			SoliderName q;
-			q = (SoliderName)solider_name;
-			state->solider[i].push_back(Solider(q, hp, Position(posx, posy), i, unit_id));
+			soldiers >> soldier_name;
+			soldiers >> hp;
+			soldiers >> posx;
+			soldiers >> posy;
+			soldiers >> temp;
+			SoldierName q;
+			q = (SoldierName)soldier_name;
+			state->soldier[i].push_back(Soldier(q, hp, Position(posx, posy), i, unit_id));
 		//	cout << q << " " << hp << " " << posx << " " << posy << " " << i << " " << unit_id << endl;
 		}
 	}
-	//resource[2] building[2] solider[2] ´¢´æÁË0 1Íæ¼Ò¸÷×Ô¶ÔÓ¦µÄÈ«²¿ÐÅÏ¢
-	//Winner ´¢´æµ±Ç°ÓÎÏ·µÄÊ¤ÀûÕß
+	//resource[2] building[2] soldier[2] ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0 1ï¿½ï¿½Ò¸ï¿½ï¿½Ô¶ï¿½Ó¦ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½Ï¢
+	//Winner ï¿½ï¿½ï¿½æµ±Ç°ï¿½ï¿½Ï·ï¿½ï¿½Ê¤ï¿½ï¿½ï¿½ï¿½
 	return state;
 }
