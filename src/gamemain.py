@@ -377,51 +377,64 @@ class GameMain:
                 # 去重，并保持原来指令次序
                 del_repeat = lambda x, y: x if y in x else x + [y]
                 new_instrument_list = reduce(del_repeat, [[], ] + instrument_list)
-
                 if instrument_type == 'construct':
-                    for instrument in new_instrument_list:
+                    instrument_num = -1
+                    while instrument_num < len(new_instrument_list)-1:
+                        instrument_num += 1
+                        instrument = new_instrument_list[instrument_num]
                         building_type = instrument[0]
 
                         new_construct_pos = Position(instrument[1][0],instrument[1][1])
 
                         # 生产建筑必须指定正确的生产位置
                         if building_type >0 and building_type <9:
-                            print("*******", instrument[2][0])
+                            # print("*******", instrument[2][0])
                             if len(instrument) <2:
                                 new_instrument_list.remove(instrument)
+                                instrument_num -=1
                                 continue
                             new_produce_pos = Position(instrument[2][0],instrument[2][1])
                         # 判断建造时代是否符合要求
                         if (OriginalBuildingAttribute[BuildingType(building_type)][BuildingAttribute.AGE].value >
                                 self.status[current_flag]['tech']):
                             new_instrument_list.remove(instrument)
+                            instrument_num -= 1
                             continue
                         # 判断建造位置是否符合要求
                         if (self._map[new_construct_pos.x][new_construct_pos.y] == 1 or
                                     self._map[new_construct_pos.x][new_construct_pos.y] == 2):
                             new_instrument_list.remove(instrument)
+                            instrument_num -= 1
                             continue
+
+
                         building_range = 8  # 建造范围未定，暂设为8
                         can_build = False
-                        count = 0
+
                         for building_list in self.buildings[current_flag].values():
-                            if not building_list:
-                                count += 1
-                            if count == 3:
+                            if (abs(new_construct_pos.x - current_flag * (self._map_size -1)) <= 10 and
+                                abs(new_construct_pos.y - current_flag * (self._map_size -1)) <=10):
                                 can_build = True
-                            if new_construct_pos.x - current_flag * (self._map_size -1) <= 10:
-                                can_build = True
+
                             for building in building_list:
                                 if (abs(building.Position.x - new_construct_pos.x) +
                                         abs(building.Position.x - new_construct_pos.x) <=
                                         building_range):
                                     can_build = True
+
                                     break
-                            if can_build:
+                            if not can_build:
                                 break
+                        for building_list in self.buildings[current_flag].values():
+                            for building in building_list:
+                                if (building.Position.x == new_construct_pos.x and
+                                                building.Position.y == new_construct_pos.y):
+                                    can_build = False
 
                         if not can_build:
                             new_instrument_list.remove(instrument)
+                            instrument_num -= 1
+
                             continue
                         # 判断生产位置是否符合要求
                         if (OriginalBuildingAttribute[building_type][BuildingAttribute.BUILDING_TYPE] ==
@@ -430,16 +443,23 @@ class GameMain:
                                     abs(new_produce_pos.y - new_construct_pos.y) >
                                     OriginalBuildingAttribute[building_type][BuildingAttribute.ORIGINAL_RANGE]):
                                 new_instrument_list.remove(instrument)
+                                instrument_num -= 1
                                 continue
                             elif self._map[new_produce_pos.x][new_produce_pos.y] != 1:
                                 new_instrument_list.remove(instrument)
+                                instrument_num -= 1
                                 continue
+
 
                 else:
                     # 去除指令对象id越界或不符合要求的情况
-                    for instrument in new_instrument_list.copy():
+                    instrument_num = -1
+                    while instrument_num < len(new_instrument_list)-1:
+                        instrument_num += 1
+                        instrument = new_instrument_list[instrument_num]
                         if instrument > self.total_id or instrument < 0:
                             new_instrument_list.remove(instrument)
+                            instrument_num -= 1
                             continue
                         # 去除指令对象不是building的情况
                         is_building = False
@@ -457,7 +477,9 @@ class GameMain:
                                 break
                         if not is_building:
                             new_instrument_list.remove(instrument)
+                            instrument_num -= 1
                             continue
+
                             # 资源不足，建筑和时代已经到达最高级的情况已经在操作函数中处理
                             # sell指令去重之后不会出现卖空的情况
                             # 其他未考虑到的情况可以继续进行补充
@@ -829,8 +851,7 @@ class GameMain:
                             Building(building_name, building_pos, current_flag, total_id, False,
                                      self.status[current_flag]['tech'], produce_pos)
                             )
-
-                    total_id += 1
+                    self.total_id += 1
                     self.status[current_flag]['money'] -= money_cost
                     self.status[current_flag]['building'] -= building_point_cost
                     self.instruments[current_flag]['construct'].append(construct_instrument)
