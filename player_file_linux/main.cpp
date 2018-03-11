@@ -72,13 +72,13 @@ int main()
 	else if (state->winner == 2)
 		cout << "draw" << endl;
 	goon = false;
-	ofstream os;
+/*	ofstream os;
 	os.open("result.txt");
 	if(state->winner==flag)
 		os<<0;
 	else
 		os<<1;
 	os<<" ";
-	os<<state->turn;
+	os<<state->turn;*/
 	pthread_join(com_thread,NULL);
 }
