@@ -5,7 +5,7 @@ import json
 import time
 import os
 import sys
-
+import copy
 import gamemain
 import unit
 import communication
@@ -35,9 +35,11 @@ def logist_platform(server,game,turn):
     status=game.status
     status[0]['money']=int(status[0]['money'])
     status[1]['money']=int(status[1]['money'])
-    building=game.buildings
-    units=game.units
-    winner=game.winner
+    building=copy.deepcopy(game.buildings)
+    building[0]['mainbase'] = [game.main_base[0]]
+    building[1]['mainbase'] = [game.main_base[1]]
+    units=copy.deepcopy(game.units)
+    winner=copy.deepcopy(game.winner)
     #units[0]=[Solider(4,100,unit.Position(7,7),1,100)]
     #units[1]=units[0]
    # building[0]=[Building(BuildingType.Hawkin,unit.Position(9,9),1,4,0,3,unit.Position(22,22))]

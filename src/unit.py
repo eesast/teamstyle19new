@@ -109,7 +109,7 @@ OriginalBuildingAttribute = {
     BuildingType.Base: {BuildingAttribute.BUILDING_TYPE: UnitType.Base,
                         BuildingAttribute.ORIGINAL_HP: 100000, BuildingAttribute.ORIGINAL_ATTACK: None,
                         BuildingAttribute.ORIGINAL_RANGE: 0, BuildingAttribute.TRAGET: None,
-                        BuildingAttribute.AGE: None, BuildingAttribute.ORIGINAL_RESOURCE: None,
+                        BuildingAttribute.AGE: Age.BIT, BuildingAttribute.ORIGINAL_RESOURCE: 0,
                         BuildingAttribute.ORIGINAL_BUILDING_POINT: None, BuildingAttribute.AOE: None,
                         BuildingAttribute.CD: None}
 ,  # need to complete
