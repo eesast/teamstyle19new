@@ -93,8 +93,9 @@ if len(sys.argv) > 1:
 game = gamemain.GameMain()
 server=communication.MainServer('127.0.0.1',9999)
 map=game._map
-server.start_connection(map)
 game.map_save()
+print('Waiting for connecting···')
+server.start_connection(map)
 
 
 #print('start')
@@ -114,15 +115,19 @@ while game.winner == 2:
     #        'update_age': False,
     #    } for _ in range(2)]
     logist_platform(server, game, game.turn_num)
+    if game.winner!=2:
+        break
     game.next_tick()
     if game.turn_num>1000:
         break
 status=game.status
 status[0]['money']=int(status[0]['money'])
 status[1]['money']=int(status[1]['money'])
-building=game.buildings
-units=game.units
-winner=game.winner
+building=copy.deepcopy(game.buildings)
+building[0]['mainbase'] = [game.main_base[0]]
+building[1]['mainbase'] = [game.main_base[1]]
+units=copy.deepcopy(game.units)
+winner=copy.deepcopy(game.winner)
 turn=game.turn_num
 player_0, player_1 = server.send_state(turn, status, building, units, winner)
 

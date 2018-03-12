@@ -112,11 +112,15 @@ class MainServer(object):
         #发送start 告诉选手端接下来的要发送命令 防治出现通信问题
         try:
             self.sock[0].send(b'start')
-        except ConnectionResetError:
+        except BrokenPipeError:
+            player_0=0
+        except BrokenPipeError:
             player_0=0
         try:
             self.sock[1].send(b'start')
         except ConnectionResetError:
+            player_1=0
+        except BrokenPipeError:
             player_1=0
 
         l=str(len(state))
@@ -128,17 +132,25 @@ class MainServer(object):
             self.sock[0].send(l)
         except ConnectionResetError:
             player_0=0
+        except BrokenPipeError:
+            player_0=0
         try:
             self.sock[1].send(l)
         except ConnectionResetError:
+            player_1=0
+        except BrokenPipeError:
             player_1=0
         try:
             self.sock[0].send(state)
         except ConnectionResetError:
             player_0=0
+        except BrokenPipeError:
+            player_0=0
         try:
             self.sock[1].send(state)
         except ConnectionResetError:
+            player_1=0
+        except BrokenPipeError:
             player_1=0
         #将数据长度以byte的形式
         self.sock[0].setblocking(0)
@@ -161,6 +173,8 @@ class MainServer(object):
                     pass
                 except ConnectionResetError:
                     player[0]=0
+                except BrokenPipeError:
+                    player[0]=0
             self.sock[0].setblocking(1)
             self.sock[1].setblocking(1)
             if flag[0]==True:
@@ -175,6 +189,8 @@ class MainServer(object):
                     data=data.split(',')  #将commandid和unitid分离
                     command.append(data)
                 except ConnectionResetError:
+                    player[0]=0
+                except BrokenPipeError:
                     player[0]=0
             self.sock[0].setblocking(0)
             self.sock[0].settimeout(0.01)
