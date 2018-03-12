@@ -74,7 +74,7 @@ def logist_platform(server,game,turn):
         game.winner = 1
     if player_1 == 0 and player_0 != 0:
         game.winner = 0
-    if player_0 == player_1 == 0:
+    if player_0 == 0 and player_1 == 0:
         game.turn_num = 1001;
     #game在这里处理命令command
 
@@ -84,9 +84,9 @@ def logist_platform(server,game,turn):
 
 ############################################################################
 
-filename = "ts19" + time.strftime("%m%d%H%M%S") + ".txt"  # 将来改成rpy
-if len(sys.argv) > 1:
-    filename = sys.argv[1]
+# filename = "ts19" + time.strftime("%m%d%H%M%S") + ".txt"  # 将来改成rpy
+# if len(sys.argv) > 1:
+#     filename = sys.argv[1]
 
 # read_file = open("test.txt", 'r')
 game = GameMain()
@@ -120,6 +120,6 @@ while game.winner == 2:
 
 
 
-with open(filename, 'w') as f:
-    f.writelines(file)
-    f.write(str(game.winner))
+# with open(filename, 'w') as f:
+#     f.writelines(file)
+#     f.write(str(game.winner))
