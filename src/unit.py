@@ -8,7 +8,7 @@ from enum import IntEnum
 但没有设置 set函数的装饰器，因此属性现在处于能读不能取的状态 在以后确定了哪些变量需要在运行期间重新赋值再加入对应的set的装饰器"""
 
 # ***********************The Define of Global Parameters************************
-Inf = 9999999
+Inf = 1000
 
 
 # *****************************Enum Value ant Table*****************************
@@ -211,6 +211,7 @@ OriginalBuildingAttribute = {
                           BuildingAttribute.CD: 5},
 
     BuildingType.Programmer: {BuildingAttribute.BUILDING_TYPE: UnitType.RESOURCE_BUILDING,
+                                BuildingAttribute.ORIGINAL_RESOURCE: 100,
                               BuildingAttribute.ORIGINAL_HP: 100, BuildingAttribute.ORIGINAL_ATTACK: 50},
     # use attack stand for the ability of resource building to get resource
 }
