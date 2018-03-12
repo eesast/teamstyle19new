@@ -17,9 +17,9 @@ class GameMain:
 
     units = [{} for _ in range(2)]
 
-    main_base = [None] * 2
 
     buildings = [{
+        'mainbase':[],
         'produce': [],
         'defence': [],
         'resource': []
@@ -59,10 +59,10 @@ class GameMain:
         _map_size = self._map_size
 
         # 生成基地，位置定在0,0和199,199处
-        self.main_base[0] = Building(BuildingType.Base, Position(0, 0), 0, self.total_id,
+        self.buildings[0]['mainbase'] = Building(BuildingType.Base, Position(0, 0), 0, self.total_id,
                                      False,1,Position(0,0))
         self.total_id += 1
-        self.main_base[1] = Building(BuildingType.Base, Position(199, 199), 1, self.total_id,
+        self.buildings[1]['mainbase'] = Building(BuildingType.Base, Position(199, 199), 1, self.total_id,
                                      False, 1, Position(199,199))
         self.total_id += 1
         for i in range(7):
