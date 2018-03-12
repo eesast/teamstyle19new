@@ -395,6 +395,11 @@ class GameMain:
                                 new_instrument_list.remove(instrument)
                                 instrument_num -=1
                                 continue
+                            if abs(instrument[2][0] - instrument[1][0]) + \
+                                abs (instrument[2][1] - instrument[1][1]) > \
+                                OriginalBuildingAttribute[BuildingType(instrument[0])][BuildingAttribute.ORIGINAL_RANGE]:
+                                new_instrument_list.remove(instrument)
+                                instrument_num -= 1
                             new_produce_pos = Position(instrument[2][0],instrument[2][1])
                         # 判断建造时代是否符合要求
                         if (OriginalBuildingAttribute[BuildingType(building_type)][BuildingAttribute.AGE].value >
@@ -960,8 +965,8 @@ class GameMain:
 
     def update_age_phase(self):
         """Deal with the update_age instruments"""
-        basic_consumption = 0  # 基础升级科技消耗，未定
-        increased_consumption = 0  # 科技每升一级，下次升级科技资源消耗增量
+        basic_consumption = 2000  # 基础升级科技消耗，未定
+        increased_consumption = 1000  # 科技每升一级，下次升级科技资源消耗增量
         for flag in range(2):
             if self.raw_instruments[flag]['update_age']:
                 consumption = basic_consumption + increased_consumption * self.status[flag]['tech']
