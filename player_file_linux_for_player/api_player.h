@@ -122,11 +122,11 @@ const int OriginalBuildingAttribute[Building_Type][Attr_Num] = {
     {DEFENSIVE_BUILDING,  225,  4,      35,   DATA,            PROCESSOR, 225,    25,    0,      1},
     {DEFENSIVE_BUILDING,  300,  25,     25,   SUBSTANCE,       ALGORITHM, 300,    30,    0,      2},
     {DEFENSIVE_BUILDING,  480,  5,      25,   ALL,             NETWORK,   480,    50,    2,      1},
-    {DEFENSIVE_BUILDING,  450, 5/*随便编的数字，为了让编译通过*/,30,   DATA,            NETWORK,   450,    45,    0,      1},
+    {DEFENSIVE_BUILDING,  450, 5/**/,30,   DATA,            NETWORK,   450,    45,    0,      1},
     {DEFENSIVE_BUILDING,  900,  0,      10,   ALL,             AI,        900,    90,    0,      1},
     {DEFENSIVE_BUILDING,  1500, INT_MAX,10,   ALL,             AI,        1500,   100,   1,      5},
 
-    {RESOURCE_BUILDING,            100,  50,     _NULL,_NULL,          _NULL,      _NULL,  _NULL, _NULL,  _NULL}
+    {RESOURCE_BUILDING,            100,  50,     _NULL,_NULL,          _NULL,      100,  _NULL, _NULL,  _NULL}
 };
 
 const int OriginalSoldierAttribute[Soldier_Type][Soldier_Attr_Num] = {

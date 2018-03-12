@@ -26,8 +26,8 @@ class GameMain:
     } for _ in range(2)]
 
     status = [{
-        'money': 10000,
-        'tech': 3,
+        'money': 1000,
+        'tech': 0,
         'building': 0,
     } for _ in range(2)]
 
@@ -437,6 +437,11 @@ class GameMain:
                                 if (building.Position.x == new_construct_pos.x and
                                                 building.Position.y == new_construct_pos.y):
                                     can_build = False
+                        for building_list in self.buildings[1 - current_flag].values():
+                            for building in building_list:
+                                if (building.Position.x == new_construct_pos.x and
+                                                building.Position.y == new_construct_pos.y):
+                                    can_build = False
 
                         if not can_build:
                             new_instrument_list.remove(instrument)
@@ -835,9 +840,13 @@ class GameMain:
                         produce_pos = None
 
                     # Ignore the instruments that spend too much.
-                    if (self.status[current_flag]['money'] < money_cost and
+                    if (self.status[current_flag]['money'] < money_cost or
                                 self.status[current_flag]['building'] < building_point_cost):
                         continue
+                    print('money')
+                    print(current_flag,self.status[current_flag]['money'],money_cost)
+                    print("buildingpoint")
+                    print(current_flag,self.status[current_flag]['building'],building_point_cost)
 
                     if (OriginalBuildingAttribute[construct_instrument[0]][BuildingAttribute.BUILDING_TYPE] ==
                             UnitType.PRODUCTION_BUILDING):
@@ -1129,6 +1138,8 @@ class GameMain:
             'sell': [],  # id
             'update_age': False,
             } for _ in range(2)]
+        self.status[0]['building'] = 0 + 60 * self.status[0]['tech']
+        self.status[1]['building'] = 0 + 60 * self.status[1]['tech']
 
 def main():
     game = GameMain()
