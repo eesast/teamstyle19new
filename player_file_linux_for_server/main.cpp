@@ -54,16 +54,17 @@ int main()
 			continue;
 		laststate = state;
 
-//		cout << "********************"<<state->turn <<"****************************"<< endl;
+		cout << "********************"<<state->turn <<"****************************"<< endl;
 		if (state->winner != 2)
 			break;
+		cout<<state->building[0].size()<<endl;
 		f_player();
 		cilent.send_command(_updateAge,c1,c2);
 		_updateAge = false;
 		c1.clear();
 		c2.clear();
 		//Sleep(100);
-//	    cout << "********************************************************" << endl;
+	    cout << "********************************************************" << endl;
 	}
 	if (state->winner == 1)
 		cout << "Winner is 1" << endl;
