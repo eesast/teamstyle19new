@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import random
+import json
 
 from unit import *
 
@@ -48,6 +49,7 @@ class GameMain:
         'upgrade': [],
         'sell': [],
         'update_age': [],
+        'produce':[],
         'resource': False
     } for _ in range(2)]
 
@@ -952,6 +954,7 @@ class GameMain:
                         Solider(solider_name, solider_hp, solider_pos, solider_flag, solider_id)
                     building.CD_left = cd  # 重置CD
                     self.total_id += 1
+                    self.instruments[current_flag]['produce'].append(solider_id)
                 else:
                     building.CD_left = building.CD_left - 1
 
@@ -1026,7 +1029,7 @@ class GameMain:
                     out.write(line)
 
     def map_save(self):
-        jmap=JSONEncoder().encode(self._map)
+        jmap=json.dumps(self._map)
         with open('map_save.txt','w') as f:
             f.write(jmap)
 
@@ -1065,13 +1068,13 @@ class GameMain:
                 building_temp = {'type': str(building.BuildingType), 'pos': (building.Position.x, building.Position.y),
                                  'hp': building.HP, 'flag': building.Flag, 'id': building.Unit_ID,
                                  'maintain': building.Is_Maintain, 'level': building.level,
-                                 'pro_pos': (building.ProducePos.x, building.ProducePos.y)}
+                                 'pro_pos': ()}
                 jbuildings[i]['defence'].append(building_temp)
             for building in self.buildings[i]['resource']:
                 building_temp = {'type': str(building.BuildingType), 'pos': (building.Position.x, building.Position.y),
                                  'hp': building.HP, 'flag': building.Flag, 'id': building.Unit_ID,
                                  'maintain': building.Is_Maintain, 'level': building.level,
-                                 'pro_pos': (building.ProducePos.x, building.ProducePos.y)}
+                                 'pro_pos': ()}
                 jbuildings[i]['resource'].append(building_temp)
             jstatus[i]=self.status[i]
             jinstruments[i]['attack']=self.instruments[i]['attack']
@@ -1091,7 +1094,7 @@ class GameMain:
 
         data={'unit_0':junits[0],'unit_1':junits[1],'buildings_0':jbuildings[0],'buildings_1':jbuildings[1],'status_0':jstatus[0],
               'status_1':jstatus[1],'instruments_0':jinstruments[0],'instruments_1':jinstruments[1]}
-        jdata = JSONEncoder().encode(data)
+        jdata = json.dumps(data)
         with open('turn_save.txt', 'a') as f:
             f.write(jdata)
             f.write('\n')
@@ -1111,7 +1114,7 @@ class GameMain:
         self.resource_phase()
         # self.update_id()
         self.judge_winnner()
-        #self.turn_save()
+        self.turn_save()
 
        # self.debug_print()
         self.raw_instruments = [{

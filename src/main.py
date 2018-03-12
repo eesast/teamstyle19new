@@ -87,30 +87,30 @@ def logist_platform(server,game,turn):
 if len(sys.argv) > 1:
     filename = sys.argv[1]'''
 
-# read_file = open("test.txt", 'r')
+#read_file = open("test.txt", 'r')
 game = gamemain.GameMain()
 server=communication.MainServer('127.0.0.1',9999)
 map=game._map
 server.start_connection(map)
-#game.map_save()
+game.map_save()
 
 
-# print('start')
+#print('start')
 file = []
 while game.winner == 2:
     # 由于未写通信模块，故每回合指令写入txt中，随后自动逐行读取
-   # print("server turns:", game.turn_num)
+    # print("server turns:", game.turn_num)
     # line = read_file.readline()
     # if line:
     #     game.raw_instruments = json.loads(line)
     # else:
-    #     game.raw_instruments = [{
-    #         'construct': [],  # (BuildingType,(BuildingPos.x,BuildingPos.y),(SoldierPos.x,SoldierPos.y))
-    #         'maintain': [],  # id
-    #         'upgrade': [],  # id
-    #         'sell': [],  # id
-    #         'update_age': False,
-    #     } for _ in range(2)]
+    #    game.raw_instruments = [{
+    #        'construct': [],  # (BuildingType,(BuildingPos.x,BuildingPos.y),(SoldierPos.x,SoldierPos.y))
+    #        'maintain': [],  # id
+    #        'upgrade': [],  # id
+    #        'sell': [],  # id
+    #        'update_age': False,
+    #    } for _ in range(2)]
     logist_platform(server, game, game.turn_num)
     game.next_tick()
     if game.turn_num>1000:
