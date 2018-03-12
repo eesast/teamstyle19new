@@ -437,6 +437,11 @@ class GameMain:
                                 if (building.Position.x == new_construct_pos.x and
                                                 building.Position.y == new_construct_pos.y):
                                     can_build = False
+                        for building_list in self.buildings[1 - current_flag].values():
+                            for building in building_list:
+                                if (building.Position.x == new_construct_pos.x and
+                                                building.Position.y == new_construct_pos.y):
+                                    can_build = False
 
                         if not can_build:
                             new_instrument_list.remove(instrument)
