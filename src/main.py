@@ -91,8 +91,9 @@ if len(sys.argv) > 1:
 game = gamemain.GameMain()
 server=communication.MainServer('127.0.0.1',9999)
 map=game._map
-server.start_connection(map)
 game.map_save()
+print('Waiting for connecting···')
+server.start_connection(map)
 
 
 #print('start')
