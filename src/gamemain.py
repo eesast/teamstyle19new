@@ -395,6 +395,11 @@ class GameMain:
                                 new_instrument_list.remove(instrument)
                                 instrument_num -=1
                                 continue
+                            if abs(instrument[2][0] - instrument[1][0]) + \
+                                abs (instrument[2][1] - instrument[1][1]) > \
+                                OriginalBuildingAttribute[BuildingType(instrument[0])][BuildingAttribute.ORIGINAL_RANGE]:
+                                new_instrument_list.remove(instrument)
+                                instrument_num -= 1
                             new_produce_pos = Position(instrument[2][0],instrument[2][1])
                         # 判断建造时代是否符合要求
                         if (OriginalBuildingAttribute[BuildingType(building_type)][BuildingAttribute.AGE].value >
