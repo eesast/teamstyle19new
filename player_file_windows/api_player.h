@@ -126,7 +126,7 @@ const int OriginalBuildingAttribute[Building_Type][Attr_Num] = {
     {DEFENSIVE_BUILDING,  900,  0,      10,   ALL,             AI,        900,    90,    0,      1},
     {DEFENSIVE_BUILDING,  1500, INT_MAX,10,   ALL,             AI,        1500,   100,   1,      5},
 
-    {RESOURCE_BUILDING,            100,  50,     _NULL,_NULL,          _NULL,      _NULL,  _NULL, _NULL,  _NULL}
+    {RESOURCE_BUILDING,            100,  50,     _NULL,_NULL,          _NULL,      100,  _NULL, _NULL,  _NULL}
 };
 
 const int OriginalSoldierAttribute[Soldier_Type][Soldier_Attr_Num] = {

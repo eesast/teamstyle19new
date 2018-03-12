@@ -26,8 +26,8 @@ class GameMain:
     } for _ in range(2)]
 
     status = [{
-        'money': 10000,
-        'tech': 3,
+        'money': 1000,
+        'tech': 0,
         'building': 0,
     } for _ in range(2)]
 
@@ -840,9 +840,13 @@ class GameMain:
                         produce_pos = None
 
                     # Ignore the instruments that spend too much.
-                    if (self.status[current_flag]['money'] < money_cost and
+                    if (self.status[current_flag]['money'] < money_cost or
                                 self.status[current_flag]['building'] < building_point_cost):
                         continue
+                    print('money')
+                    print(current_flag,self.status[current_flag]['money'],money_cost)
+                    print("buildingpoint")
+                    print(current_flag,self.status[current_flag]['building'],building_point_cost)
 
                     if (OriginalBuildingAttribute[construct_instrument[0]][BuildingAttribute.BUILDING_TYPE] ==
                             UnitType.PRODUCTION_BUILDING):
@@ -1134,6 +1138,8 @@ class GameMain:
             'sell': [],  # id
             'update_age': False,
             } for _ in range(2)]
+        self.status[0]['building'] = 0 + 60 * self.status[0]['tech']
+        self.status[1]['building'] = 0 + 60 * self.status[1]['tech']
 
 def main():
     game = GameMain()
