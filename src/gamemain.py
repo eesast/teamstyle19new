@@ -517,7 +517,10 @@ class GameMain:
                         for enemy_id, enemy in self.units[1 - flag].items():
                             now_dist = abs(enemy.Position.x - building.Position.x) \
                                        + abs(enemy.Position.y - building.Position.y)
-                            if now_dist < pre_dist and enemy.HP > 0:
+                            if now_dist < pre_dist and enemy.HP > 0 and \
+                                (enemy.Solider_Name == SoliderName.BIT_STREAM or
+                                enemy.Solider_Name == SoliderName.PACKET or
+                                enemy.Solider_Name == SoliderName.TURNING_MACHINE):
                                 target = enemy
                                 target_id = enemy_id
                                 pre_dist = now_dist
@@ -536,7 +539,12 @@ class GameMain:
                         for enemy_id, enemy in self.units[1 - flag].items():
                             now_dist = (abs(enemy.Position.x - building.Position.x) +
                                         abs(enemy.Position.y - building.Position.y))
-                            if now_dist < pre_dist and enemy.HP > 0:
+                            if now_dist < pre_dist and enemy.HP > 0 and \
+                                (enemy.Solider_Name == SoliderName.VOLTAGE_SOURCE or
+                                 enemy.Solider_Name == SoliderName.CURRENT_SOURCE or
+                                 enemy.Solider_Name == SoliderName.ENIAC or
+                                 enemy.Solider_Name == SoliderName.OPTICAL_FIBER or
+                                 enemy.Solider_Name == SoliderName.ULTRON):
                                 target = enemy
                                 target_id = enemy_id
                                 pre_dist = now_dist
@@ -547,7 +555,12 @@ class GameMain:
                             hit_c = 0
                             for enemy_id, enemy in self.units[1 - flag].items():
                                 if (abs(enemy.Position.x - target_x) + abs(enemy.Position.y - target_y) <
-                                        OriginalBuildingAttribute[BuildingType.Ohm][BuildingAttribute.AOE]):
+                                        OriginalBuildingAttribute[BuildingType.Ohm][BuildingAttribute.AOE]
+                                    and (enemy.Solider_Name == SoliderName.VOLTAGE_SOURCE or
+                                         enemy.Solider_Name == SoliderName.CURRENT_SOURCE or
+                                         enemy.Solider_Name == SoliderName.ENIAC or
+                                         enemy.Solider_Name == SoliderName.OPTICAL_FIBER or
+                                         enemy.Solider_Name == SoliderName.ULTRON)):
                                     enemy.HP = (enemy.HP - (OriginalBuildingAttribute[BuildingType.Ohm]
                                                            [BuildingAttribute.ORIGINAL_ATTACK] * tech_factor))
                                     if enemy.Solider_Name == SoliderName.VOLTAGE_SOURCE:
@@ -557,7 +570,12 @@ class GameMain:
                                 if hit_v and hit_c:
                                     for enemy_id, enemy in self.units[1 - flag].items():
                                         if (abs(enemy.Position.x - target_x) + abs(enemy.Position.y - target_y)
-                                                < OriginalBuildingAttribute[BuildingType.Ohm][BuildingAttribute.AOE]):
+                                                < OriginalBuildingAttribute[BuildingType.Ohm][BuildingAttribute.AOE]
+                                            and (enemy.Solider_Name == SoliderName.VOLTAGE_SOURCE or
+                                                 enemy.Solider_Name == SoliderName.CURRENT_SOURCE or
+                                                 enemy.Solider_Name == SoliderName.ENIAC or
+                                                 enemy.Solider_Name == SoliderName.OPTICAL_FIBER or
+                                                 enemy.Solider_Name == SoliderName.ULTRON)):
                                             enemy.HP = (enemy.HP - 3 * (OriginalBuildingAttribute[BuildingType.Ohm][
                                                                     BuildingAttribute.ORIGINAL_ATTACK] * tech_factor))
                             self.instruments[flag]['attack'].append((building.Unit_ID, target_id))
@@ -582,7 +600,12 @@ class GameMain:
                         for enemy_id, enemy in self.units[1 - flag].items():
                             now_dist = abs(enemy.Position.x - building.Position.x) \
                                        + abs(enemy.Position.y - building.Position.y)
-                            if now_dist < pre_dist and enemy.HP > 0:
+                            if (now_dist < pre_dist and enemy.HP > 0
+                                and (enemy.Solider_Name == SoliderName.VOLTAGE_SOURCE or
+                                     enemy.Solider_Name == SoliderName.CURRENT_SOURCE or
+                                     enemy.Solider_Name == SoliderName.ENIAC or
+                                     enemy.Solider_Name == SoliderName.OPTICAL_FIBER or
+                                     enemy.Solider_Name == SoliderName.ULTRON)):
                                 target = enemy
                                 target_id = enemy_id
                                 pre_dist = now_dist
@@ -603,7 +626,12 @@ class GameMain:
                         for enemy_id, enemy in self.units[1 - flag].items():
                             now_dist = abs(enemy.Position.x - building.Position.x) \
                                        + abs(enemy.Position.y - building.Position.y)
-                            if now_dist < pre_dist and enemy.HP> 0:
+                            if (now_dist < pre_dist and enemy.HP> 0
+                                and (enemy.Solider_Name == SoliderName.VOLTAGE_SOURCE or
+                                     enemy.Solider_Name == SoliderName.CURRENT_SOURCE or
+                                     enemy.Solider_Name == SoliderName.ENIAC or
+                                     enemy.Solider_Name == SoliderName.OPTICAL_FIBER or
+                                     enemy.Solider_Name == SoliderName.ULTRON)):
                                 target = enemy
                                 target_id = enemy_id
                                 pre_dist = now_dist
@@ -650,7 +678,10 @@ class GameMain:
                     for enemy_id, enemy in self.units[1 - flag].items():
                         now_dist = abs(enemy.Position.x - building.Position.x) \
                                    + abs(enemy.Position.y - building.Position.y)
-                        if now_dist < pre_dist and enemy.HP > 0:
+                        if now_dist < pre_dist and enemy.HP > 0 and \
+                                (enemy.Solider_Name == SoliderName.BIT_STREAM or
+                                enemy.Solider_Name == SoliderName.PACKET or
+                                enemy.Solider_Name == SoliderName.TURNING_MACHINE):
                             target = enemy
                             target_id = enemy_id
                             pre_dist = now_dist
