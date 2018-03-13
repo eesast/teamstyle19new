@@ -44,7 +44,7 @@ void MyClient::start_connection()  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï
 	string sflag(cflag);
 	istringstream os(sflag);
 	os >> flag;
-	cout << "my flag is" << flag;
+	//cout << "my flag is" << flag;
 	int size = 200 * 200;  //sizeï¿½ï¿½ï¿½Ôµï¿½ï¿½ï¿½
 	smap = new char[size + 1];
 	recv(sockClient, smap, size, 0);
@@ -52,7 +52,7 @@ void MyClient::start_connection()  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï
 	char can_start[3];
 	recv(sockClient, can_start, 2, 0);
 	can_start[2] = '\0';
-	cout << can_start<<endl;
+	//cout << can_start<<endl;
 	fflag = flag;
 	change_map(smap);
 
@@ -121,7 +121,7 @@ State* MyClient::recv_state()
 	while (true) 
 	{
 		recv(sockClient, start, 5, 0);
-		cout << start<<endl;
+	//	cout << start<<endl;
 		bool flag = true;
 		for(int i=0;i<5;i++)
 			if (start[i] != cpstart[i])
