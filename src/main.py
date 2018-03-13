@@ -116,6 +116,7 @@ while game.winner == 2:
     #        'sell': [],  # id
     #        'update_age': False,
     #    } for _ in range(2)]
+    print('turn',game.turn_num)
     logist_platform(server, game, game.turn_num)
     if game.winner!=2:
         break

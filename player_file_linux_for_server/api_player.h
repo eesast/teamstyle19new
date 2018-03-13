@@ -177,10 +177,10 @@ struct Building {
     Position pos;
     int flag;
     int unit_id;
-    bool maintain;
+    int level;
 
 	Building() {};
-	Building(BuildingType building_type, int heal, Position pos, int flag, int unit_id, bool maintain):building_type(building_type),heal(heal),pos(pos),flag(flag),unit_id(unit_id),maintain(maintain) {};
+	Building(BuildingType building_type, int heal, Position pos, int flag, int unit_id,int level):building_type(building_type),heal(heal),pos(pos),flag(flag),unit_id(unit_id),level(level) {};
 };
 
 //API for players
