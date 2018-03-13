@@ -28,7 +28,7 @@ class GameMain:
     status = [{
         'money': 1000,
         'tech': 0,
-        'building': 0,
+        'building': 80,
     } for _ in range(2)]
 
     # 通信模块将收到的指令写入，各阶段函数从中读取指令，指令格式同api_player.h
@@ -1146,13 +1146,13 @@ class GameMain:
 
     def next_tick(self):
         """回合演算与指令合法性判断"""
- #       print(self.raw_instruments)
+        # print(self.raw_instruments)
         self.turn_num += 1
         self.attack_phase()
         self.clean_up_phase()
         self.move_phase()
         self.check_legal()
-  #      print(self.raw_instruments)
+        # print(self.raw_instruments)
         self.building_phase()
         self.produce_phase()
         self.update_age_phase()
@@ -1161,6 +1161,8 @@ class GameMain:
         self.judge_winnner()
         self.turn_save()
 
+
+        # print(self.main_base[0].BuildingType,self.main_base[0].Position.x)
        # self.debug_print()
         self.raw_instruments = [{
             'construct': [],  # (BuildingType,(BuildingPos.x,BuildingPos.y),(SoldierPos.x,SoldierPos.y))
@@ -1169,8 +1171,8 @@ class GameMain:
             'sell': [],  # id
             'update_age': False,
             } for _ in range(2)]
-        self.status[0]['building'] = 0 + 60 * self.status[0]['tech']
-        self.status[1]['building'] = 0 + 60 * self.status[1]['tech']
+        self.status[0]['building'] = 80 + 60 * self.status[0]['tech']
+        self.status[1]['building'] = 80 + 60 * self.status[1]['tech']
 
 def main():
     game = GameMain()
