@@ -853,7 +853,6 @@ class GameMain:
 
         def construct_phase(self):
 
-            total_id = self.total_id
             for current_flag in range(2):
                 age_increase_factor = 0.5 * (self.status[current_flag]['tech'] + 2)
                 for construct_instrument in self.raw_instruments[current_flag]['construct']:
@@ -874,28 +873,30 @@ class GameMain:
                     if (self.status[current_flag]['money'] < money_cost or
                                 self.status[current_flag]['building'] < building_point_cost):
                         continue
-                    print('money')
-                    print(current_flag,self.status[current_flag]['money'],money_cost)
-                    print("buildingpoint")
-                    print(current_flag,self.status[current_flag]['building'],building_point_cost)
+                    # print('money')
+                    # print(current_flag,self.status[current_flag]['money'],money_cost)
+                    # print("buildingpoint")
+                    # print(current_flag,self.status[current_flag]['building'],building_point_cost)
 
                     if (OriginalBuildingAttribute[construct_instrument[0]][BuildingAttribute.BUILDING_TYPE] ==
                             UnitType.PRODUCTION_BUILDING):
                         self.buildings[current_flag]['produce'].append(
-                            Building(building_name, building_pos, current_flag, total_id, False,
+                            Building(building_name, building_pos, current_flag, self.total_id, False,
                                      self.status[current_flag]['tech'], produce_pos)
                             )
+
                     elif (OriginalBuildingAttribute[construct_instrument[0]][BuildingAttribute.BUILDING_TYPE] ==
 
                             UnitType.DEFENSIVE_BUILDING):
                         self.buildings[current_flag]['defence'].append(
 
-                            Building(building_name, building_pos, current_flag, total_id, False,
+                            Building(building_name, building_pos, current_flag, self.total_id, False,
                                      self.status[current_flag]['tech'], produce_pos)
                             )
+
                     else:
                         self.buildings[current_flag]['resource'].append(
-                            Building(building_name, building_pos, current_flag, total_id, False,
+                            Building(building_name, building_pos, current_flag, self.total_id, False,
                                      self.status[current_flag]['tech'], produce_pos)
                             )
                     self.total_id += 1
@@ -1160,10 +1161,13 @@ class GameMain:
         # self.update_id()
         self.judge_winnner()
         self.turn_save()
-
+        # for building in self.buildings[0]['produce']:
+        #     print(building.BuildingType,building.Unit_ID)
+        #     print('****')
+        # print('****************************************')
 
         # print(self.main_base[0].BuildingType,self.main_base[0].Position.x)
-       # self.debug_print()
+        # self.debug_print()
         self.raw_instruments = [{
             'construct': [],  # (BuildingType,(BuildingPos.x,BuildingPos.y),(SoldierPos.x,SoldierPos.y))
             'maintain': [],  # id
