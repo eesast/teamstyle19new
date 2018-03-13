@@ -190,7 +190,7 @@ State* MyClient::recv_state()
 	//��buildingʵ����
 	int unit_id, building_type, posx, posy, int_main;
 	double hp;
-	bool bool_main;
+	int level;
 	char temp;
 	for (int i = 0; i < 2; i++)
 	{
@@ -206,11 +206,11 @@ State* MyClient::recv_state()
 			builds >> posx;
 			builds >> posy;
 			builds >> int_main;
-			bool_main = int_main;
+			level = int_main;
 			builds >> temp;
 			BuildingType q;
 			q = (BuildingType)building_type;
-			state->building[i].push_back(Building(q, hp, Position(posx, posy), i, unit_id, bool_main));
+			state->building[i].push_back(Building(q, hp, Position(posx, posy), i, unit_id, level));
 			//cout << q << " " << hp << " " << posx << " " << posy << " " <<i << " " << unit_id << " " << bool_main << endl;
 		}
 	}
