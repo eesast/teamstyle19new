@@ -98,9 +98,9 @@ enum SoldierAttr {
 };
 
 enum ActionMode {
-    BUILDING_ATTACK, //推塔
-    BASE_ATTACK,     //冲锋
-    MOVING_ATTACK    //抗线
+    BUILDING_ATTACK, //attack building
+    BASE_ATTACK,     //go forward
+    MOVING_ATTACK    //defence
 };
 
 const int OriginalBuildingAttribute[Building_Type][Attr_Num] = {
