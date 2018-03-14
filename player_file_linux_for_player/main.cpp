@@ -1,5 +1,4 @@
 #include"communication.h"
-//#include<thread>
 #include<pthread.h>
 #include<vector>
 #include<iostream>
@@ -39,8 +38,6 @@ int main()
 	int turn = 0;
     pthread_t com_thread;
     pthread_create(&com_thread,NULL,Listen,(void*)NULL);
-
-	//State* state;
 	while (state == NULL)
 	{
 
@@ -53,8 +50,6 @@ int main()
 		if (state == laststate)
 			continue;
 		laststate = state;
-
-//		cout << "********************"<<state->turn <<"****************************"<< endl;
 		if (state->winner != 2)
 			break;
 		f_player();
@@ -62,8 +57,6 @@ int main()
 		_updateAge = false;
 		c1.clear();
 		c2.clear();
-		//Sleep(100);
-//	    cout << "********************************************************" << endl;
 	}
 	if (state->winner == 1)
 		cout << "Winner is 1" << endl;
@@ -72,13 +65,6 @@ int main()
 	else if (state->winner == 2)
 		cout << "draw" << endl;
 	goon = false;
-/*	ofstream os;
-	os.open("result.txt");
-	if(state->winner==flag)
-		os<<0;
-	else
-		os<<1;
-	os<<" ";
-	os<<state->turn;*/
+
 	pthread_join(com_thread,NULL);
 }
