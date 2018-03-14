@@ -104,6 +104,7 @@ class MainServer(object):
     def send_state(self,turn,status,building,unit,winner=3):  #给外部调用的接口 只要把当前的status传入即可将status发送给C++选手端
         #回合没有结束 没有winner时 不输入该参数或者输入3
         #将state0和state1处理成byte形式
+        print(status[0]['tech'])
         player_0=1
         player_1=1
         state =self.change_to_byte(turn,status,building,unit,winner)

@@ -171,13 +171,13 @@ State* MyClient::recv_state()
 	{
 		istringstream iis(m0.str(2+3*i));
 		int int_age;
-		char temp;
-		iis >> int_age;
-		iis >> temp;
 		int building_resource;
+		int building_point;
+		char temp;
 		iis >> building_resource;
 		iis >> temp;
-		int building_point;
+		iis >> int_age;
+		iis >> temp;
 		iis >> building_point;
 		//cout << building_point;
 		_resource temp_resource(building_point, building_resource);

@@ -159,14 +159,14 @@ State* MyClient::recv_state()
 	for (int i = 0; i < 2; i++)
 	{
 		istringstream iis(m0.str(2+3*i));
-		int int_money;
-		char temp;
-		iis >> int_money;
-		iis >> temp;
-		int age;
-		iis >> age;
-		iis >> temp;
+		int int_age;
+		int building_resource;
 		int building_point;
+		char temp;
+		iis >> building_resource;
+		iis >> temp;
+		iis >> int_age;
+		iis >> temp;
 		iis >> building_point;
 		_resource temp_resource(building_point, int_money);
 		state->resource[i] = temp_resource;
