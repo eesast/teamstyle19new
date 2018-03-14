@@ -855,7 +855,17 @@ class GameMain:
 
             for current_flag in range(2):
                 age_increase_factor = 0.5 * (self.status[current_flag]['tech'] + 2)
+                max_bd_num = 40 * age_increase_factor
+                bd_num = 0
+
+                for building_type,buildings_in_it in self.buildings[current_flag].items():
+                    # print(building_type,buildings_in_it)
+                    bd_num += len(buildings_in_it)
+                    # print(bd_num)
+
                 for construct_instrument in self.raw_instruments[current_flag]['construct']:
+                    if bd_num > max_bd_num:
+                        break
                     building_name = construct_instrument[0]
                     building_pos = Position(*construct_instrument[1])
                     money_cost = (
@@ -899,6 +909,8 @@ class GameMain:
                             Building(building_name, building_pos, current_flag, self.total_id, False,
                                      self.status[current_flag]['tech'], produce_pos)
                             )
+
+                    bd_num += 1
                     self.total_id += 1
                     self.status[current_flag]['money'] -= money_cost
                     self.status[current_flag]['building'] -= building_point_cost

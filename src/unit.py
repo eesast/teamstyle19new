@@ -211,7 +211,7 @@ OriginalBuildingAttribute = {
                           BuildingAttribute.CD: 5},
 
     BuildingType.Programmer: {BuildingAttribute.BUILDING_TYPE: UnitType.RESOURCE_BUILDING,
-                                BuildingAttribute.ORIGINAL_RESOURCE: 100,
+                              BuildingAttribute.ORIGINAL_RESOURCE: 100, BuildingAttribute.ORIGINAL_BUILDING_POINT: 10,
                               BuildingAttribute.ORIGINAL_HP: 100, BuildingAttribute.ORIGINAL_ATTACK: 50},
     # use attack stand for the ability of resource building to get resource
 }
