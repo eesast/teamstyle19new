@@ -50,9 +50,6 @@ struct command2
 class MyClient
 {
 private:
-	/*WSADATA wsaData;
-	SOCKET sockClient;
-	SOCKADDR_IN addrServer;*/
 
 	int sockClient;
 	struct sockaddr_in addrServer;

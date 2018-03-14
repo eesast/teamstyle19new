@@ -1,4 +1,5 @@
 #include"communication.h"
+#include<iostream>
 #include<vector>
 using namespace std;
 
@@ -10,5 +11,4 @@ extern bool** map;
 extern bool flag;
 void f_player()
 {
-
 };

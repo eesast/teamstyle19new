@@ -12,7 +12,7 @@ using namespace std;
 
 MyClient::MyClient()
 {
-	//设置socket的基本参数
+	//set socket arguments
 	WSAStartup(MAKEWORD(2, 2), &wsaData);
 	sockClient = socket(AF_INET, SOCK_STREAM, 0);
 	addrServer.sin_addr.S_un.S_addr = inet_addr("127.0.0.1"); 
@@ -32,7 +32,7 @@ void MyClient::change_map(char* map0)
 	}
 }
 
-void MyClient::start_connection()  //向服务器发起连接请求
+void MyClient::start_connection()  
 {
 	connect(sockClient, (SOCKADDR*)&addrServer, sizeof(SOCKADDR));	
 	char cflag[1];
@@ -41,7 +41,7 @@ void MyClient::start_connection()  //向服务器发起连接请求
 	istringstream os(sflag);
 	os >> flag;
 	cout << "my flag is" << flag;
-	int size = 200 * 200;  //size可以调整
+	int size = 200 * 200;  
 	smap = new char[size + 1];
 	recv(sockClient, smap, size, 0);
 	smap[size] = '\0';
@@ -113,7 +113,7 @@ State* MyClient::recv_state()
 	char start[6];
 	start[5] = '\0';
 	char* cpstart = "start";
-	//等待start命令 一旦接收到start命令就开始接受状态
+	//waiting start command 
 	while (true) 
 	{
 		recv(sockClient, start, 5, 0);
@@ -128,7 +128,7 @@ State* MyClient::recv_state()
 			break;
 	}
 
-	//接受接下来传入的state有多少个字节 传来的数字一定是9位 非数字位用#补齐
+	//waiting the info of length
 	char number[10];
 	for (int i = 0; i < 9; i++)
 		number[i] = '#';
@@ -137,44 +137,42 @@ State* MyClient::recv_state()
 	istringstream is(number);
 	int len;
 	is >> len;
-	//接受状态
+	//recv state
 	char *save;
 	save = new char[len + 1];
 	save[len] = '\0';
 	recv(sockClient, save, len, 0);
 	int aaal;
-	//将byte流的数据转换成实例
 	regex reg0("(.*);(.*);(.*);(.*);#(.*);(.*);(.*);#");
 	smatch m0;
 	string s(save);
 	regex_match(s, m0, reg0);
-//m0.str(2/5) 储存了时代 资源 科技
-//m0.str(3/6) 储存了建筑的信息
-//m0.str(4/7) 储存了soldier的信息
+//m0.str(2/5) save age tech resource
+//m0.str(3/6) save building
+//m0.str(4/7) save solider
 	int w;
 	istringstream iis(m0.str(1));
 	State* state = new State;
 	iis >> w;
 	state->winner = w % 10;
 	state->turn = w / 10;
-	//将resource和age实例化
 	for (int i = 0; i < 2; i++)
 	{
 		istringstream iis(m0.str(2+3*i));
-		int int_money;
-		char temp;
-		iis >> int_money;
-		iis >> temp;
-		int age;
-		iis >> age;
-		iis >> temp;
+		int int_age;
+		int building_resource;
 		int building_point;
+		char temp;
+		iis >> building_resource;
+		iis >> temp;
+		iis >> int_age;
+		iis >> temp;
 		iis >> building_point;
 		_resource temp_resource(building_point, int_money);
 		state->resource[i] = temp_resource;
 		state->age[i] = (Age)age;
 	}
-	//将building实例化
+
 	int unit_id, building_type, posx, posy, int_main;
 	double hp;
 	int level;
@@ -220,7 +218,6 @@ State* MyClient::recv_state()
 			state->soldier[i].push_back(Soldier(q, hp, Position(posx, posy), i, unit_id));
 		}
 	}
-	//resource[2] building[2] soldier[2] 储存了0 1玩家各自对应的全部信息
-	//Winner 储存当前游戏的胜利者
+
 	return state;
 }

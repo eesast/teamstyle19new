@@ -25,9 +25,9 @@ MyClient::MyClient()
 
 void MyClient::change_map(char* map0)
 {
-	map = new bool*[200];
+	map = new int*[200];
 	for (int i = 0; i < _mapsize; i++)
-		map[i] = new bool[_mapsize];
+		map[i] = new int[_mapsize];
 	for (int i = 0; i < _mapsize; i++)
 	{
 		for (int j = 0; j < _mapsize; j++)
@@ -171,13 +171,13 @@ State* MyClient::recv_state()
 	{
 		istringstream iis(m0.str(2+3*i));
 		int int_age;
-		char temp;
-		iis >> int_age;
-		iis >> temp;
 		int building_resource;
+		int building_point;
+		char temp;
 		iis >> building_resource;
 		iis >> temp;
-		int building_point;
+		iis >> int_age;
+		iis >> temp;
 		iis >> building_point;
 		//cout << building_point;
 		_resource temp_resource(building_point, building_resource);

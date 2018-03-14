@@ -14,7 +14,7 @@ void f_player();
 
 State* state=NULL;
 MyClient cilent;
-bool** map;
+int** map;
 bool flag;
 bool goon = true;
 
