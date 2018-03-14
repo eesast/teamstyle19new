@@ -29,7 +29,7 @@ void MyClient::change_map(char* map0)
 	}
 }
 
-void MyClient::start_connection()  
+void MyClient::start_connection()
 {
     connect(sockClient,(struct sockaddr*)&addrServer,sizeof(struct sockaddr_in));
     char cflag[1];
@@ -37,7 +37,7 @@ void MyClient::start_connection()
 	string sflag(cflag);
 	istringstream os(sflag);
 	os >> flag;
-	int size = 200 * 200;  
+	int size = 200 * 200;
 	smap = new char[size + 1];
 	recv(sockClient, smap, size, 0);
 	smap[size] = '\0';
@@ -108,7 +108,7 @@ State* MyClient::recv_state()
 	char start[6];
 	start[5] = '\0';
 	char* cpstart = "start";
-	while (true) 
+	while (true)
 	{
 		recv(sockClient, start, 5, 0);
 		bool flag = true;
@@ -179,11 +179,11 @@ s	for (int i = 0; i < 2; i++)
 			builds >> posx;
 			builds >> posy;
 			builds >> int_main;
-			level = int_main;
+			levels = int_main;
 			builds >> temp;
 			BuildingType q;
 			q = (BuildingType)building_type;
-			state->building[i].push_back(Building(q, hp, Position(posx, posy), i, unit_id, level));
+			state->building[i].push_back(Building(q, hp, Position(posx, posy), i, unit_id, levels));
 		}
 	}
 	int soldier_name;
