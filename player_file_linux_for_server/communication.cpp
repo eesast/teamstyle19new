@@ -25,9 +25,9 @@ MyClient::MyClient()
 
 void MyClient::change_map(char* map0)
 {
-	map = new bool*[200];
+	map = new int*[200];
 	for (int i = 0; i < _mapsize; i++)
-		map[i] = new bool[_mapsize];
+		map[i] = new int[_mapsize];
 	for (int i = 0; i < _mapsize; i++)
 	{
 		for (int j = 0; j < _mapsize; j++)

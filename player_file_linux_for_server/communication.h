@@ -64,7 +64,7 @@ private:
 
 public:
 	int flag;
-	bool **map;
+	int **map;
 
 public:
 	MyClient();
