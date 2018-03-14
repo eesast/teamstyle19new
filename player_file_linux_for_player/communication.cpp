@@ -145,7 +145,7 @@ State* MyClient::recv_state()
 	iis >> w;
 	state->winner = w % 10;
 	state->turn = w / 10;
-s	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 2; i++)
 	{
 		istringstream iis(m0.str(2+3*i));
 		int int_age;
