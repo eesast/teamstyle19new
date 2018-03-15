@@ -168,9 +168,9 @@ State* MyClient::recv_state()
 		iis >> int_age;
 		iis >> temp;
 		iis >> building_point;
-		_resource temp_resource(building_point, int_money);
+		_resource temp_resource(building_point, building_resource);
 		state->resource[i] = temp_resource;
-		state->age[i] = (Age)age;
+		state->age[i] = (Age)int_age;
 	}
 
 	int unit_id, building_type, posx, posy, int_main;
