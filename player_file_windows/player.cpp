@@ -96,6 +96,7 @@ void print_info() {
 }
 void f_player()
 {
+    /*
     if (state->turn == 1) {
         for (int i = 0; i < 200; i++) {
             for (int j = 0; j < 200; j++) {
@@ -104,6 +105,7 @@ void f_player()
             cout << endl;
         }
     }
+    */
     if (flag == 0)
         player0();
     else
@@ -117,7 +119,7 @@ void player0() {
         for (int i = 6; i < 200; i++) {
             for (int j = 6; j < 200; j++) {
                 if (can_cons(Position(i, j))) {
-                    if (near_a_road(Position(i, j))) 
+                    if (near_a_road(Position(i, j)) && state->resource[flag].resource >= 1000)
                         construct(Shannon, Position(i, j), find_road(Position(i, j)));
                     else
                         construct(Programmer, Position(i, j), Position(0, 0));
@@ -131,7 +133,7 @@ void player1() {
         for (int i = 193; i > 0; i--) {
             for (int j = 193; j > 0; j--) {
                 if (can_cons(Position(i, j))) {
-                    if (near_a_road(Position(i, j)))
+                    if (near_a_road(Position(i, j)) && state->resource[flag].resource >= 1000)
                         construct(Shannon, Position(i, j), find_road(Position(i, j)));
                     else
                         construct(Programmer, Position(i, j), Position(0, 0));
