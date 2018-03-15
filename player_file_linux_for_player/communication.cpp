@@ -179,11 +179,11 @@ State* MyClient::recv_state()
 			builds >> posx;
 			builds >> posy;
 			builds >> int_main;
-			levels = int_main;
+			level = int_main;
 			builds >> temp;
 			BuildingType q;
 			q = (BuildingType)building_type;
-			state->building[i].push_back(Building(q, hp, Position(posx, posy), i, unit_id, levels));
+			state->building[i].push_back(Building(q, hp, Position(posx, posy), i, unit_id, level));
 		}
 	}
 	int soldier_name;
