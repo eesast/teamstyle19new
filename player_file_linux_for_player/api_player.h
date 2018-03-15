@@ -185,7 +185,7 @@ struct Building {
 
 //API for players
 void updateAge();
-void construct(BuildingType building_type, Position pos, Position soldier_pos); //The solier position is not set now
+void construct(BuildingType building_type, Position pos, Position soldier_pos=Position(0,0)); //The solier position is not set now
 void upgrade(int unit_id);
 void sell(int unit_id);
 void toggleMaintain(int unit_id);
