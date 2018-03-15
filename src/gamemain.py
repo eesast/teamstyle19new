@@ -191,7 +191,7 @@ class GameMain:
                     _map[i][j] = 1
 
     def init_map_from_bitmap(self, path):
-        from PIL import Image
+        #from PIL import Image
 
         _map_size = self._map_size
         _map = self._map

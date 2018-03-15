@@ -88,7 +88,7 @@ void MyClient::send_command(bool _update, vector<command1> &v1, vector<command2>
 	char* msg = change_command(_update,v1,v2);
 	if (msg == NULL)
 		return;
-	char* hello = "start";
+	const char* hello = "start";
 	int len = strlen(msg);
 	stringstream s;
 	s << len;
@@ -112,7 +112,7 @@ State* MyClient::recv_state()
 {
 	char start[6];
 	start[5] = '\0';
-	char* cpstart = "start";
+	const char* cpstart = "start";
 	//waiting start command 
 	while (true) 
 	{
