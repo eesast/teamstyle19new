@@ -211,8 +211,11 @@ OriginalBuildingAttribute = {
                           BuildingAttribute.CD: 5},
 
     BuildingType.Programmer: {BuildingAttribute.BUILDING_TYPE: UnitType.RESOURCE_BUILDING,
-                              BuildingAttribute.ORIGINAL_RESOURCE: 100, BuildingAttribute.ORIGINAL_BUILDING_POINT: 10,
-                              BuildingAttribute.ORIGINAL_HP: 100, BuildingAttribute.ORIGINAL_ATTACK: 50},
+                        BuildingAttribute.ORIGINAL_HP: 100, BuildingAttribute.ORIGINAL_ATTACK: 50,
+                        BuildingAttribute.ORIGINAL_RANGE: 0, BuildingAttribute.TRAGET: UnitType.ALL,
+                        BuildingAttribute.AGE: Age.BIT, BuildingAttribute.ORIGINAL_RESOURCE: 100,
+                        BuildingAttribute.ORIGINAL_BUILDING_POINT: 10, BuildingAttribute.AOE: 0,
+                        BuildingAttribute.CD: 1},
     # use attack stand for the ability of resource building to get resource
 }
 
