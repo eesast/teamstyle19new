@@ -35,7 +35,6 @@ int main()
 	cilent.start_connection();
 	map = cilent.map;
 	flag = cilent.flag;
-	int turn = 0;
     pthread_t com_thread;
     pthread_create(&com_thread,NULL,Listen,(void*)NULL);
 	while (state == NULL)
