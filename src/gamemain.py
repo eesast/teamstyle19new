@@ -415,7 +415,7 @@ class GameMain:
                             continue
 
 
-                        building_range = 8  # 建造范围未定，暂设为8
+                        building_range = 8  # 建造范围暂设为8
                         can_build = False
 
                         for building_list in self.buildings[current_flag].values():
