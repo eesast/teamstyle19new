@@ -136,7 +136,7 @@ State* MyClient::recv_state()
 	save = new char[len + 1];
 	save[len] = '\0';
 	recv(sockClient, save, len, 0);
-	cout<<save<<endl;
+//	cout<<save<<endl;
 	regex reg0("(.*);(.*);(.*);(.*);#(.*);(.*);(.*);#");
 	smatch m0;
 	string s(save);

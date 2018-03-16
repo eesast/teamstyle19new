@@ -23,7 +23,6 @@ sem_t* sg=NULL;
 
 void* Listen(void* arg)
 {
-	//pthread_mutex_lock(&mt);
 	State* t;
 	while (goon)
 	{
@@ -31,7 +30,6 @@ void* Listen(void* arg)
 		t=state;
 		state = s;
 		delete t;
-		//pthread_mutex_unlock(&mt);
 		sem_post(sg);
 	}
 	return NULL;
@@ -39,9 +37,6 @@ void* Listen(void* arg)
 
 int main()
 {
-	if(sg==NULL)
-		cout<<"ASDASD"<<endl;
-	//pthread_mutex_init(&mt,NULL);
 	cilent.start_connection();
 	map = cilent.map;
 	flag = cilent.flag;
@@ -51,25 +46,10 @@ int main()
 		sg=sem_open("/temp1",O_CREAT,0644,0);
     pthread_t com_thread;
     pthread_create(&com_thread,NULL,Listen,(void*)NULL);
-/*	while (state == NULL)
-	{
-
-	}*/
-	//state=cilent.recv_state();
 	sem_wait(sg);
-	State* laststate = NULL;
-	cout<<"++++++++"<<endl;
-	//pthread_mutex_lock(&mt);
-	cout<<"ASDASDASD"<<endl;
-	int c;
 	while (state->turn < 1000)
 	{
-		/*if (state == NULL)
-			continue;
-		if (state == laststate)
-			continue;
-		laststate = state;*/
-		cout<<"*********"<<state->turn<<endl;
+		cout<<"*********"<<state->turn<<"************"<<endl;
 		if (state->winner != 2)
 			break;
 		f_player();
@@ -79,7 +59,6 @@ int main()
 		c1.clear();
 		c2.clear();
 		sem_wait(sg);
-	//	pthread_mutex_lock(&mt);
 	}
 	if (state->winner == 1)
 		cout << "Winner is 1" << endl;
