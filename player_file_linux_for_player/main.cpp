@@ -16,6 +16,7 @@ MyClient cilent;
 int** map;
 bool flag;
 bool goon = true;
+bool use=false;
 pthread_mutex_t mt;
 
 void* Listen(void* arg)
@@ -60,7 +61,8 @@ int main()
 		if (state->winner != 2)
 			break;
 		f_player();
-		cilent.send_command(_updateAge,c1,c2);
+		if(!use)
+			cilent.send_command(_updateAge,c1,c2);
 		_updateAge = false;
 		c1.clear();
 		c2.clear();

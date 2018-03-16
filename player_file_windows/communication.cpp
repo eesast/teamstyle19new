@@ -6,7 +6,7 @@
 #include<regex>
 #include<vector>
 #include"api_player.h"
-
+extern bool use;
 
 using namespace std;
 
@@ -127,7 +127,7 @@ State* MyClient::recv_state()
 		if (flag)
 			break;
 	}
-
+	use=true;
 	//waiting the info of length
 	char number[10];
 	for (int i = 0; i < 9; i++)
@@ -218,6 +218,8 @@ State* MyClient::recv_state()
 			state->soldier[i].push_back(Soldier(q, hp, Position(posx, posy), i, unit_id));
 		}
 	}
-
+	use=false;
+	const char* hello = "start";
+	send(sockClient, hello, strlen(hello), 0);
 	return state;
 }
