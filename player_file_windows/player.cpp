@@ -80,10 +80,9 @@ bool can_cons(Position p) {
         return 0;
 }
 void print_my_bd() {
-    int my_bd_num = state->building[flag].size();
-    for (int i = 0; i < my_bd_num; i++) {
+    for (int i = 0; i < state->building[flag].size(); i++) {
         Building bd = state->building[flag][i];
-        cout << "id:" << bd.unit_id << " type:" << bd.building_type << " pos:" << bd.pos.x << ' ' << bd.pos.y << endl;
+        cout << "id:" << bd.unit_id << " type:" << bd.building_type <<" HP:"<<bd.heal<< " pos:" << bd.pos.x << ' ' << bd.pos.y << endl;
     }
 }
 void print_my_re() {
@@ -98,9 +97,9 @@ void print_my_base() {
 }
 void print_info() {
     cout << "turn:" << state->turn << endl;
-    //print_my_re();
-    //print_my_base();
-    //print_my_bd();
+    print_my_re();
+    print_my_base();
+    print_my_bd();
 }
 void f_player()
 {
@@ -114,16 +113,10 @@ void f_player()
         }
     }
     */
-    /*
     if (flag == 0)
         player0();
     else
         player1();
-        */
-    for (int i = 0; i < 200; i++)
-    {
-        construct(Shannon, Position(i, 1), Position(0,0));
-    }
 
     print_info();
     
