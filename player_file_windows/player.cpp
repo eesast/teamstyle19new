@@ -98,8 +98,8 @@ void print_my_base() {
 }
 void print_info() {
     cout << "turn:" << state->turn << endl;
-    print_my_re();
-    print_my_base();
+    //print_my_re();
+    //print_my_base();
     //print_my_bd();
 }
 void f_player()
@@ -114,10 +114,17 @@ void f_player()
         }
     }
     */
+    /*
     if (flag == 0)
         player0();
     else
         player1();
+        */
+    for (int i = 0; i < 200; i++)
+    {
+        construct(Shannon, Position(i, 1), Position(0,0));
+    }
+
     print_info();
     
     
@@ -125,8 +132,8 @@ void f_player()
 void player0() {
     int ins_num = 0;
     if (state->turn < 100) {
-        for (int i = 6; i < 50; i++) {
-            for (int j = 6; j < 50; j++) {
+        for (int i = 6; i < 20; i++) {
+            for (int j = 6; j < 20; j++) {
                 if (can_cons(Position(i, j))) {
                     if (near_a_road(Position(i, j)) && state->resource[flag].resource >= 1000)
                         construct(Shannon, Position(i, j), find_road(Position(i,j)));
@@ -143,14 +150,14 @@ void player0() {
 void player1() {
     int ins_num = 0;
     if (state->turn < 100) {
-        for (int i = 193; i > 150; i--) {
-            for (int j = 193; j > 150; j--) {
+        for (int i = 193; i > 180; i--) {
+            for (int j = 193; j > 180; j--) {
                 if (can_cons(Position(i, j))) {
                     if (near_a_road(Position(i, j)) && state->resource[flag].resource >= 1000)
                         construct(Shannon, Position(i, j), find_road(Position(i, j)));
                     else
                         construct(Programmer, Position(i, j), Position(0, 0));
-                   
+                    ins_num++;
                     if (ins_num > 50)
                         return;
                 }

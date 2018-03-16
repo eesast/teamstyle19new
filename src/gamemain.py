@@ -17,7 +17,7 @@ class GameMain:
 
     units = [{} for _ in range(2)]
 
-    main_base = [None] * 2
+    main_base = [None,None]
 
     buildings = [{
         'produce': [],
@@ -1001,7 +1001,7 @@ class GameMain:
         for current_flag in range(2):
             age_increase_factor = 0.5 * (self.status[current_flag]['tech'] + 2)
             for building in self.buildings[current_flag]['produce']:
-                if building.CD_left == 0:
+                if building.CD_left <= 0:
                     solider_name = OriginalBuildingAttribute[building.BuildingType][BuildingAttribute.TRAGET]
                     solider_hp = OriginalSoliderAttribute[solider_name][SoliderAttr.SOLIDER_ORIGINAL_HP]
                     solider_pos = building.ProducePos
@@ -1025,6 +1025,13 @@ class GameMain:
                 consumption = basic_consumption + increased_consumption * self.status[flag]['tech']
                 if self.status[flag]['money'] > consumption and self.status[flag]['tech'] < Age.AI.value:
                     self.status[flag]['money'] -= consumption
+                    self.main_base[flag].HP = (
+                        self.main_base[flag].HP /
+                        (OriginalBuildingAttribute[BuildingType.Base][BuildingAttribute.ORIGINAL_HP]*
+                        (self.status[flag]['tech'] + 2) * 0.5) *
+                        (OriginalBuildingAttribute[BuildingType.Base][BuildingAttribute.ORIGINAL_HP] *
+                        (self.status[flag]['tech'] + 3) * 0.5)
+                                    )
                     self.status[flag]['tech'] += 1
                     self.instruments[flag]['update_age'].append(True)
                 else:
