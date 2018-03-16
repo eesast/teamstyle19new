@@ -689,11 +689,14 @@ class GameMain:
                             pre_dist = now_dist
                     if target is not None:
                         persent = 0.1 * tech_factor
-                        target.HP = (target.HP - OriginalSoliderAttribute[target.Solider_Name][
-                            SoliderAttr.SOLIDER_ORIGINAL_HP] * persent)
+                        enemy_tech_factor = tech_factor = 0.5 * (self.status[1-flag]['tech'] + 2)
+                        fixed_hp = OriginalBuildingAttribute[BuildingType.Robert_Kahn][BuildingAttribute.ORIGINAL_ATTACK] * \
+                                tech_factor
+                        target.HP = (target.HP - fixed_hp - OriginalSoliderAttribute[target.Solider_Name][
+                            SoliderAttr.SOLIDER_ORIGINAL_HP] * enemy_tech_factor * persent)
                         self.instruments[flag]['attack'].append((building.Unit_ID, target_id))
 
-                # Hawkin Attack,秒杀一格
+                # Hawkin Attack,秒杀三格
                 if building.BuildingType == BuildingType.Hawkin:
                     building.CD_left = building.CD_left - 1
                     if building.CD_left <= 0:
@@ -1021,7 +1024,7 @@ class GameMain:
     def update_age_phase(self):
         """Deal with the update_age instruments"""
         basic_consumption = 2000  # 基础升级科技消耗，未定
-        increased_consumption = 1000  # 科技每升一级，下次升级科技资源消耗增量
+        increased_consumption = 1500  # 科技每升一级，下次升级科技资源消耗增量
         for flag in range(2):
             if self.raw_instruments[flag]['update_age']:
                 consumption = basic_consumption + increased_consumption * self.status[flag]['tech']
