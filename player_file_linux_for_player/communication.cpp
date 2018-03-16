@@ -7,6 +7,7 @@
 #include"api_player.h"
 
 using namespace std;
+extern bool use;
 
 MyClient::MyClient()
 {
@@ -121,7 +122,7 @@ State* MyClient::recv_state()
 		if (flag)
 			break;
 	}
-
+	use=true;
 	char number[10];
 	for (int i = 0; i < 9; i++)
 		number[i] = '#';
@@ -206,5 +207,8 @@ State* MyClient::recv_state()
 			state->soldier[i].push_back(Soldier(q, hp, Position(posx, posy), i, unit_id));
 		}
 	}
+	use=false;
+	const char* hello = "start";
+	send(sockClient, hello, strlen(hello), 0);
 	return state;
 }
