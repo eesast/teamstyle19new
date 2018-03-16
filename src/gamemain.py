@@ -400,6 +400,7 @@ class GameMain:
                                 OriginalBuildingAttribute[BuildingType(instrument[0])][BuildingAttribute.ORIGINAL_RANGE]:
                                 new_instrument_list.remove(instrument)
                                 instrument_num -= 1
+                                continue
                             new_produce_pos = Position(instrument[2][0],instrument[2][1])
                         # 判断建造时代是否符合要求
                         if (OriginalBuildingAttribute[BuildingType(building_type)][BuildingAttribute.AGE].value >
@@ -446,7 +447,6 @@ class GameMain:
                         if not can_build:
                             new_instrument_list.remove(instrument)
                             instrument_num -= 1
-
                             continue
                         # 判断生产位置是否符合要求
                         if (OriginalBuildingAttribute[building_type][BuildingAttribute.BUILDING_TYPE] ==
