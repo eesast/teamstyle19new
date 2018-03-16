@@ -130,25 +130,25 @@ class MainServer(object):
             l+='#'
         l=l.encode('utf-8')
         try:
-            self.sock[0].send(l)
+            self.sock[0].sendall(l)
         except ConnectionResetError:
             player_0=0
         except BrokenPipeError:
             player_0=0
         try:
-            self.sock[1].send(l)
+            self.sock[1].sendall(l)
         except ConnectionResetError:
             player_1=0
         except BrokenPipeError:
             player_1=0
         try:
-            self.sock[0].send(state)
+            self.sock[0].sendall(state)
         except ConnectionResetError:
             player_0=0
         except BrokenPipeError:
             player_0=0
         try:
-            self.sock[1].send(state)
+            self.sock[1].sendall(state)
         except ConnectionResetError:
             player_1=0
         except BrokenPipeError:
