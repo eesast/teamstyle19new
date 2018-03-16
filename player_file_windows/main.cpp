@@ -2,6 +2,7 @@
 #include<thread>
 #include<vector>
 #include<iostream>
+#include<windows.h>
 //#include<ctime>
 using namespace std;
 
@@ -15,6 +16,8 @@ MyClient cilent;
 int** map;
 bool flag;
 bool goon = true;
+HANDLE signal;
+
 
 void Listen()
 {
@@ -25,28 +28,32 @@ void Listen()
 		t=state;
 		state=s;
 		delete t;
+		ReleaseSemaphore(signal, 1 ,NULL);
+
 	}
 }
 
 int main()
 {
+	signal = CreateSemaphore(NULL, 0, 1, NULL);
 	cilent.start_connection();
 	map = cilent.map;
 	flag = cilent.flag;
 	int turn = 0;
 	thread th_communication(Listen);
-	while (state == NULL)
+	WaitForSingleObject(signal, INFINITE);
+	/*while (state == NULL)
 	{
 
-	}
+	}*/
 	State* laststate = NULL;
 	while (state->turn < 1000)
 	{
-		if (state == NULL)
+		/*if (state == NULL)
 			continue;
 		if (state == laststate)
 			continue;
-		laststate = state;
+		laststate = state;*/
 		if (state->winner != 2)
 			break;
 		f_player();
@@ -54,6 +61,7 @@ int main()
 		_updateAge = false;
 		c1.clear();
 		c2.clear();
+		WaitForSingleObject(signal, INFINITE);
 	}
 	if (state->winner == 1)
 		cout << "Winner is 1" << endl;
