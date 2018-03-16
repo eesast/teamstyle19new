@@ -21,7 +21,7 @@ pthread_mutex_t mt;
 
 void* Listen(void* arg)
 {
-	pthread_mutex_lock(&mt);
+	//pthread_mutex_lock(&mt);
 	State* t;
 	while (goon)
 	{
@@ -29,7 +29,7 @@ void* Listen(void* arg)
 		t=state;
 		state = s;
 		delete t;
-		pthread_mutex_unlock(&mt);
+		//pthread_mutex_unlock(&mt);
 	}
 	return NULL;
 }
@@ -42,22 +42,23 @@ int main()
 	flag = cilent.flag;
     pthread_t com_thread;
     pthread_create(&com_thread,NULL,Listen,(void*)NULL);
-	/*while (state == NULL)
+	while (state == NULL)
 	{
 
 	}
-	State* laststate = NULL;*/
+	State* laststate = NULL;
 	cout<<"++++++++"<<endl;
-	pthread_mutex_lock(&mt);
+	//pthread_mutex_lock(&mt);
 	cout<<"ASDASDASD"<<endl;
 	int c;
 	while (state->turn < 1000)
 	{
-		/*if (state == NULL)
+		if (state == NULL)
 			continue;
 		if (state == laststate)
 			continue;
-		laststate = state;*/
+		laststate = state;
+		cout<<"*********"<<state->turn<<endl;
 		if (state->winner != 2)
 			break;
 		f_player();
@@ -66,7 +67,7 @@ int main()
 		_updateAge = false;
 		c1.clear();
 		c2.clear();
-		pthread_mutex_lock(&mt);
+	//	pthread_mutex_lock(&mt);
 	}
 	if (state->winner == 1)
 		cout << "Winner is 1" << endl;

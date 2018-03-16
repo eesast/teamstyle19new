@@ -147,6 +147,22 @@ State* MyClient::recv_state()
 	smatch m0;
 	string s(save);
 	regex_match(s, m0, reg0);
+	int templen=len;
+	int temptruth;
+	int now;
+	truth=recv(sockClient, save, templen, 0);
+	now=truth;
+	while(true)
+	{
+		if(truth<templen)
+		{
+			temptruth=recv(sockClient,save+now,len-now,0);
+			now+=temptruth;
+		}
+		else
+			break;
+
+	}
 //m0.str(2/5) save age tech resource
 //m0.str(3/6) save building
 //m0.str(4/7) save solider

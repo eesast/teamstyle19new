@@ -131,11 +131,27 @@ State* MyClient::recv_state()
 	istringstream is(number);
 	int len;
 	is >> len;
-
+	int truth;
 	char *save;
 	save = new char[len + 1];
 	save[len] = '\0';
-	recv(sockClient, save, len, 0);
+	int templen=len;
+	int temptruth;
+	int now;
+	truth=recv(sockClient, save, templen, 0);
+	now=truth;
+	while(true)
+	{
+		if(truth<templen)
+		{
+			temptruth=recv(sockClient,save+now,len-now,0);
+			now+=temptruth;
+		}
+		else
+			break;
+
+	}
+	cout<<save<<endl;
 	regex reg0("(.*);(.*);(.*);(.*);#(.*);(.*);(.*);#");
 	smatch m0;
 	string s(save);
