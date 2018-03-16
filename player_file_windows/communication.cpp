@@ -150,7 +150,7 @@ State* MyClient::recv_state()
 	int templen=len;
 	int temptruth;
 	int now;
-	truth=recv(sockClient, save, templen, 0);
+	int truth=recv(sockClient, save, templen, 0);
 	now=truth;
 	while(true)
 	{
