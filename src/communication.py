@@ -142,13 +142,17 @@ class MainServer(object):
         except BrokenPipeError:
             player_1=0
         try:
-            self.sock[0].sendall(state)
+            l=self.sock[0].send(state)
+            print(state)
+            print(l)
         except ConnectionResetError:
             player_0=0
         except BrokenPipeError:
             player_0=0
         try:
-            self.sock[1].sendall(state)
+            l=self.sock[1].send(state)
+            print(state)
+            print(l)
         except ConnectionResetError:
             player_1=0
         except BrokenPipeError:
@@ -165,7 +169,7 @@ class MainServer(object):
             player_1=0
         except BrokenPipeError:
             player_1=0
-        
+
         #将数据长度以byte的形式
         self.sock[0].setblocking(0)
         self.sock[0].settimeout(0.01)
