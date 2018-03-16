@@ -80,10 +80,9 @@ bool can_cons(Position p) {
         return 0;
 }
 void print_my_bd() {
-    int my_bd_num = state->building[flag].size();
-    for (int i = 0; i < my_bd_num; i++) {
+    for (int i = 0; i < state->building[flag].size(); i++) {
         Building bd = state->building[flag][i];
-        cout << "id:" << bd.unit_id << " type:" << bd.building_type << " pos:" << bd.pos.x << ' ' << bd.pos.y << endl;
+        cout << "id:" << bd.unit_id << " type:" << bd.building_type <<" HP:"<<bd.heal<< " pos:" << bd.pos.x << ' ' << bd.pos.y << endl;
     }
 }
 void print_my_re() {
@@ -100,7 +99,7 @@ void print_info() {
     cout << "turn:" << state->turn << endl;
     print_my_re();
     print_my_base();
-    //print_my_bd();
+    print_my_bd();
 }
 void f_player()
 {
@@ -118,6 +117,7 @@ void f_player()
         player0();
     else
         player1();
+
     print_info();
     
     
@@ -125,8 +125,8 @@ void f_player()
 void player0() {
     int ins_num = 0;
     if (state->turn < 100) {
-        for (int i = 6; i < 50; i++) {
-            for (int j = 6; j < 50; j++) {
+        for (int i = 6; i < 20; i++) {
+            for (int j = 6; j < 20; j++) {
                 if (can_cons(Position(i, j))) {
                     if (near_a_road(Position(i, j)) && state->resource[flag].resource >= 1000)
                         construct(Shannon, Position(i, j), find_road(Position(i,j)));
@@ -143,14 +143,14 @@ void player0() {
 void player1() {
     int ins_num = 0;
     if (state->turn < 100) {
-        for (int i = 193; i > 150; i--) {
-            for (int j = 193; j > 150; j--) {
+        for (int i = 193; i > 180; i--) {
+            for (int j = 193; j > 180; j--) {
                 if (can_cons(Position(i, j))) {
                     if (near_a_road(Position(i, j)) && state->resource[flag].resource >= 1000)
                         construct(Shannon, Position(i, j), find_road(Position(i, j)));
                     else
                         construct(Programmer, Position(i, j), Position(0, 0));
-                   
+                    ins_num++;
                     if (ins_num > 50)
                         return;
                 }
