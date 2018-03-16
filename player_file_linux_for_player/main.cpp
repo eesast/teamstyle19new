@@ -41,9 +41,9 @@ int main()
 	map = cilent.map;
 	flag = cilent.flag;
 	if(flag==0)
-		sg=sem_open("/temp0",O_CREAT,0644,0);
+		sg=sem_open("/temp3",O_CREAT,0644,0);
 	else
-		sg=sem_open("/temp1",O_CREAT,0644,0);
+		sg=sem_open("/temp4",O_CREAT,0644,0);
     pthread_t com_thread;
     pthread_create(&com_thread,NULL,Listen,(void*)NULL);
 	sem_wait(sg);

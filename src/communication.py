@@ -104,7 +104,7 @@ class MainServer(object):
     def send_state(self,turn,status,building,unit,winner=3):  #给外部调用的接口 只要把当前的status传入即可将status发送给C++选手端
         #回合没有结束 没有winner时 不输入该参数或者输入3
         #将state0和state1处理成byte形式
-        print(status[0]['tech'])
+       # print(status[0]['tech'])
         player_0=1
         player_1=1
         state =self.change_to_byte(turn,status,building,unit,winner)
@@ -143,16 +143,16 @@ class MainServer(object):
             player_1=0
         try:
             l=self.sock[0].send(state)
-            print(state)
-            print(l)
+          #  print(state)
+          #  print(l)
         except ConnectionResetError:
             player_0=0
         except BrokenPipeError:
             player_0=0
         try:
             l=self.sock[1].send(state)
-            print(state)
-            print(l)
+            #print(state)
+            #print(l)
         except ConnectionResetError:
             player_1=0
         except BrokenPipeError:
