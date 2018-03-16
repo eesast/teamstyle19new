@@ -113,7 +113,7 @@ class MainServer(object):
         #发送start 告诉选手端接下来的要发送命令 防治出现通信问题
         try:
             self.sock[0].send(b'start')
-        except BrokenPipeError:
+        except ConnectionResetError:
             player_0=0
         except BrokenPipeError:
             player_0=0
