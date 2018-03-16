@@ -146,10 +146,10 @@ State* MyClient::recv_state()
 	int now;
 	int truth=recv(sockClient, save, templen, 0);
 	now=truth;
-    cout << "^^^^^^^^^^^^^^^^^^^^^" << endl;
+   // cout << "^^^^^^^^^^^^^^^^^^^^^" << endl;
 	while(true)
 	{
-        cout << now << endl;
+      //  cout << now << endl;
 		if(now<templen)
 		{
 			temptruth=recv(sockClient,save+now,len-now,0);
@@ -159,7 +159,7 @@ State* MyClient::recv_state()
 			break;
 
 	}
-    cout << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" << endl;
+  //  cout << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" << endl;
 	int aaal;
 	regex reg0("(.*);(.*);(.*);(.*);#(.*);(.*);(.*);#");
 	smatch m0;

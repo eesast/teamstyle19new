@@ -43,18 +43,9 @@ int main()
 	int turn = 0;
 	thread th_communication(Listen);
 	WaitForSingleObject(signal, INFINITE);
-	/*while (state == NULL)
-	{
-
-	}*/
 	State* laststate = NULL;
 	while (state->turn < 1000)
 	{
-		/*if (state == NULL)
-			continue;
-		if (state == laststate)
-			continue;
-		laststate = state;*/
 		if (state->winner != 2)
 			break;
 		f_player();
