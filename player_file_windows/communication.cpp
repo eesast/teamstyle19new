@@ -141,12 +141,6 @@ State* MyClient::recv_state()
 	char *save;
 	save = new char[len + 1];
 	save[len] = '\0';
-	recv(sockClient, save, len, 0);
-	int aaal;
-	regex reg0("(.*);(.*);(.*);(.*);#(.*);(.*);(.*);#");
-	smatch m0;
-	string s(save);
-	regex_match(s, m0, reg0);
 	int templen=len;
 	int temptruth;
 	int now;
@@ -163,6 +157,11 @@ State* MyClient::recv_state()
 			break;
 
 	}
+	int aaal;
+	regex reg0("(.*);(.*);(.*);(.*);#(.*);(.*);(.*);#");
+	smatch m0;
+	string s(save);
+	regex_match(s, m0, reg0);
 //m0.str(2/5) save age tech resource
 //m0.str(3/6) save building
 //m0.str(4/7) save solider
