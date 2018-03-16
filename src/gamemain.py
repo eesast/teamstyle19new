@@ -362,10 +362,12 @@ class GameMain:
                 self.winner = 1
             else:
                 self.winner = 2
-        elif self.main_base[0].HP <= 0 and self.main_base[1].HP != 0:
-            self.winner = 0
-        elif self.main_base[1].HP <= 0 and self.main_base[0].HP != 0:
+        elif self.main_base[0].HP <= 0 and self.main_base[1].HP > 0:
             self.winner = 1
+        elif self.main_base[1].HP <= 0 and self.main_base[0].HP > 0:
+            self.winner = 0
+        elif self.main_base[0].HP <= 0 and self.main_base[1].HP <= 0:
+            self.winner = 3
         else:
             self.winner = 2
 
