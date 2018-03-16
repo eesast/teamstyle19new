@@ -3,6 +3,7 @@
 #include<vector>
 #include<iostream>
 #include<fstream>
+#include<semaphore.h>
 //#include<ctime>
 using namespace std;
 
@@ -18,6 +19,7 @@ bool flag;
 bool goon = true;
 bool use=false;
 pthread_mutex_t mt;
+sem_t* sg=NULL;
 
 void* Listen(void* arg)
 {
@@ -30,22 +32,31 @@ void* Listen(void* arg)
 		state = s;
 		delete t;
 		//pthread_mutex_unlock(&mt);
+		sem_post(sg);
 	}
 	return NULL;
 }
 
 int main()
 {
-	pthread_mutex_init(&mt,NULL);
+	if(sg==NULL)
+		cout<<"ASDASD"<<endl;
+	//pthread_mutex_init(&mt,NULL);
 	cilent.start_connection();
 	map = cilent.map;
 	flag = cilent.flag;
+	if(flag==0)
+		sg=sem_open("/temp0",O_CREAT,0644,0);
+	else
+		sg=sem_open("/temp1",O_CREAT,0644,0);
     pthread_t com_thread;
     pthread_create(&com_thread,NULL,Listen,(void*)NULL);
-	while (state == NULL)
+/*	while (state == NULL)
 	{
 
-	}
+	}*/
+	//state=cilent.recv_state();
+	sem_wait(sg);
 	State* laststate = NULL;
 	cout<<"++++++++"<<endl;
 	//pthread_mutex_lock(&mt);
@@ -53,11 +64,11 @@ int main()
 	int c;
 	while (state->turn < 1000)
 	{
-		if (state == NULL)
+		/*if (state == NULL)
 			continue;
 		if (state == laststate)
 			continue;
-		laststate = state;
+		laststate = state;*/
 		cout<<"*********"<<state->turn<<endl;
 		if (state->winner != 2)
 			break;
@@ -67,6 +78,7 @@ int main()
 		_updateAge = false;
 		c1.clear();
 		c2.clear();
+		sem_wait(sg);
 	//	pthread_mutex_lock(&mt);
 	}
 	if (state->winner == 1)
