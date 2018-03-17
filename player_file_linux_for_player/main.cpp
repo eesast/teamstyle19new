@@ -40,10 +40,23 @@ int main()
 	cilent.start_connection();
 	map = cilent.map;
 	flag = cilent.flag;
+	#ifdef __APPLE__
+	{
 	if(flag==0)
 		sg=sem_open("/temp3",O_CREAT,0644,0);
 	else
 		sg=sem_open("/temp4",O_CREAT,0644,0);
+	}
+	#else
+	{
+		int v=sem_init(sg,0,0);
+		if(v==-1)
+		{
+			cout<<"信号量启动失败,程序自动退出"<<endl;
+			exit(0);
+		}
+	}
+	#endif
     pthread_t com_thread;
     pthread_create(&com_thread,NULL,Listen,(void*)NULL);
 	sem_wait(sg);
