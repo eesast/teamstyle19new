@@ -211,7 +211,7 @@ OriginalBuildingAttribute = {
                           BuildingAttribute.CD: 2},
 
     BuildingType.Programmer: {BuildingAttribute.BUILDING_TYPE: UnitType.RESOURCE_BUILDING,
-                        BuildingAttribute.ORIGINAL_HP: 100, BuildingAttribute.ORIGINAL_ATTACK: 20,
+                        BuildingAttribute.ORIGINAL_HP: 100, BuildingAttribute.ORIGINAL_ATTACK: 10,
                         BuildingAttribute.ORIGINAL_RANGE: 0, BuildingAttribute.TRAGET: UnitType.ALL,
                         BuildingAttribute.AGE: Age.BIT, BuildingAttribute.ORIGINAL_RESOURCE: 100,
                         BuildingAttribute.ORIGINAL_BUILDING_POINT: 10, BuildingAttribute.AOE: 0,
@@ -358,12 +358,13 @@ class Building(object):
 
 
 class Solider(object):
-    def __init__(self, solider_name, hp, pos, flag, unit_id):
+    def __init__(self, solider_name, hp, pos, flag, unit_id, level):
         self.__Solider_Name = solider_name
         self.__HP = hp
         self.__Position = pos
         self.__Flag = flag
         self.__Unit_ID = unit_id
+        self.level = level
 
     @property
     def HP(self):

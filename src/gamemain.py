@@ -506,8 +506,9 @@ class GameMain:
         for flag in range(2):
             tech_factor = 0.5 * (self.status[flag]['tech'] + 2)
 
+            # 建筑对兵种攻击
             for building in self.buildings[flag]['defence']:
-
+                tech_factor = 0.5 * (building.level + 2)
                 # Bool Attack , 1/2 概率无效，攻击最近单位
                 if building.BuildingType == BuildingType.Bool:
                     can_attack = random.randint(0, 1)
@@ -722,6 +723,7 @@ class GameMain:
 
             # 兵种对建筑的攻击
             for unit_id, unit in self.units[flag].items():
+                tech_factor = unit.level
                 action_mode = OriginalSoliderAttribute[unit.Solider_Name][SoliderAttr.ACTION_MODE]
                 pre_dist = OriginalSoliderAttribute[unit.Solider_Name][SoliderAttr.ATTACK_RANGE] + 1
                 if unit.Solider_Name == SoliderName.TURNING_MACHINE or unit.Solider_Name == SoliderName.ULTRON:
@@ -1012,9 +1014,10 @@ class GameMain:
                     solider_pos = building.ProducePos
                     solider_flag = current_flag
                     solider_id = self.total_id
+                    solider_level = building.level
                     cd = OriginalBuildingAttribute[building.BuildingType][BuildingAttribute.CD]
                     self.units[current_flag][solider_id]=\
-                        Solider(solider_name, solider_hp, solider_pos, solider_flag, solider_id)
+                        Solider(solider_name, solider_hp, solider_pos, solider_flag, solider_id, solider_level)
                     building.CD_left = cd  # 重置CD
                     self.total_id += 1
                     self.instruments[current_flag]['produce'].append(solider_id)
@@ -1046,9 +1049,10 @@ class GameMain:
         """Produce new resource and refresh building force"""
         for flag in range(2):
             basic_resource = OriginalBuildingAttribute[BuildingType.Programmer][BuildingAttribute.ORIGINAL_ATTACK]
-            resource = (basic_resource * 0.5 * (self.status[flag]['tech'] + 2)) * len(self.buildings[flag]['resource'])
-            self.status[flag]['money'] += resource
-            self.status[flag]['building'] = self.status[flag]['tech'] * 60 + 100
+            for building in self.buildings[flag]['resource']:
+                resource = basic_resource * 0.5 * (building.level + 2)
+                self.status[flag]['money'] += resource
+            self.status[flag]['building'] = 80 + 60 * self.status[flag]['tech']
             self.instruments[flag]['resource'] = True
 
     def debug_print(self):
@@ -1199,8 +1203,7 @@ class GameMain:
             'sell': [],  # id
             'update_age': False,
             } for _ in range(2)]
-        self.status[0]['building'] = 80 + 60 * self.status[0]['tech']
-        self.status[1]['building'] = 80 + 60 * self.status[1]['tech']
+
 
 def main():
     game = GameMain()
