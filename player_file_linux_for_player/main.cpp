@@ -4,6 +4,10 @@
 #include<iostream>
 #include<fstream>
 #include<semaphore.h>
+#include <chrono>  
+#include <random>  
+#include<sstream>
+
 //#include<ctime>
 using namespace std;
 
@@ -42,10 +46,23 @@ int main()
 	flag = cilent.flag;
 	#ifdef __APPLE__
 	{
-	if(flag==0)
-		sg=sem_open("/temp3",O_CREAT,0644,0);
-	else
-		sg=sem_open("/temp4",O_CREAT,0644,0);
+		unsigned seed1 = std::chrono::system_clock::now().time_since_epoch().count();
+		std::mt19937 g1(seed1);
+		int r1=g1();
+		int r2=r1+1;
+		stringstream s;
+		if(flag==0)
+			{
+				s<<"ts_00_";
+				s<<r1;
+				sg=sem_open(s.str().c_str(),O_CREAT,0644,0);
+			}
+		else
+			{
+				s<<"ts_01_";
+				s<<r2;
+				sg=sem_open(s.str().c_str(),O_CREAT,0644,0);
+			}
 	}
 	#else
 	{
