@@ -723,7 +723,7 @@ class GameMain:
 
             # 兵种对建筑的攻击
             for unit_id, unit in self.units[flag].items():
-                tech_factor = unit.level
+                tech_factor = 0.5 * ( unit.level + 2)
                 action_mode = OriginalSoliderAttribute[unit.Solider_Name][SoliderAttr.ACTION_MODE]
                 pre_dist = OriginalSoliderAttribute[unit.Solider_Name][SoliderAttr.ATTACK_RANGE] + 1
                 if unit.Solider_Name == SoliderName.TURNING_MACHINE or unit.Solider_Name == SoliderName.ULTRON:
