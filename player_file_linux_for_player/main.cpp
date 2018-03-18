@@ -4,6 +4,10 @@
 #include<iostream>
 #include<fstream>
 #include<semaphore.h>
+#include <chrono>  
+#include <random>  
+#include<sstream>
+
 //#include<ctime>
 using namespace std;
 
@@ -18,8 +22,7 @@ int** map;
 bool flag;
 bool goon = true;
 bool use=false;
-pthread_mutex_t mt;
-sem_t* sg=NULL;
+sem_t *sg=new sem_t;
 
 void* Listen(void* arg)
 {
@@ -30,7 +33,6 @@ void* Listen(void* arg)
 		t=state;
 		state = s;
 		delete t;
-		sem_post(sg);
 	}
 	return NULL;
 }
@@ -40,10 +42,36 @@ int main()
 	cilent.start_connection();
 	map = cilent.map;
 	flag = cilent.flag;
-	if(flag==0)
-		sg=sem_open("/temp3",O_CREAT,0644,0);
-	else
-		sg=sem_open("/temp4",O_CREAT,0644,0);
+	#ifdef __APPLE__
+	{
+		unsigned seed1 = std::chrono::system_clock::now().time_since_epoch().count();
+		std::mt19937 g1(seed1);
+		int r1=g1();
+		int r2=r1+1;
+		stringstream s;
+		if(flag==0)
+			{
+				s<<"ts_00_";
+				s<<r1;
+				sg=sem_open(s.str().c_str(),O_CREAT,0644,0);
+			}
+		else
+			{
+				s<<"ts_01_";
+				s<<r2;
+				sg=sem_open(s.str().c_str(),O_CREAT,0644,0);
+			}
+	}
+	#else
+	{
+		int v=sem_init(sg,0,0);
+		if(v==-1)
+		{
+			cout<<"信号量启动失败,程序自动退出"<<endl;
+			exit(0);
+		}
+	}
+	#endif
     pthread_t com_thread;
     pthread_create(&com_thread,NULL,Listen,(void*)NULL);
 	sem_wait(sg);
@@ -59,7 +87,7 @@ int main()
 		c1.clear();
 		c2.clear();
 		sem_wait(sg);
-	}
+		}
 	if (state->winner == 1)
 		cout << "Winner is 1" << endl;
 	else if (state->winner == 0)
