@@ -33,6 +33,7 @@ void* Listen(void* arg)
 		t=state;
 		state = s;
 		delete t;
+		sem_post(sg);
 	}
 	return NULL;
 }
