@@ -75,8 +75,10 @@ def logist_platform(server,game,turn):
   #  print("player0:",player_0,"player1:",player_1)
     if player_0 == 0 and player_1 != 0:
         game.winner = 1
+        game.turn_num = 1001
     if player_1 == 0 and player_0 != 0:
         game.winner = 0
+        game.turn_num = 1001
     if player_0 == player_1 == 0:
         game.turn_num = 1001
     #game在这里处理命令command
@@ -123,6 +125,8 @@ while game.winner == 2:
     game.next_tick()
     if game.turn_num>1000:
         break
+if game.winner == 3:
+    game.winner = 2
 status=game.status
 status[0]['money']=int(status[0]['money'])
 status[1]['money']=int(status[1]['money'])
