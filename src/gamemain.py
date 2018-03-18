@@ -1130,7 +1130,13 @@ class GameMain:
             'produce': [],
             'resource': False
         } for _ in range(2)]
+        jbase=[{
+            'base_HP':0,
+            'base_pos':(0,0)
+        } for _ in range(2)]
         for i in range (2):
+            jbase[i]['base_HP']=self.main_base[i].HP
+            jbase[i]['base_pos']=(self.main_base[i].Position.x,self.main_base[i].Position.y)
             for unit_id,unit in self.units[i].items():
                 unit_temp={'name':str(unit.Solider_Name),'hp':unit.HP,'pos':(unit.Position.x,unit.Position.y),'flag':unit.Flag,'id':unit.Unit_ID}
                 junits[i].append(unit_temp)
@@ -1166,7 +1172,7 @@ class GameMain:
             jinstruments[i]['produce'] = self.instruments[i]['produce']
             jinstruments[i]['resource']=self.instruments[i]['resource']
 
-        data={'unit_0':junits[0],'unit_1':junits[1],'buildings_0':jbuildings[0],'buildings_1':jbuildings[1],'status_0':jstatus[0],
+        data={'mainbase_0':jbase[0],'mainbase_1':jbase[1],'unit_0':junits[0],'unit_1':junits[1],'buildings_0':jbuildings[0],'buildings_1':jbuildings[1],'status_0':jstatus[0],
               'status_1':jstatus[1],'instruments_0':jinstruments[0],'instruments_1':jinstruments[1]}
         jdata = json.dumps(data)
         with open('turn_save.txt', 'a') as f:
