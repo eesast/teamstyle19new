@@ -22,8 +22,11 @@ int** map;
 bool flag;
 bool goon = true;
 bool use=false;
-pthread_mutex_t mt;
-sem_t* sg=NULL;
+#ifdef __APPLE__
+	sem_t* sg=NULL;
+#else
+{	sem_t sg;}
+#endif
 
 void* Listen(void* arg)
 {
@@ -34,7 +37,11 @@ void* Listen(void* arg)
 		t=state;
 		state = s;
 		delete t;
-		sem_post(sg);
+		#ifdef __APPLE__
+			sem_post(sg);
+		#else 
+			sem_post(&sg);
+		#endif
 	}
 	return NULL;
 }
@@ -66,7 +73,7 @@ int main()
 	}
 	#else
 	{
-		int v=sem_init(sg,0,0);
+		int v=sem_init(&sg,0,0);
 		if(v==-1)
 		{
 			cout<<"信号量启动失败,程序自动退出"<<endl;
@@ -76,7 +83,11 @@ int main()
 	#endif
     pthread_t com_thread;
     pthread_create(&com_thread,NULL,Listen,(void*)NULL);
-	sem_wait(sg);
+	#ifdef __APPLE__
+		sem_wait(sg);
+	#else 
+		sem_wait(&sg);
+	#endif
 	while (state->turn < 1000)
 	{
 		cout<<"*********"<<state->turn<<"************"<<endl;
@@ -88,8 +99,12 @@ int main()
 		_updateAge = false;
 		c1.clear();
 		c2.clear();
+	#ifdef __APPLE__
 		sem_wait(sg);
-	}
+	#else 
+		sem_wait(&sg);
+	#endif
+		}
 	if (state->winner == 1)
 		cout << "Winner is 1" << endl;
 	else if (state->winner == 0)

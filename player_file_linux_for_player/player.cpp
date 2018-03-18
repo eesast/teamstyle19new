@@ -14,7 +14,7 @@ void player1();
 
 
 int dist(Position p1, Position p2) {
-    return abs(p1.x - p2.x) + abs(p1.y - p2.y);
+    return (p1.x - p2.x)>0?p1.x-p2.x:p2.x-p1.x + (p1.y - p2.y)?p1.y-p2.y:p2.y-p1.y;
 }
 bool near_a_road(Position p) {
     int x = p.x;
