@@ -104,7 +104,7 @@ enum ActionMode {
 };
 
 const int OriginalBuildingAttribute[Building_Type][Attr_Num] = {
-    {Base,              100000，_NULL,   0,   _NULL,           BIT,       0,      _NULL, _NULL,   _NULL},
+    {Base,              100000,_NULL,   0,   _NULL,           BIT,       0,      _NULL, _NULL,   _NULL},
     {PRODUCTION_BUILDING, 100,  _NULL,  10,   BIT_STREAM,      BIT,       100,    10,    _NULL,  1},
     {PRODUCTION_BUILDING, 120,  _NULL,  5,    VOLTAGE_SOURCE,  CIRCUIT,   120,    12,    _NULL,  2},
     {PRODUCTION_BUILDING, 120,  _NULL,  5,    CURRENT_SOURCE,  CIRCUIT,   120,    12,    _NULL,  2},
