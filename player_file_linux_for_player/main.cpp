@@ -31,6 +31,7 @@ void* Listen(void* arg)
 	while (goon)
 	{
 		State* s = cilent.recv_state();
+		state=s;
 		all_state.push_back(state);
 		/*t=state;
 		state = s;
