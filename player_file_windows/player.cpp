@@ -7,6 +7,7 @@ extern	bool _updateAge;
 extern vector<command1> c1;
 extern vector<command2>c2;
 extern State* state ;
+extern vector<State* > all_state;
 extern int** map;
 extern bool flag;
 

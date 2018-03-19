@@ -17,6 +17,7 @@ extern vector<command2> c2;
 void f_player();
 
 State* state=NULL;
+vector<State* > all_state;
 MyClient cilent;
 int** map;
 bool flag;
@@ -30,9 +31,10 @@ void* Listen(void* arg)
 	while (goon)
 	{
 		State* s = cilent.recv_state();
-		t=state;
+		all_state.push_back(state);
+		/*t=state;
 		state = s;
-		delete t;
+		delete t;*/
 		sem_post(sg);
 	}
 	return NULL;
