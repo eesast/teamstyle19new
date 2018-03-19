@@ -85,6 +85,12 @@ int main()
 		if (state->winner != 2)
 			break;
 		f_player();
+		cout<<state->winner<<endl;
+		for(int i=0;i<state->building[flag].size();i++)
+		{
+			if(state->building[flag][i].building_type==0)
+				cout<<state->building[flag][i].heal<<endl;
+		}
 		if(!use)
 			cilent.send_command(_updateAge,c1,c2);
 		_updateAge = false;

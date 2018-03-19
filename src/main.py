@@ -118,6 +118,7 @@ while game.winner == 2:
     #    } for _ in range(2)]
     print('turn', game.turn_num)
     logist_platform(server, game, game.turn_num)
+    print(game.winner)
     if game.winner != 2:
         break
     game.next_tick()
@@ -136,7 +137,7 @@ units = copy.deepcopy(game.units)
 winner = copy.deepcopy(game.winner)
 turn = game.turn_num
 player_0, player_1 = server.send_state(turn, status, building, units, winner)
-
+print(game.winner)
 """with open(filename, 'w') as f:
     f.writelines(file)
     f.write(str(game.winner))"""
