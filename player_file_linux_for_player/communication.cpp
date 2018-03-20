@@ -34,16 +34,38 @@ void MyClient::start_connection()
 {
     connect(sockClient,(struct sockaddr*)&addrServer,sizeof(struct sockaddr_in));
     char cflag[1];
-	recv(sockClient, cflag, 1, 0);
+int t=0;
+int temp=0;
+int now=0;
+	while(true)
+{
+	t=recv(sockClient, cflag, 1, 0);
+	if(t==1)
+		break;
+}
 	string sflag(cflag);
 	istringstream os(sflag);
 	os >> flag;
 	int size = 200 * 200;
 	smap = new char[size + 1];
-	recv(sockClient, smap, size, 0);
+	while(true)
+{
+	t=recv(sockClient, smap+now, size-now, 0);
+	now=now+t;
+	if(now==size);
+		break;
+}
 	smap[size] = '\0';
 	char can_start[3];
-	recv(sockClient, can_start, 2, 0);
+	temp=0;
+	now=0;
+	while(true)
+{
+	temp=recv(sockClient, can_start+now, 2-now, 0);
+	now=now+temp;
+	if(now==2)
+		break;
+}
 	can_start[2] = '\0';
 	fflag = flag;
 	change_map(smap);
@@ -70,7 +92,7 @@ char* MyClient::change_command(bool _update, vector<command1> &v1, vector<comman
 	string ss = s.str();
 	if (ss.size() == 0)
 		return NULL;
-	char* c = new char[ss.size()];
+	char* c = new char[ss.size()+1];
 	for (int i = 0; i < ss.size(); i++)
 	{
 		c[i] = ss[i];
@@ -106,12 +128,22 @@ void MyClient::send_command(bool _update, vector<command1> &v1, vector<command2>
 
 State* MyClient::recv_state()
 {
+cout<<"start_recv"<<endl;
 	char start[6];
 	start[5] = '\0';
 	const char* cpstart = "start";
 	while (true)
 	{
-		recv(sockClient, start, 5, 0);
+		int e=0;
+		int t=0;
+		while(true)
+		{
+		cout<<"start now len"<<e<<endl;
+		t=recv(sockClient, start+e, 5-e, 0);
+		e+=t;
+		if(e==5)
+		break;
+		}	
 		bool flag = true;
 		for(int i=0;i<5;i++)
 			if (start[i] != cpstart[i])
@@ -122,12 +154,22 @@ State* MyClient::recv_state()
 		if (flag)
 			break;
 	}
+cout<<"start is ok"<<endl;
 	use=true;
 	char number[10];
 	for (int i = 0; i < 9; i++)
 		number[i] = '#';
 	number[9] = '\0';
-	recv(sockClient, number, 9, 0);
+	int h=0;
+	int th=0;
+	while(true)
+{	cout<<"h now len"<<h<<endl;
+	th=recv(sockClient, number+h, 9-h, 0);
+	h+=th;
+	if(h==9)
+		break;
+}
+cout<<"len is ok"<<endl;
 	istringstream is(number);
 	int len;
 	is >> len;
@@ -135,7 +177,25 @@ State* MyClient::recv_state()
 	char *save;
 	save = new char[len + 1];
 	save[len] = '\0';
-	recv(sockClient, save, len, 0);
+	int templen=len;
+int temptruth;
+int now;
+int fact;
+	int truth=recv(sockClient, save, len, 0);
+cout<<truth<<endl;
+now=truth;
+while(true)
+{
+	if(now<templen)
+{
+	temptruth=recv(sockClient,save+now,len-now,0);
+	now+=temptruth;
+cout<<"cycle"<<endl;
+}
+	else
+		break;
+}
+	cout<<"fact   "<<fact<<"save   "<<len<<"now"<<now<<endl;
 //	cout<<save<<endl;
 	regex reg0("(.*);(.*);(.*);(.*);#(.*);(.*);(.*);#");
 	smatch m0;

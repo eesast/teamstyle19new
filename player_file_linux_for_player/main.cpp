@@ -27,12 +27,14 @@ sem_t *sg=new sem_t;
 
 void* Listen(void* arg)
 {
+	cout<<"start listening"<<endl;
 	State* t;
 	while (goon)
 	{
 		State* s = cilent.recv_state();
 		state=s;
 		all_state.push_back(state);
+		cout<<"I was listening"<<state->turn<<endl;
 		/*t=state;
 		state = s;
 		delete t;*/
@@ -69,6 +71,7 @@ int main()
 	#else
 	{
 		int v=sem_init(sg,0,0);
+		cout<<"VVVVV"<<v<<endl;
 		if(v==-1)
 		{
 			cout<<"信号量启动失败,程序自动退出"<<endl;
@@ -78,7 +81,9 @@ int main()
 	#endif
     pthread_t com_thread;
     pthread_create(&com_thread,NULL,Listen,(void*)NULL);
-	sem_wait(sg);
+	cout<<"end at here"<<endl;	
+sem_wait(sg);
+	cout<<"start at here"<<endl;
 	while (state->turn < 1000)
 	{
 		cout<<"*********"<<state->turn<<"************"<<endl;
@@ -96,6 +101,8 @@ int main()
 		_updateAge = false;
 		c1.clear();
 		c2.clear();
+		if(state->winner!=2)
+			break;
 		sem_wait(sg);
 		}
 	if (state->winner == 1)
