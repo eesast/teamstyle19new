@@ -69,12 +69,16 @@ class MainServer(object):
       #  print('the lenght:',len(map0))
         self.sock[0].send(map0)
         self.sock[1].send(map0)
+        self.sock[0].recv(2)
+        self.sock[1].recv(2)
         self.sock[0].setblocking(0)  #将sock都设置成非阻塞模式 为了和之后的记时配合
         self.sock[0].settimeout(0.01)
         self.sock[1].setblocking(0)
         self.sock[1].settimeout(0.01)
-        self.sock[0].send(b'ok')
-        self.sock[1].send(b'ok')
+        #self.sock[0].send(b'ok')
+        #self.sock[1].send(b'ok')
+	#self.sock[0].recv(2)
+	#self.sock[1].recv(2)
 
     def change_to_byte(self,turn,status,building,unit,winner):  #将要发送给玩家的状态变成byte流
         state=['','']

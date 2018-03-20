@@ -43,6 +43,7 @@ int now=0;
 	if(t==1)
 		break;
 }
+cout<<"start connection 1"<<cflag<<endl;
 	string sflag(cflag);
 	istringstream os(sflag);
 	os >> flag;
@@ -55,20 +56,23 @@ int now=0;
 	if(now==size);
 		break;
 }
+cout<<"start connection 2"<<smap<<endl;
 	smap[size] = '\0';
 	char can_start[3];
 	temp=0;
 	now=0;
-	while(true)
+/*	while(true)
 {
 	temp=recv(sockClient, can_start+now, 2-now, 0);
 	now=now+temp;
 	if(now==2)
 		break;
 }
-	can_start[2] = '\0';
+cout<<"start connection 3"<<can_start<<endl;
+    */ //	can_start[2] = '\0';
 	fflag = flag;
 	change_map(smap);
+send(sockClient,"ok",2,0);
 
 }
 
