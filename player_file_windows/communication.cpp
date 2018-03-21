@@ -46,11 +46,12 @@ void MyClient::start_connection()
 	recv(sockClient, smap, size, 0);
 	smap[size] = '\0';
 	char can_start[3];
-	recv(sockClient, can_start, 2, 0);
-	can_start[2] = '\0';
+	//recv(sockClient, can_start, 2, 0);
+	//can_start[2] = '\0';
 	cout << can_start<<endl;
 	fflag = flag;
 	change_map(smap);
+        send(sockClient,"ok",2,0);
 
 }
 
