@@ -39,6 +39,8 @@ void* Listen(void* arg)
 		state = s;
 		delete t;*/
 		sem_post(sg);
+		if(state->winner!=2)
+			break;
 	}
 	return NULL;
 }
