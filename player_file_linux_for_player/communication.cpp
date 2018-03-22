@@ -143,18 +143,12 @@ cout<<"start_recv"<<endl;
 		bool flag=true;
 		while(flag)
 		{
-		cout<<"start now len"<<e<<endl;
 		t=recv(sockClient, start+e, 5-e, 0);
 		e+=t;
-		cout<<"%%%%%%%%%"<<e<<endl;
-		for(int hh=0;hh<e;hh++)
-			cout<<start[hh];
-		cout<<endl;
-		cout<<"%%%%%%%%%%%%"<<endl;
 		if(e==5)
 		
-		{cout<<"weishenmebutuichu?"<<endl;
-		flag=false;   
+		{
+			flag=false;   
 			break;
 		}
 		}
