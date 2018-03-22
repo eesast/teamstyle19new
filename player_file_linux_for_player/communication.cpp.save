@@ -14,7 +14,7 @@ MyClient::MyClient()
 
     sockClient=socket(AF_INET,SOCK_STREAM,0);
     addrServer.sin_family=AF_INET;
-    addrServer.sin_port=htons(10001);
+    addrServer.sin_port=htons(9999);
     addrServer.sin_addr.s_addr=inet_addr("127.0.0.1");
 }
 
@@ -53,7 +53,7 @@ cout<<"start connection 1"<<cflag<<endl;
 {
 	t=recv(sockClient, smap+now, size-now, 0);
 	now=now+t;
-	if(now==size)
+	if(now==size);
 		break;
 }
 cout<<"start connection 2"<<smap<<endl;
@@ -140,25 +140,14 @@ cout<<"start_recv"<<endl;
 	{
 		int e=0;
 		int t=0;
-		bool flag=true;
-		while(flag)
+		while(true)
 		{
 		cout<<"start now len"<<e<<endl;
 		t=recv(sockClient, start+e, 5-e, 0);
 		e+=t;
-		cout<<"%%%%%%%%%"<<e<<endl;
-		for(int hh=0;hh<e;hh++)
-			cout<<start[hh];
-		cout<<endl;
-		cout<<"%%%%%%%%%%%%"<<endl;
 		if(e==5)
-		
-		{cout<<"weishenmebutuichu?"<<endl;
-		flag=false;   
-			break;
-		}
-		}
-		break;	
+		break;
+		}	
 /*		bool flag = true;
 		for(int i=0;i<5;i++)
 			if (start[i] != cpstart[i])
