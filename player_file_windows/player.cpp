@@ -6,7 +6,7 @@ using namespace std;
 extern	bool _updateAge;
 extern vector<command1> c1;
 extern vector<command2>c2;
-extern State* state ;
+extern State* state;
 extern vector<State* > all_state;
 extern int** map;
 extern bool flag;
@@ -38,7 +38,7 @@ bool near_a_road(Position p) {
 Position find_road(Position p) {
     int x = p.x;
     int y = p.y;
-    if(map[x][y] == 0){
+    if (map[x][y] == 0) {
         if (map[x - 1][y] == 1)
             return Position(x - 1, y);
         if (map[x + 1][y] == 1)
@@ -83,7 +83,7 @@ bool can_cons(Position p) {
 void print_my_bd() {
     for (int i = 0; i < state->building[flag].size(); i++) {
         Building bd = state->building[flag][i];
-        cout << "id:" << bd.unit_id << " type:" << bd.building_type <<" HP:"<<bd.heal<< " pos:" << bd.pos.x << ' ' << bd.pos.y << endl;
+        cout << "id:" << bd.unit_id << " type:" << bd.building_type << " HP:" << bd.heal << " pos:" << bd.pos.x << ' ' << bd.pos.y << endl;
     }
 }
 void print_my_re() {
@@ -106,12 +106,12 @@ void f_player()
 {
     /*
     if (state->turn == 1) {
-        for (int i = 0; i < 200; i++) {
-            for (int j = 0; j < 200; j++) {
-                cout << map[i][j];
-            }
-            cout << endl;
-        }
+    for (int i = 0; i < 200; i++) {
+    for (int j = 0; j < 200; j++) {
+    cout << map[i][j];
+    }
+    cout << endl;
+    }
     }
     */
     if (flag == 0)
@@ -120,8 +120,8 @@ void f_player()
         player1();
 
     print_info();
-    
-    
+
+
 };
 void player0() {
     int ins_num = 0;
@@ -130,7 +130,7 @@ void player0() {
             for (int j = 6; j < 20; j++) {
                 if (can_cons(Position(i, j))) {
                     if (near_a_road(Position(i, j)) && state->resource[flag].resource >= 1000)
-                        construct(Shannon, Position(i, j), find_road(Position(i,j)));
+                        construct(Shannon, Position(i, j), find_road(Position(i, j)));
                     else
                         construct(Programmer, Position(i, j), Position(0, 0));
                     ins_num++;
