@@ -43,7 +43,15 @@ void MyClient::start_connection()
     cout << "my flag is" << flag;
     int size = 200 * 200;
     smap = new char[size + 1];
-    recv(sockClient, smap, size, 0);
+    int now=0;
+    int t=0;
+    while(true)
+    {
+    t=recv(sockClient, smap+now, size-now, 0);
+    now+=t;
+    if(now==size)
+        break;
+    }
     smap[size] = '\0';
     char can_start[3];
     //recv(sockClient, can_start, 2, 0);

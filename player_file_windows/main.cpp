@@ -29,6 +29,8 @@ void Listen()
         State* s = cilent.recv_state();
         state = s;
         all_state.push_back(state);
+        if(state->winner!=2||state->turn>=1000)
+            break;
         /*t=state;
         state=s;
         delete t;*/
