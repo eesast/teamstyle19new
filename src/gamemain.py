@@ -7,6 +7,7 @@ import json
 from unit import *
 
 class GameMain:
+    save_num = 0
     _map_size = 200
     _map = []
     for i in range(_map_size):
@@ -1104,7 +1105,8 @@ class GameMain:
 
     def map_save(self):
         jmap=json.dumps(self._map)
-        with open('map_save.txt','w') as f:
+        filename="map_save"+(str)(self.save_num)+".txt"
+        with open(filename,'w') as f:
             f.write(jmap)
 
     def turn_save(self):
@@ -1175,7 +1177,8 @@ class GameMain:
         data={'mainbase_0':jbase[0],'mainbase_1':jbase[1],'unit_0':junits[0],'unit_1':junits[1],'buildings_0':jbuildings[0],'buildings_1':jbuildings[1],'status_0':jstatus[0],
               'status_1':jstatus[1],'instruments_0':jinstruments[0],'instruments_1':jinstruments[1]}
         jdata = json.dumps(data)
-        with open('turn_save.txt', 'a') as f:
+        filename = "turn_save" + (str)(self.save_num) + ".txt"
+        with open(filename, 'a') as f:
             f.write(jdata)
             f.write('\n')
 

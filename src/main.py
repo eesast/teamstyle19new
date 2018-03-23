@@ -7,8 +7,10 @@ import os
 import sys
 import copy
 import gamemain
+import random
 import unit
 import communication
+import zipfile
 
 
 # 以下为两个将building，solider转化为字典函数，便于写入文件（在通信未完成之前）
@@ -92,9 +94,11 @@ if len(sys.argv) > 1:
 else:
     result_filename = None
 
+save_path=sys.argv[2]
 # read_file = open("test.txt", 'r')
 game = gamemain.GameMain()
 server = communication.MainServer('127.0.0.1', 9999)
+game.save_num=random.randint(1,9999)
 map = game._map
 game.map_save()
 print('Waiting for connecting···')
@@ -138,6 +142,16 @@ winner = copy.deepcopy(game.winner)
 turn = game.turn_num
 player_0, player_1 = server.send_state(turn, status, building, units, winner)
 print(game.winner)
+f = zipfile.ZipFile(save_path,'w',zipfile.ZIP_DEFLATED)
+map_save_file="map_save"+(str)(game.save_num)+".txt"
+turn_save_file="turn_save"+(str)(game.save_num)+".txt"
+f.write(turn_save_file)
+f.write(map_save_file)
+f.close()
+os.remove(turn_save_file)
+os.remove(map_save_file)
+
+
 """with open(filename, 'w') as f:
     f.writelines(file)
     f.write(str(game.winner))"""
