@@ -14,7 +14,7 @@ MyClient::MyClient()
 
     sockClient=socket(AF_INET,SOCK_STREAM,0);
     addrServer.sin_family=AF_INET;
-    addrServer.sin_port=htons(10001);
+    addrServer.sin_port=htons(9999);
     addrServer.sin_addr.s_addr=inet_addr("127.0.0.1");
 }
 

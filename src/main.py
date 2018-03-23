@@ -94,7 +94,7 @@ else:
 
 # read_file = open("test.txt", 'r')
 game = gamemain.GameMain()
-server = communication.MainServer('127.0.0.1', 10001)
+server = communication.MainServer('127.0.0.1', 9999)
 map = game._map
 game.map_save()
 print('Waiting for connecting···')
