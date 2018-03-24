@@ -27,8 +27,8 @@ class GameMain:
     } for _ in range(2)]
 
     status = [{
-        'money': 1000,
-        'tech': 0,
+        'money': 100000,
+        'tech': 5,
         'building': 80,
     } for _ in range(2)]
 
