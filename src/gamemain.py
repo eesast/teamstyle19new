@@ -27,8 +27,8 @@ class GameMain:
     } for _ in range(2)]
 
     status = [{
-        'money': 100000,
-        'tech': 5,
+        'money': 1000,
+        'tech': 0,
         'building': 80,
     } for _ in range(2)]
 
@@ -391,6 +391,11 @@ class GameMain:
 
                         new_construct_pos = Position(instrument[1][0],instrument[1][1])
 
+
+                        if building_type <1 or building_type >17:
+                            new_instrument_list.remove(instrument)
+                            instrument_num -= 1
+                            continue
                         # 生产建筑必须指定正确的生产位置
                         if building_type >0 and building_type <9:
                             # print("*******", instrument[2][0])
