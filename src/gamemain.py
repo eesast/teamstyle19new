@@ -1159,7 +1159,9 @@ class GameMain:
                                  'pro_pos': ()}
                 jbuildings[i]['resource'].append(building_temp)
             jstatus[i]=self.status[i]
-            jinstruments[i]['attack']=self.instruments[i]['attack']
+            #jinstruments[i]['attack']=self.instruments[i]['attack']
+            for id1,id2 in self.instruments[i]['attack']:
+                jinstruments[i]['attack'].append({'id0':id1,'id1':id2})
             for id,pos in self.instruments[i]['move']:
                 jinstruments[i]['move'].append({'id':id,'pos':(pos.x,pos.y)})
             for building in self.instruments[i]['construct']:
