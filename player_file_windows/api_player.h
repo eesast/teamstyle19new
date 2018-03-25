@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #define _NULL -1
 #define INT_MAX 1000000000
@@ -25,7 +25,7 @@ enum Age {
     AI
 };
 
-enum BuildingType {
+enum BuildingType{
     //base
     __Base,
 
@@ -61,18 +61,18 @@ enum BuildingAttribute {
                       //For resources buildings, it stands for Collective_Value
                       //For production buildings, it means nothing set as _NULL
 
-                      OIRGINAL_RANGE,    //FOr production buildings, it stands for the range of production,
-                                         //For defensive buildings, it stands for the range of attacking
-                                         //For resource buildings, it means nothing
+    ORGINAL_RANGE,    //FOr production buildings, it stands for the range of production,
+                      //For defensive buildings, it stands for the range of attacking
+                      //For resource buildings, it means nothing
 
-                                         TARGET,           //For production buildings, it stands for the type of units it produce,
-                                                           //For defensive buildings, it stands for the type of units it attack.
-                                                           AGE,
-                                                           ORIGINAL_RESOURCE,
-                                                           ORIGINAL_BUILDING_POINT,
-                                                           AOE,              //Only works for defensive buildings
-                                                           CD,
-                                                           Attr_Num          //For the definition of Array
+    TARGET,           //For production buildings, it stands for the type of units it produce,
+                      //For defensive buildings, it stands for the type of units it attack.
+    AGE,
+    ORIGINAL_RESOURCE,
+    ORIGINAL_BUILDING_POINT,
+    AOE,              //Only works for defensive buildings
+    CD,
+    Attr_Num          //For the definition of Array
 };
 
 enum SoldierName {
@@ -102,39 +102,39 @@ enum ActionMode {
     BASE_ATTACK,     //go forward
     MOVING_ATTACK    //defence
 };
-
+// hp  attack range  resurce buildingpoint cd attrnum
 const int OriginalBuildingAttribute[Building_Type][Attr_Num] = {
-    { Base,              100000, _NULL,   0,   _NULL,           BIT,       0,      _NULL, _NULL,   _NULL },
-{ PRODUCTION_BUILDING, 100,  _NULL,  10,   BIT_STREAM,      BIT,       100,    10,    _NULL,  1 },
-{ PRODUCTION_BUILDING, 120,  _NULL,  5,    VOLTAGE_SOURCE,  CIRCUIT,   120,    12,    _NULL,  2 },
-{ PRODUCTION_BUILDING, 120,  _NULL,  5,    CURRENT_SOURCE,  CIRCUIT,   120,    12,    _NULL,  2 },
-{ PRODUCTION_BUILDING, 150,  _NULL,  15,   ENIAC,           PROCESSOR, 150,    16,    _NULL,  5 },
-{ PRODUCTION_BUILDING, 360,  _NULL,  30,   PACKET,          NETWORK,   360,    12,    _NULL,  1 },
-{ PRODUCTION_BUILDING, 300,  _NULL,  15,   OPTICAL_FIBER,   NETWORK,   300,    30,    _NULL,  3 },
-{ PRODUCTION_BUILDING, 600,  _NULL,  15,   TURING_MACHINE,  AI,        600,    20,    _NULL,  8 },
-{ PRODUCTION_BUILDING, 1000, _NULL,  10,   ULTRON,          AI,        1000,   80,    _NULL,  10 },
+    {Base,              100000,_NULL,   0,   _NULL,           BIT,       0,      _NULL, _NULL,   _NULL},
+    {PRODUCTION_BUILDING, 150,  _NULL,  10,   BIT_STREAM,      BIT,       150,    15,    _NULL,  3},
+    {PRODUCTION_BUILDING, 200,  _NULL,  5,    VOLTAGE_SOURCE,  CIRCUIT,   160,    16,    _NULL,  6},
+    {PRODUCTION_BUILDING, 180,  _NULL,  5,    CURRENT_SOURCE,  CIRCUIT,   160,    16,    _NULL,  6},
+    {PRODUCTION_BUILDING, 200,  _NULL,  15,   ENIAC,           PROCESSOR, 200,    20,    _NULL,  15},
+    {PRODUCTION_BUILDING, 150,  _NULL,  20,   PACKET,          NETWORK,   250,    25,    _NULL,  3},
+    {PRODUCTION_BUILDING, 160,  _NULL,  15,   OPTICAL_FIBER,   NETWORK,   300,    30,    _NULL,  8},
+    {PRODUCTION_BUILDING, 300,  _NULL,  15,   TURING_MACHINE,  AI,        600,    60,    _NULL,  20},
+    {PRODUCTION_BUILDING, 250, _NULL,  10,   ULTRON,          AI,        600,   60,    _NULL,  20},
 
-{ DEFENSIVE_BUILDING,  150,  16,     20,   DATA,            BIT,       150,    15,    0,      1 },
-{ DEFENSIVE_BUILDING,  180,  10,     25,   SUBSTANCE,       CIRCUIT,   180,    20,    3,      3 },
-{ DEFENSIVE_BUILDING,  225,  4,      35,   DATA,            PROCESSOR, 225,    25,    0,      1 },
-{ DEFENSIVE_BUILDING,  300,  25,     25,   SUBSTANCE,       ALGORITHM, 300,    30,    0,      2 },
-{ DEFENSIVE_BUILDING,  480,  5,      25,   ALL,             NETWORK,   480,    50,    2,      1 },
-{ DEFENSIVE_BUILDING,  450, 5/**/,30,   DATA,            NETWORK,   450,    45,    0,      1 },
-{ DEFENSIVE_BUILDING,  900,  0,      10,   ALL,             AI,        900,    90,    0,      1 },
-{ DEFENSIVE_BUILDING,  1500, INT_MAX,10,   ALL,             AI,        1500,   100,   1,      5 },
+    {DEFENSIVE_BUILDING,  300,  16,     36,   DATA,            BIT,       150,    15,    1,      1},
+    {DEFENSIVE_BUILDING,  280,  20,     30,   SUBSTANCE,       CIRCUIT,   200,    20,    3,      3},
+    {DEFENSIVE_BUILDING,  225,  4,      60,   DATA,            PROCESSOR, 225,    22,    1,      1},
+    {DEFENSIVE_BUILDING,  300,  25,     40,   SUBSTANCE,       ALGORITHM, 200,    20,    2,      2},
+    {DEFENSIVE_BUILDING,  180,  6,      50,   ALL,             NETWORK,   250,    25,    1,      1},
+    {DEFENSIVE_BUILDING,  450,  5,      36,   DATA,            NETWORK,   450,    45,    1,      1},
+    {DEFENSIVE_BUILDING,  1000,  0,      24,   ALL,             AI,        500,   50,    1,      1},
+    {DEFENSIVE_BUILDING,  400, INT_MAX,20,   ALL,             AI,        500,     50,   2,      5},
 
-{ RESOURCE_BUILDING,            100,  50,     _NULL,_NULL,          _NULL,      100,  _NULL, _NULL,  _NULL }
+    {RESOURCE_BUILDING,            100,  10,     _NULL,_NULL,          _NULL,      100,  _NULL, _NULL,  _NULL}
 };
 
 const int OriginalSoldierAttribute[Soldier_Type][Soldier_Attr_Num] = {
-    { DATA,      BUILDING_ATTACK,        10,     10,     8,      8 },
-{ SUBSTANCE, BUILDING_ATTACK,        30,     16,     12,     6 },
-{ SUBSTANCE, BASE_ATTACK,            30,     160,    1,      6 },
-{ SUBSTANCE, MOVING_ATTACK,          200,    15,     5,      3 },
-{ DATA,      BASE_ATTACK,            30,     200,    1,      16 },
-{ SUBSTANCE, BUILDING_ATTACK,        40,     15,     30,     10 },
-{ DATA,      MOVING_ATTACK,          400,    10,     10,     2 },
-{ SUBSTANCE, BUILDING_ATTACK,        200,    1000,   10,     8 }
+    {DATA,      BUILDING_ATTACK,        20,     10,     16,      16},
+    {SUBSTANCE, BUILDING_ATTACK,        60,     16,     24,     12},
+    {SUBSTANCE, BASE_ATTACK,            100,     160,    6,      20},
+    {SUBSTANCE, MOVING_ATTACK,          500,    15,     10,      6},
+    {DATA,      BASE_ATTACK,            70,     300,    6,      24},
+    {SUBSTANCE, BUILDING_ATTACK,        40,     15,     40,     16},
+    {DATA,      MOVING_ATTACK,          800,    10,     12,     4},
+    {SUBSTANCE, BUILDING_ATTACK,        100,    500,   20,     12}
 };
 
 
@@ -147,14 +147,14 @@ struct Resource {
 
     int resource_1;
     int resource_2;
-    Resource(int building_point_1 = 0, int building_point_2 = 0, int resource_1 = 0, int resource_2 = 0) :
+    Resource(int building_point_1=0, int building_point_2=0, int resource_1=0, int resource_2=0):
         building_point_1(building_point_1), building_point_2(building_point_2), resource_1(resource_1), resource_2(resource_2) {}
 };
 
 struct Position {
     int x;
     int y;
-    Position(int x = -1, int y = -1) : x(x), y(y) {}
+    Position(int x = -1, int y = -1): x(x), y(y) {}
 };
 
 struct Soldier {
@@ -164,8 +164,8 @@ struct Soldier {
     int flag;
     int unit_id;
 
-    Soldier() {};
-    Soldier(SoldierName soldier_name, int heal, Position pos, int flag, int unit_id) :soldier_name(soldier_name), heal(heal), pos(pos), flag(flag), unit_id(unit_id) {};
+	Soldier() {};
+	Soldier(SoldierName soldier_name, int heal, Position pos, int flag, int unit_id) :soldier_name(soldier_name),heal(heal),pos(pos),flag(flag),unit_id(unit_id){};
 };
 
 struct Building {
@@ -176,13 +176,13 @@ struct Building {
     int unit_id;
     int level;
 
-    Building() {};
-    Building(BuildingType building_type, int heal, Position pos, int flag, int unit_id, int level) :building_type(building_type), heal(heal), pos(pos), flag(flag), unit_id(unit_id), level(level) {};
+	Building() {};
+	Building(BuildingType building_type, int heal, Position pos, int flag, int unit_id,int level):building_type(building_type),heal(heal),pos(pos),flag(flag),unit_id(unit_id),level(level) {};
 };
 
 //API for players
 void updateAge();
-void construct(BuildingType building_type, Position pos, Position soldier_pos = Position(0, 0)); //The solier position is not set now
+void construct(BuildingType building_type, Position pos, Position soldier_pos=Position(0,0)); //The solier position is not set now
 void upgrade(int unit_id);
 void sell(int unit_id);
 void toggleMaintain(int unit_id);
