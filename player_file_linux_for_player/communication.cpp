@@ -129,6 +129,7 @@ void MyClient::send_command(bool _update, vector<command1> &v1, vector<command2>
 	send(sockClient, hello, strlen(hello), 0);
 	send(sockClient, s.str().c_str(), 10, 0);
 	send(sockClient, msg, strlen(msg), 0);
+	cout<<"Aaaaaaaaa"<<msg<<"ASDASDASD"<<endl;
 }
 
 State* MyClient::recv_state()
