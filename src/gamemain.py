@@ -449,7 +449,7 @@ class GameMain:
                                     can_build = True
 
                                     break
-                            if not can_build:
+                            if can_build:
                                 break
                         for building_list in self.buildings[current_flag].values():
                             for building in building_list:
@@ -1246,7 +1246,9 @@ class GameMain:
         self.attack_phase()
         self.clean_up_phase()
         self.move_phase()
+        print(self.raw_instruments[1])
         self.check_legal()
+        print(self.raw_instruments[1])
         # print(self.raw_instruments)
         self.building_phase()
         self.produce_phase()
@@ -1261,7 +1263,7 @@ class GameMain:
         # print('****************************************')
 
         # print(self.main_base[0].BuildingType,self.main_base[0].Position.x)
-        # self.debug_print()
+        self.debug_print()
         self.raw_instruments = [{
             'construct': [],  # (BuildingType,(BuildingPos.x,BuildingPos.y),(SoldierPos.x,SoldierPos.y))
             'maintain': [],  # id
