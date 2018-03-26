@@ -92,13 +92,14 @@ if len(sys.argv) > 1:
     result_filename = sys.argv[1]
 else:
     result_filename = None
-
-#save_path=sys.argv[2]
 # read_file = open("test.txt", 'r')
-save_path = "D:/teamstyle19new/src"
 game = gamemain.GameMain()
 server = communication.MainServer('127.0.0.1', 9999)
 game.save_num=random.randint(1,9999)
+if len(sys.argv)>1:
+    save_path=sys.argv[2]
+else:
+    save_path="./save"+str(game.save_num)+".zip"
 #save_path="E:/savetest"+str(game.save_num)+".zip"
 map = game._map
 game.map_save()
