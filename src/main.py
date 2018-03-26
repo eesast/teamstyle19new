@@ -100,6 +100,7 @@ save_path = "D:/teamstyle19new/src"
 game = gamemain.GameMain()
 server = communication.MainServer('127.0.0.1', 9999)
 game.save_num=random.randint(1,9999)
+#save_path="E:/savetest"+str(game.save_num)+".zip"
 map = game._map
 game.map_save()
 print('Waiting for connecting···')
