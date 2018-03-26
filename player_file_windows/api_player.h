@@ -104,7 +104,7 @@ enum ActionMode {
 };
 // hp  attack range  resurce buildingpoint cd attrnum
 const int OriginalBuildingAttribute[Building_Type][Attr_Num] = {
-    {Base,              100000,_NULL,   0,   _NULL,           BIT,       0,      _NULL, _NULL,   _NULL},
+    {Base,              10000,_NULL,   0,   _NULL,           BIT,       0,      _NULL, _NULL,   _NULL},
     {PRODUCTION_BUILDING, 150,  _NULL,  10,   BIT_STREAM,      BIT,       150,    15,    _NULL,  3},
     {PRODUCTION_BUILDING, 200,  _NULL,  5,    VOLTAGE_SOURCE,  CIRCUIT,   160,    16,    _NULL,  6},
     {PRODUCTION_BUILDING, 180,  _NULL,  5,    CURRENT_SOURCE,  CIRCUIT,   160,    16,    _NULL,  6},

@@ -280,6 +280,7 @@ class MainServer(object):
             else:
                 command[1][i]={'commandid':int(v[0]),'unitid':int(v[1]),'buildp':Position(int(v[2]),int(v[3])),'soliderp':Position(int(v[4]),int(v[5]))}
         command[1]=command[1][0:l1]
+        print('sss',command[0][0],command[1][0])
         return command,player_0,player_1 #conmmand是返回给服务器的命令集合
         # command[0]为0的命令 command[1]为1的命令
         # command[0][0]为0是否建造的命令 command[0][i] (i>=1) 为一个个字典 command[0][i]['commmandid']为储存的命令编号
