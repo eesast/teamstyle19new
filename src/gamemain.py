@@ -1263,7 +1263,7 @@ class GameMain:
         # print('****************************************')
 
         # print(self.main_base[0].BuildingType,self.main_base[0].Position.x)
-        self.debug_print()
+        # self.debug_print()
         self.raw_instruments = [{
             'construct': [],  # (BuildingType,(BuildingPos.x,BuildingPos.y),(SoldierPos.x,SoldierPos.y))
             'maintain': [],  # id
