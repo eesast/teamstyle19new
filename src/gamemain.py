@@ -27,7 +27,7 @@ class GameMain:
     } for _ in range(2)]
 
     status = [{
-        'money': 1000,
+        'money': 10000,
         'tech': 0,
         'building': 80,
     } for _ in range(2)]
@@ -1032,6 +1032,7 @@ class GameMain:
 
     def update_age_phase(self):
         """Deal with the update_age instruments"""
+
         basic_consumption = 2000  # 基础升级科技消耗，未定
         increased_consumption = 1500  # 科技每升一级，下次升级科技资源消耗增量
         for flag in range(2):
@@ -1192,6 +1193,7 @@ class GameMain:
     def next_tick(self):
         """回合演算与指令合法性判断"""
         # print(self.raw_instruments)
+
         self.turn_num += 1
         self.attack_phase()
         self.clean_up_phase()

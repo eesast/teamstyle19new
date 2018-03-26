@@ -54,12 +54,11 @@ def logist_platform(server, game, turn):
     print(winner)'''
     player_0, player_1 = server.send_state(turn, status, building, units, winner)
     command, player_0, player_1 = server.recv_command()
-    # print(command[0])
     # print(len(command[0]))
     for flag in range(2):
         if len(command[flag]) == 0:
             continue
-        if command[flag][0] == 0:
+        if command[flag][0] == '0':
             game.raw_instruments[flag]['update_age'] = True
         for i in range(1, len(command[flag])):
             command_now = command[flag][i]
@@ -123,7 +122,13 @@ while game.winner == 2:
     #        'update_age': False,
     #    } for _ in range(2)]
     print('turn', game.turn_num)
+    print("*******************************************************************")
+    print(game.raw_instruments[0]['update_age'])
+    print("-------------------------------------------------------------------")
     logist_platform(server, game, game.turn_num)
+    print("*******************************************************************")
+    print(game.raw_instruments[0]['update_age'])
+    print("-------------------------------------------------------------------")
     print(game.winner)
     if game.winner != 2:
         break
