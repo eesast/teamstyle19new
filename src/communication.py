@@ -116,13 +116,13 @@ class MainServer(object):
         self.sock[1].setblocking(1)
         #发送start 告诉选手端接下来的要发送命令 防治出现通信问题
         try:
-            print(self.sock[0].send(b'start'))
+            self.sock[0].send(b'start')
         except ConnectionResetError:
             player_0=0
         except BrokenPipeError:
             player_0=0
         try:
-            print(self.sock[1].send(b'start'))
+            self.sock[1].send(b'start')
         except ConnectionResetError:
             player_1=0
         except BrokenPipeError:
@@ -207,7 +207,7 @@ class MainServer(object):
                 _len=int(_len)
                 try:
                     data=sock.recv(_len) #size
-                    print(data)
+                   # print(data)
                     data=data.decode('utf-8')
                     data=data.split(',')  #将commandid和unitid分离
                     command.append(data)
