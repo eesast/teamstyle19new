@@ -281,7 +281,7 @@ class MainServer(object):
             else:
                 command[1][i]={'commandid':int(v[0]),'unitid':int(v[1]),'buildp':Position(int(v[2]),int(v[3])),'soliderp':Position(int(v[4]),int(v[5]))}
         command[1]=command[1][0:l1]
-        print(command)
+        #print(command)
      #   print('sss',command[0][0],command[1][0])
         return command,player_0,player_1 #conmmand是返回给服务器的命令集合
         # command[0]为0的命令 command[1]为1的命令
