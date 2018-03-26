@@ -131,6 +131,9 @@ while game.winner == 2:
     if game.turn_num > 1000:
         break
 
+if game.winner == 2:
+    game.draw_judge()
+
 if game.winner == 3:
     game.winner = 2
 status=game.status

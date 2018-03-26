@@ -373,6 +373,8 @@ class GameMain:
             self.winner = 2
 
     def check_legal(self):
+        print_info = 1
+
         """Remove the repeated instruments, or instruments on the wrong units"""
         from functools import reduce
         for current_flag in range(2):
@@ -402,12 +404,16 @@ class GameMain:
                             if len(instrument) <2:
                                 new_instrument_list.remove(instrument)
                                 instrument_num -=1
+                                if print_info:
+                                    print("指令因为生产建筑没有指定生产位置而被消除")
                                 continue
                             if abs(instrument[2][0] - instrument[1][0]) + \
                                 abs (instrument[2][1] - instrument[1][1]) > \
                                 OriginalBuildingAttribute[BuildingType(instrument[0])][BuildingAttribute.ORIGINAL_RANGE]:
                                 new_instrument_list.remove(instrument)
                                 instrument_num -= 1
+                                if print_info:
+                                    print("指令因为生产建筑指定的生产位置超出范围而被消除")
                                 continue
                             new_produce_pos = Position(instrument[2][0],instrument[2][1])
                         # 判断建造时代是否符合要求
@@ -415,12 +421,16 @@ class GameMain:
                                 self.status[current_flag]['tech']):
                             new_instrument_list.remove(instrument)
                             instrument_num -= 1
+                            if print_info:
+                                print("指令因为建造时代不符合要求而被消除")
                             continue
                         # 判断建造位置是否符合要求
                         if (self._map[new_construct_pos.x][new_construct_pos.y] == 1 or
                                     self._map[new_construct_pos.x][new_construct_pos.y] == 2):
                             new_instrument_list.remove(instrument)
                             instrument_num -= 1
+                            if print_info:
+                                print("指令因为建造位置不符合要求而被消除")
                             continue
 
 
@@ -455,6 +465,8 @@ class GameMain:
                         if not can_build:
                             new_instrument_list.remove(instrument)
                             instrument_num -= 1
+                            if print_info:
+                                print("指令因为不在建造范围内或与已有建筑重叠而被消除")
                             continue
                         # 判断生产位置是否符合要求
                         if (OriginalBuildingAttribute[building_type][BuildingAttribute.BUILDING_TYPE] ==
@@ -464,10 +476,14 @@ class GameMain:
                                     OriginalBuildingAttribute[building_type][BuildingAttribute.ORIGINAL_RANGE]):
                                 new_instrument_list.remove(instrument)
                                 instrument_num -= 1
+                                if print_info:
+                                    print("指令因为生产建筑指定的生产位置超出范围而被消除")
                                 continue
                             elif self._map[new_produce_pos.x][new_produce_pos.y] != 1:
                                 new_instrument_list.remove(instrument)
                                 instrument_num -= 1
+                                if print_info:
+                                    print("指令因为生产建筑指定的生产位置不在路上而被消除")
                                 continue
 
 
@@ -480,6 +496,8 @@ class GameMain:
                         if instrument > self.total_id or instrument < 0:
                             new_instrument_list.remove(instrument)
                             instrument_num -= 1
+                            if print_info:
+                                print("指令因为id超过最大id而被消除")
                             continue
                         # 去除指令对象不是building的情况
                         is_building = False
@@ -498,6 +516,8 @@ class GameMain:
                         if not is_building:
                             new_instrument_list.remove(instrument)
                             instrument_num -= 1
+                            if print_info:
+                                print("指令因为指定了非建筑目标而被消除")
                             continue
 
                             # 资源不足，建筑和时代已经到达最高级的情况已经在操作函数中处理
@@ -1191,6 +1211,31 @@ class GameMain:
         with open(filename, 'a') as f:
             f.write(jdata)
             f.write('\n')
+
+    def draw_judge(self):
+        tech_factor0 = 0.5 * (self.status[0]['tech'] + 2)
+        tech_factor1 = 0.5 * (self.status[1]['tech'] + 2)
+        if self.winner != 1 and self.winner != 0:
+            maxbasehp0 = OriginalBuildingAttribute[BuildingType.Base][BuildingAttribute.ORIGINAL_HP] * tech_factor0
+            maxbasehp1 = OriginalBuildingAttribute[BuildingType.Base][BuildingAttribute.ORIGINAL_HP] * tech_factor1
+            if self.main_base[0].HP/maxbasehp0 < self.main_base[1]/maxbasehp1:
+                self.winner = 1
+                return
+            elif self.main_base[0].HP/maxbasehp0 > self.main_base[1]/maxbasehp1:
+                self.winner = 0
+                return
+            if self.status[0]['tech'] > self.status[1]['tech']:
+                self.winner = 0
+                return
+            elif self.status[0]['tech'] < self.status[1]['tech']:
+                self.winner = 1
+                return
+            if self.status[0]['money'] > self.status[1]['money']:
+                self.winner = 1
+                return
+            elif self.status[0]['money'] < self.status[1]['money']:
+                self.winner = 0
+                return
 
     def next_tick(self):
         """回合演算与指令合法性判断"""
