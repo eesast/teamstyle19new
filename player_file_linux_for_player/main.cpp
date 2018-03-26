@@ -24,6 +24,7 @@ bool flag;
 bool goon = true;
 bool use=false;
 sem_t *sg=new sem_t;
+bool discon=false;
 
 void* Listen(void* arg)
 {
@@ -32,6 +33,8 @@ void* Listen(void* arg)
 	while (goon)
 	{
 		State* s = cilent.recv_state();
+		if(discon)
+			break;
 		state=s;
 		all_state.push_back(state);
 		cout<<"I was listening"<<state->turn<<endl;
@@ -41,6 +44,7 @@ void* Listen(void* arg)
 		sem_post(sg);
 		if(state->winner!=2)
 			break;
+		
 	}
 	return NULL;
 }
