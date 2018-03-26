@@ -894,10 +894,11 @@ class GameMain:
                 for building_type,buildings_in_it in self.buildings[current_flag].items():
                     # print(building_type,buildings_in_it)
                     bd_num += len(buildings_in_it)
+
                     # print(bd_num)
 
                 for construct_instrument in self.raw_instruments[current_flag]['construct']:
-                    if bd_num > max_bd_num:
+                    if bd_num >= max_bd_num:
                         break
                     building_name = construct_instrument[0]
                     building_pos = Position(*construct_instrument[1])

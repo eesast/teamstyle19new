@@ -125,7 +125,7 @@ while game.winner == 2:
     print('turn', game.turn_num)
     logist_platform(server, game, game.turn_num)
 
-    print(game.winner)
+    # print(game.winner)
     if game.winner != 2:
         break
     game.next_tick()
