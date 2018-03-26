@@ -8,6 +8,7 @@
 
 using namespace std;
 extern bool use;
+extern bool discon;
 
 MyClient::MyClient()
 {
@@ -144,6 +145,11 @@ cout<<"start_recv"<<endl;
 		while(flag)
 		{
 		t=recv(sockClient, start+e, 5-e, 0);
+		if(t==0||t==-1)
+		{
+			discon=true;
+			return NULL;
+		}
 		e+=t;
 		if(e==5)
 		
@@ -175,6 +181,11 @@ cout<<"start is ok"<<endl;
 {	cout<<"h now len"<<h<<endl;
 	th=recv(sockClient, number+h, 9-h, 0);
 	h+=th;
+	if(th==0||th==-1)
+	{
+		discon=true;
+		break;
+	}
 	if(h==9)
 		break;
 }
@@ -199,12 +210,17 @@ while(true)
 {
 	temptruth=recv(sockClient,save+now,len-now,0);
 	now+=temptruth;
-cout<<"cycle"<<endl;
+	if(temptruth==0||temptruth==-1)
+	{
+		discon=true;
+		break;
+	}
+//cout<<"cycle"<<endl;
 }
 	else
 		break;
 }
-	cout<<"fact   "<<fact<<"save   "<<len<<"now"<<now<<endl;
+//	cout<<"fact   "<<fact<<"save   "<<len<<"now"<<now<<endl;
 //	cout<<save<<endl;
 	regex reg0("(.*);(.*);(.*);(.*);#(.*);(.*);(.*);#");
 	smatch m0;
