@@ -122,13 +122,8 @@ while game.winner == 2:
     #        'update_age': False,
     #    } for _ in range(2)]
     print('turn', game.turn_num)
-    print("*******************************************************************")
-    print(game.raw_instruments[0]['update_age'])
-    print("-------------------------------------------------------------------")
     logist_platform(server, game, game.turn_num)
-    print("*******************************************************************")
-    print(game.raw_instruments[0]['update_age'])
-    print("-------------------------------------------------------------------")
+
     print(game.winner)
     if game.winner != 2:
         break

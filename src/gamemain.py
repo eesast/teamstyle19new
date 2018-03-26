@@ -27,7 +27,7 @@ class GameMain:
     } for _ in range(2)]
 
     status = [{
-        'money': 10000,
+        'money': 1000,
         'tech': 0,
         'building': 80,
     } for _ in range(2)]
@@ -1089,6 +1089,8 @@ class GameMain:
                 for building in buildings_of_type:
                     line = "\t\t\tID:" + str(building.Unit_ID) + " Type:" + str(int(building.BuildingType)) \
                           + " Position:" + str(building.Position.x) + ' ' + str(building.Position.y) \
+                          + " Pro_pos:" + str(building.ProducePos.x if building.ProducePos != None else -1) \
+                          + ' ' + str(building.ProducePos.y if building.ProducePos != None else -1) \
                           + " HP:" + str(building.HP) + '\n'
                     with open("debug.txt", "a") as out:
                         out.write(line)
