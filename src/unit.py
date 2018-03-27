@@ -118,7 +118,7 @@ OriginalBuildingAttribute = {
                            BuildingAttribute.ORIGINAL_RANGE: 10, BuildingAttribute.TRAGET: SoliderName.BIT_STREAM,
                            BuildingAttribute.AGE: Age.BIT, BuildingAttribute.ORIGINAL_RESOURCE: 150,
                            BuildingAttribute.ORIGINAL_BUILDING_POINT: 15, BuildingAttribute.AOE: None,
-                           BuildingAttribute.CD: 3},
+                           BuildingAttribute.CD: 2},
     BuildingType.Thevenin: {BuildingAttribute.BUILDING_TYPE: UnitType.PRODUCTION_BUILDING,
                             BuildingAttribute.ORIGINAL_HP: 200, BuildingAttribute.ORIGINAL_ATTACK: None,
                             BuildingAttribute.ORIGINAL_RANGE: 5, BuildingAttribute.TRAGET: SoliderName.VOLTAGE_SOURCE,
@@ -221,7 +221,7 @@ OriginalBuildingAttribute = {
 
 OriginalSoliderAttribute = {
     SoliderName.BIT_STREAM: {SoliderAttr.SOLIDER_TYPE: UnitType.DATA,
-                             SoliderAttr.ACTION_MODE: ActionMode.BUILDING_ATTACK, SoliderAttr.SOLIDER_ORIGINAL_HP: 20,
+                             SoliderAttr.ACTION_MODE: ActionMode.BUILDING_ATTACK, SoliderAttr.SOLIDER_ORIGINAL_HP: 16,
                              SoliderAttr.SOLIDER_ORIGINAL_ATTACK: 10, SoliderAttr.ATTACK_RANGE: 16,
                              SoliderAttr.SPEED: 16},
     SoliderName.VOLTAGE_SOURCE: {SoliderAttr.SOLIDER_TYPE: UnitType.SUBSTANCE,

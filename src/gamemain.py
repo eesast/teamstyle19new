@@ -373,7 +373,7 @@ class GameMain:
             self.winner = 2
 
     def check_legal(self):
-        print_info = 1
+        print_info = 0
 
         """Remove the repeated instruments, or instruments on the wrong units"""
         from functools import reduce
@@ -996,8 +996,7 @@ class GameMain:
                                                           BuildingAttribute.ORIGINAL_HP] * 0.5
 
                                 if (self.status[current_flag]['money'] > lost_percent * construct_money + upgrade_diff_money
-                                    and self.status[current_flag]['tech'] >=
-                                            building.level + 1):
+                                    and self.status[current_flag]['tech'] >= building.level + 1):
                                     building.level += 1
                                     building.HP = max_HP + upgrade_diff_max_HP
                                     self.status[current_flag]['money'] -= upgrade_diff_money + lost_percent * construct_money
@@ -1247,6 +1246,14 @@ class GameMain:
         self.clean_up_phase()
         self.move_phase()
         # print(self.raw_instruments[1])
+        print("传回的指令：")
+        for flag in range(2):
+            print("flag:",flag)
+            print('construct:',self.raw_instruments[flag]['construct'])
+            print('maintain:',self.raw_instruments[flag]['maintain'])
+            print('upgrade:',self.raw_instruments[flag]['upgrade'])
+            print('sell:',self.raw_instruments[flag]['sell'])
+            print('update_age:',self.raw_instruments[flag]['update_age'])
         self.check_legal()
         # print(self.raw_instruments[1])
         # print(self.raw_instruments)
@@ -1264,6 +1271,14 @@ class GameMain:
 
         # print(self.main_base[0].BuildingType,self.main_base[0].Position.x)
         # self.debug_print()
+        print("执行了的指令：")
+        for flag in range(2):
+            print("flag:",flag)
+            print('construct:',self.instruments[flag]['construct'])
+            print('maintain:',self.instruments[flag]['maintain'])
+            print('upgrade:',self.instruments[flag]['upgrade'])
+            print('sell:',self.instruments[flag]['sell'])
+            print('update_age:',self.instruments[flag]['update_age'])
         self.raw_instruments = [{
             'construct': [],  # (BuildingType,(BuildingPos.x,BuildingPos.y),(SoldierPos.x,SoldierPos.y))
             'maintain': [],  # id

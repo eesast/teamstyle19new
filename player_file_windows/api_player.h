@@ -117,7 +117,7 @@ enum ActionMode {
 //   type                 hp   attack   range  target          age       resurce bd_point  aoe   cd
 const int OriginalBuildingAttribute[Building_Type][Attr_Num] = {
     {Base,              10000,  _NULL,  0,    _NULL,           BIT,       0,      _NULL, _NULL,  _NULL},
-    {PRODUCTION_BUILDING, 150,  _NULL,  10,   BIT_STREAM,      BIT,       150,    15,    _NULL,  3},
+    {PRODUCTION_BUILDING, 150,  _NULL,  10,   BIT_STREAM,      BIT,       150,    15,    _NULL,  2},
     {PRODUCTION_BUILDING, 200,  _NULL,  5,    VOLTAGE_SOURCE,  CIRCUIT,   160,    16,    _NULL,  6},
     {PRODUCTION_BUILDING, 180,  _NULL,  5,    CURRENT_SOURCE,  CIRCUIT,   160,    16,    _NULL,  6},
     {PRODUCTION_BUILDING, 200,  _NULL,  15,   ENIAC,           PROCESSOR, 200,    20,    _NULL,  15},
@@ -139,7 +139,7 @@ const int OriginalBuildingAttribute[Building_Type][Attr_Num] = {
 };
 
 const int OriginalSoldierAttribute[Soldier_Type][Soldier_Attr_Num] = {
-    {DATA,      BUILDING_ATTACK,        20,     10,     16,     16},
+    {DATA,      BUILDING_ATTACK,        16,     10,     16,     16},
     {SUBSTANCE, BUILDING_ATTACK,        60,     16,     24,     12},
     {SUBSTANCE, BASE_ATTACK,            100,    160,    6,      20},
     {SUBSTANCE, MOVING_ATTACK,          500,    15,     10,     6},
