@@ -444,7 +444,7 @@ class GameMain:
 
                             for building in building_list:
                                 if (abs(building.Position.x - new_construct_pos.x) +
-                                        abs(building.Position.x - new_construct_pos.x) <=
+                                        abs(building.Position.y - new_construct_pos.y) <=
                                         building_range):
                                     can_build = True
 

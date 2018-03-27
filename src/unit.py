@@ -296,7 +296,7 @@ class Position(object):
 class Building(object):
     def __init__(self, building_type, pos, flag, unit_id, maintain, time, produce_pos):
         self.__BuildingType = building_type
-        self.__HP = OriginalBuildingAttribute[building_type][BuildingAttribute.ORIGINAL_HP] * (0.5 + time / 2)
+        self.__HP = OriginalBuildingAttribute[building_type][BuildingAttribute.ORIGINAL_HP] * (1 + time / 2)
         self.__Position = pos
         self.__Flag = flag
         self.__Unit_ID = unit_id
