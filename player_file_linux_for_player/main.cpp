@@ -35,7 +35,10 @@ void* Listen(void* arg)
 	{
 		State* s = cilent.recv_state();
 		if(discon)
-			break;
+			{
+				sem_post(sg);
+				break;
+			}
 		state=s;
 		all_state.push_back(state);
 		cout<<"I was listening"<<state->turn<<endl;
@@ -44,8 +47,7 @@ void* Listen(void* arg)
 		delete t;*/
 		sem_post(sg);
 		if(state->winner!=2)
-			break;
-		
+			break;	
 	}
 	return NULL;
 }
@@ -115,7 +117,11 @@ sem_wait(sg);
 		if(state->winner!=2)
 			break;
 		sem_wait(sg);
+		if(discon)
+		{
+			return 0;
 		}
+	}
 	if (state->winner == 1)
 		cout << "Winner is 1" << endl;
 	else if (state->winner == 0)
