@@ -104,6 +104,7 @@ else:
 map = game._map
 game.map_save()
 print('Waiting for connecting···')
+sys.stdout.flush()
 server.start_connection(map)
 
 # print('start')

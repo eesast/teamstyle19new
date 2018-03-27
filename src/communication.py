@@ -1,6 +1,7 @@
 import socket
 import threading
 import time
+import sys
 from  enum import  Enum
 import unit
 from unit import Position
@@ -62,6 +63,7 @@ class MainServer(object):
             self.sock[count],self.addr[count]=self.server.accept()
             count=count+1
             print('connect successfully!',self.addr)
+            sys.stdout.flush()
         self.sock[0].send(b'0') #给玩家发送消息 告诉他们的编号
         self.sock[1].send(b'1')
         map0=self.change_map(map0)
