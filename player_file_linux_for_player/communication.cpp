@@ -201,7 +201,7 @@ cout<<"start is ok"<<endl;
 	if(h==9)
 		break;
 }
-cout<<"len is ok"<<endl;
+//cout<<"len is ok"<<endl;
 	istringstream is(number);
 	int len;
 	is >> len;
@@ -214,7 +214,7 @@ int temptruth;
 int now;
 int fact;
 	int truth=recv(sockClient, save, len, 0);
-cout<<truth<<endl;
+//cout<<truth<<endl;
 now=truth;
 while(true)
 {
