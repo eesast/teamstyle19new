@@ -11,6 +11,7 @@
 //#include<ctime>
 using namespace std;
 
+bool fail=false;
 extern	bool _updateAge;
 extern vector<command1> c1;
 extern vector<command2> c2;
@@ -52,6 +53,10 @@ void* Listen(void* arg)
 int main()
 {
 	cilent.start_connection();
+	if(fail)
+	{
+		return 0;
+	}
 	map = cilent.map;
 	flag = cilent.flag;
 	#ifdef __APPLE__

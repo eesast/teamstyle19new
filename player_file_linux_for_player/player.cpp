@@ -79,8 +79,11 @@ bool can_cons(Position p) {
 }
 void f_player()
 {
-  // updateAge();
-   //_updateAge=true;
+
+    if(flag==0)
+        player0();
+    else
+        player1();
 
     
     

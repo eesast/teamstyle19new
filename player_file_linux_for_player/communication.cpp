@@ -9,6 +9,7 @@
 using namespace std;
 extern bool use;
 extern bool discon;
+extern bool fail;
 
 MyClient::MyClient()
 {
@@ -43,6 +44,11 @@ int now=0;
 	t=recv(sockClient, cflag, 1, 0);
 	if(t==1)
 		break;
+	if(t==0||t==-1)
+	{
+		fail=true;
+		return ;
+	}
 }
 cout<<"start connection 1"<<cflag<<endl;
 	string sflag(cflag);
@@ -56,6 +62,11 @@ cout<<"start connection 1"<<cflag<<endl;
 	now=now+t;
 	if(now==size)
 		break;
+	if(t==0||t==-1)
+	{
+		fail=true;
+		return ;
+	}
 }
 cout<<"start connection 2"<<smap<<endl;
 	smap[size] = '\0';
@@ -129,7 +140,7 @@ void MyClient::send_command(bool _update, vector<command1> &v1, vector<command2>
 	send(sockClient, hello, strlen(hello), 0);
 	send(sockClient, s.str().c_str(), 10, 0);
 	send(sockClient, msg, strlen(msg), 0);
-	cout<<"Aaaaaaaaa"<<msg<<"ASDASDASD"<<endl;
+	//cout<<"Aaaaaaaaa"<<msg<<"ASDASDASD"<<endl;
 }
 
 State* MyClient::recv_state()
@@ -179,7 +190,7 @@ cout<<"start is ok"<<endl;
 	int h=0;
 	int th=0;
 	while(true)
-{	cout<<"h now len"<<h<<endl;
+{	//cout<<"h now len"<<h<<endl;
 	th=recv(sockClient, number+h, 9-h, 0);
 	h+=th;
 	if(th==0||th==-1)
