@@ -72,7 +72,7 @@ enum BuildingAttribute {
                       //For resources buildings, it stands for Collective_Value
                       //For production buildings, it means nothing set as _NULL
 
-    ORGINAL_RANGE,    //FOr production buildings, it stands for the range of production,
+    ORIGNAL_RANGE,    //FOr production buildings, it stands for the range of production,
                       //For defensive buildings, it stands for the range of attacking
                       //For resource buildings, it means nothing
 
@@ -135,7 +135,7 @@ const int OriginalBuildingAttribute[Building_Type][Attr_Num] = {
     {DEFENSIVE_BUILDING,  1000, 0,      24,   ALL,             AI,        500,    50,    0,      1},
     {DEFENSIVE_BUILDING,  400, INT_MAX, 20,   ALL,             AI,        500,    50,    2,      2},
 
-    {RESOURCE_BUILDING,   100,  10,     _NULL,_NULL,          _NULL,      100,  _NULL, _NULL,  _NULL}
+    {RESOURCE_BUILDING,   100,  10,     _NULL,_NULL,          _NULL,      100,    10, _NULL,  _NULL}
 };
 
 const int OriginalSoldierAttribute[Soldier_Type][Soldier_Attr_Num] = {
