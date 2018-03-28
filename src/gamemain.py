@@ -1213,28 +1213,35 @@ class GameMain:
             f.write('\n')
 
     def draw_judge(self):
-        tech_factor0 = 0.5 * (self.status[0]['tech'] + 2)
-        tech_factor1 = 0.5 * (self.status[1]['tech'] + 2)
+        bd_num = [0,0]
+        for flag in range(2):
+            for building_type,buildings in self.buildings[flag].items():
+                bd_num[flag] += len(buildings)
+
         if self.winner != 1 and self.winner != 0:
-            maxbasehp0 = OriginalBuildingAttribute[BuildingType.Base][BuildingAttribute.ORIGINAL_HP] * tech_factor0
-            maxbasehp1 = OriginalBuildingAttribute[BuildingType.Base][BuildingAttribute.ORIGINAL_HP] * tech_factor1
-            if self.main_base[0].HP/maxbasehp0 < self.main_base[1]/maxbasehp1:
-                self.winner = 1
-                return
-            elif self.main_base[0].HP/maxbasehp0 > self.main_base[1]/maxbasehp1:
-                self.winner = 0
-                return
             if self.status[0]['tech'] > self.status[1]['tech']:
                 self.winner = 0
                 return
             elif self.status[0]['tech'] < self.status[1]['tech']:
                 self.winner = 1
                 return
-            if self.status[0]['money'] > self.status[1]['money']:
+            if self.main_base[0].HP > self.main_base[1].HP:
+                self.winner = 0
+                return
+            elif self.main_base[0].HP < self.main_base[1].HP:
                 self.winner = 1
                 return
-            elif self.status[0]['money'] < self.status[1]['money']:
+            if bd_num[0] > bd_num[1]:
                 self.winner = 0
+                return
+            elif bd_num[0] < bd_num[1]:
+                self.winner = 1
+                return
+            if self.status[0]['money'] > self.status[1]['money']:
+                self.winner = 0
+                return
+            elif self.status[0]['money'] < self.status[1]['money']:
+                self.winner = 1
                 return
 
     def next_tick(self):
