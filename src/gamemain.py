@@ -580,8 +580,8 @@ class GameMain:
                         if target is not None:
                             target_x = target.Position.x
                             target_y = target.Position.y
-                            hit_v = 0
-                            hit_c = 0
+                            hit_v = False
+                            hit_c = False
                             for enemy_id, enemy in self.units[1 - flag].items():
                                 if (abs(enemy.Position.x - target_x) + abs(enemy.Position.y - target_y) <
                                         OriginalBuildingAttribute[BuildingType.Ohm][BuildingAttribute.AOE]
@@ -593,9 +593,9 @@ class GameMain:
                                     enemy.HP = (enemy.HP - (OriginalBuildingAttribute[BuildingType.Ohm]
                                                            [BuildingAttribute.ORIGINAL_ATTACK] * tech_factor))
                                     if enemy.Solider_Name == SoliderName.VOLTAGE_SOURCE:
-                                        hit_v = 1
+                                        hit_v = True
                                     if enemy.Solider_Name == SoliderName.CURRENT_SOURCE:
-                                        hit_c = 1
+                                        hit_c = True
                             if hit_v and hit_c:
                                 for enemy_id, enemy in self.units[1 - flag].items():
                                     if (abs(enemy.Position.x - target_x) + abs(enemy.Position.y - target_y)
@@ -716,7 +716,7 @@ class GameMain:
                             pre_dist = now_dist
                     if target is not None:
                         persent = 0.1 * tech_factor
-                        enemy_tech_factor = tech_factor = 0.5 * (self.status[1-flag]['tech'] + 2)
+                        enemy_tech_factor = 0.5 * (target.level + 2)
                         fixed_hp = OriginalBuildingAttribute[BuildingType.Robert_Kahn][BuildingAttribute.ORIGINAL_ATTACK] * \
                                 tech_factor
                         target.HP = (target.HP - fixed_hp - OriginalSoliderAttribute[target.Solider_Name][
