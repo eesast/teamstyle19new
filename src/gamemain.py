@@ -596,17 +596,17 @@ class GameMain:
                                         hit_v = 1
                                     if enemy.Solider_Name == SoliderName.CURRENT_SOURCE:
                                         hit_c = 1
-                                if hit_v and hit_c:
-                                    for enemy_id, enemy in self.units[1 - flag].items():
-                                        if (abs(enemy.Position.x - target_x) + abs(enemy.Position.y - target_y)
-                                                < OriginalBuildingAttribute[BuildingType.Ohm][BuildingAttribute.AOE]
-                                            and (enemy.Solider_Name == SoliderName.VOLTAGE_SOURCE or
-                                                 enemy.Solider_Name == SoliderName.CURRENT_SOURCE or
-                                                 enemy.Solider_Name == SoliderName.ENIAC or
-                                                 enemy.Solider_Name == SoliderName.OPTICAL_FIBER or
-                                                 enemy.Solider_Name == SoliderName.ULTRON)):
-                                            enemy.HP = (enemy.HP - 3 * (OriginalBuildingAttribute[BuildingType.Ohm][
-                                                                    BuildingAttribute.ORIGINAL_ATTACK] * tech_factor))
+                            if hit_v and hit_c:
+                                for enemy_id, enemy in self.units[1 - flag].items():
+                                    if (abs(enemy.Position.x - target_x) + abs(enemy.Position.y - target_y)
+                                            < OriginalBuildingAttribute[BuildingType.Ohm][BuildingAttribute.AOE]
+                                        and (enemy.Solider_Name == SoliderName.VOLTAGE_SOURCE or
+                                             enemy.Solider_Name == SoliderName.CURRENT_SOURCE or
+                                             enemy.Solider_Name == SoliderName.ENIAC or
+                                             enemy.Solider_Name == SoliderName.OPTICAL_FIBER or
+                                             enemy.Solider_Name == SoliderName.ULTRON)):
+                                        enemy.HP = (enemy.HP - 3 * (OriginalBuildingAttribute[BuildingType.Ohm][
+                                                                BuildingAttribute.ORIGINAL_ATTACK] * tech_factor))
                             self.instruments[flag]['attack'].append((building.Unit_ID, target_id))
                 # Mole Attack，连续攻击同一个目标每次翻倍
                 if building.BuildingType == BuildingType.Mole:
@@ -933,7 +933,6 @@ class GameMain:
 
                             UnitType.DEFENSIVE_BUILDING):
                         self.buildings[current_flag]['defence'].append(
-
                             Building(building_name, building_pos, current_flag, self.total_id, False,
                                      self.status[current_flag]['tech'], produce_pos)
                             )
@@ -1248,6 +1247,18 @@ class GameMain:
         """回合演算与指令合法性判断"""
         # print(self.raw_instruments)
 
+
+        self.instruments = [{
+           'attack': [],
+           'move': [],
+           'construct': [],
+           'maintain': [],
+           'upgrade': [],
+           'sell': [],
+           'update_age': [],
+           'produce': [],
+           'resource': False
+           } for _ in range(2)]
         self.turn_num += 1
         self.attack_phase()
         self.clean_up_phase()
