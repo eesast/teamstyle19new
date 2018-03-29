@@ -1014,7 +1014,7 @@ class GameMain:
                                 max_HP = (
                                     OriginalBuildingAttribute[building.BuildingType][BuildingAttribute.ORIGINAL_HP] *
                                     0.5 * (building.level + 2))
-                                return_percent = 0.5 if building.HP < 0.5 * max_HP else 1 - building.HP / max_HP
+                                return_percent = 0.5 * building.HP / max_HP
                                 construct_money = (OriginalBuildingAttribute[building.BuildingType][
                                                        BuildingAttribute.ORIGINAL_RESOURCE] *
                                                    0.5 * (building.level + 2))
