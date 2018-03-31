@@ -92,9 +92,9 @@ class MainServer(object):
                 for v in building[number][key]:
                     state[number]+=str(v.Unit_ID)+' '+str(int(v.BuildingType))+' '+str(int(v.HP))+' '+str(v.Position.x)+' '+str(v.Position.y)+' '+str(int(v.Is_Maintain))+','
             state[number]+=';'
-            #再之后传入unit的信息 Unit_ID Solider_Name HP Position
+            #再之后传入unit的信息 Unit_ID Soldier_Name HP Position
             for vkey,v in unit[number].items():
-                state[number]+=str(v.Unit_ID)+' '+str(int(v.Solider_Name))+' '+str(int(v.HP))+' '+str(v.Position.x)+' '+str(v.Position.y)+','
+                state[number]+=str(v.Unit_ID)+' '+str(int(v.Soldier_Name))+' '+str(int(v.HP))+' '+str(v.Position.x)+' '+str(v.Position.y)+','
             state[number]+=';'
             state[number] += '#'
             #state[number]=state[number].encode('utf-8')
@@ -306,7 +306,7 @@ for i in range(0,_mapsize):
 mainserver=MainServer('127.0.0.1',9999)
 mainserver.start_connection(map0)
 t=unit.Position(7,7)
-unit.Solider(100,t,0,0,1)
+unit.Soldier(100,t,0,0,1)
 UUnit=[[],[]]
 Building=[{'produce':[],'defence':[],'resource':[]},{'produce':[],'defence':[],'resource':[]}]
 status = [{
@@ -316,7 +316,7 @@ status = [{
 } for i in range(2)]
 for i in range(0,2):
     for j in range(2):
-        UUnit[i].append(unit.Solider(unit.SoliderName.PACKET.value,100,unit.Position(6,6),i,j))
+        UUnit[i].append(unit.Soldier(unit.SoldierName.PACKET.value,100,unit.Position(6,6),i,j))
         Building[i]['produce'].append(unit.Building(unit.BuildingType.Hawkin,unit.Position(7,7),i,j+10,0,unit.Age.NETWORK.value))
         Building[i]['defence'].append(unit.Building(unit.BuildingType.Hawkin,unit.Position(7,7),i,j+20,0,unit.Age.NETWORK.value))
         Building[i]['resource'].append(unit.Building(unit.BuildingType.Hawkin,unit.Position(7,7),i,j+30,0,unit.Age.NETWORK.value))

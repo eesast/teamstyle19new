@@ -547,9 +547,9 @@ class GameMain:
                             now_dist = abs(enemy.Position.x - building.Position.x) \
                                        + abs(enemy.Position.y - building.Position.y)
                             if now_dist < pre_dist and enemy.HP > 0 and \
-                                (enemy.Solider_Name == SoliderName.BIT_STREAM or
-                                enemy.Solider_Name == SoliderName.PACKET or
-                                enemy.Solider_Name == SoliderName.TURNING_MACHINE):
+                                (enemy.Soldier_Name == SoldierName.BIT_STREAM or
+                                enemy.Soldier_Name == SoldierName.PACKET or
+                                enemy.Soldier_Name == SoldierName.TURNING_MACHINE):
                                 target = enemy
                                 target_id = enemy_id
                                 pre_dist = now_dist
@@ -569,11 +569,11 @@ class GameMain:
                             now_dist = (abs(enemy.Position.x - building.Position.x) +
                                         abs(enemy.Position.y - building.Position.y))
                             if now_dist < pre_dist and enemy.HP > 0 and \
-                                (enemy.Solider_Name == SoliderName.VOLTAGE_SOURCE or
-                                 enemy.Solider_Name == SoliderName.CURRENT_SOURCE or
-                                 enemy.Solider_Name == SoliderName.ENIAC or
-                                 enemy.Solider_Name == SoliderName.OPTICAL_FIBER or
-                                 enemy.Solider_Name == SoliderName.ULTRON):
+                                (enemy.Soldier_Name == SoldierName.VOLTAGE_SOURCE or
+                                 enemy.Soldier_Name == SoldierName.CURRENT_SOURCE or
+                                 enemy.Soldier_Name == SoldierName.ENIAC or
+                                 enemy.Soldier_Name == SoldierName.OPTICAL_FIBER or
+                                 enemy.Soldier_Name == SoldierName.ULTRON):
                                 target = enemy
                                 target_id = enemy_id
                                 pre_dist = now_dist
@@ -585,26 +585,26 @@ class GameMain:
                             for enemy_id, enemy in self.units[1 - flag].items():
                                 if (abs(enemy.Position.x - target_x) + abs(enemy.Position.y - target_y) <
                                         OriginalBuildingAttribute[BuildingType.Ohm][BuildingAttribute.AOE]
-                                    and (enemy.Solider_Name == SoliderName.VOLTAGE_SOURCE or
-                                         enemy.Solider_Name == SoliderName.CURRENT_SOURCE or
-                                         enemy.Solider_Name == SoliderName.ENIAC or
-                                         enemy.Solider_Name == SoliderName.OPTICAL_FIBER or
-                                         enemy.Solider_Name == SoliderName.ULTRON)):
+                                    and (enemy.Soldier_Name == SoldierName.VOLTAGE_SOURCE or
+                                         enemy.Soldier_Name == SoldierName.CURRENT_SOURCE or
+                                         enemy.Soldier_Name == SoldierName.ENIAC or
+                                         enemy.Soldier_Name == SoldierName.OPTICAL_FIBER or
+                                         enemy.Soldier_Name == SoldierName.ULTRON)):
                                     enemy.HP = (enemy.HP - (OriginalBuildingAttribute[BuildingType.Ohm]
                                                            [BuildingAttribute.ORIGINAL_ATTACK] * tech_factor))
-                                    if enemy.Solider_Name == SoliderName.VOLTAGE_SOURCE:
+                                    if enemy.Soldier_Name == SoldierName.VOLTAGE_SOURCE:
                                         hit_v = True
-                                    if enemy.Solider_Name == SoliderName.CURRENT_SOURCE:
+                                    if enemy.Soldier_Name == SoldierName.CURRENT_SOURCE:
                                         hit_c = True
                             if hit_v and hit_c:
                                 for enemy_id, enemy in self.units[1 - flag].items():
                                     if (abs(enemy.Position.x - target_x) + abs(enemy.Position.y - target_y)
                                             < OriginalBuildingAttribute[BuildingType.Ohm][BuildingAttribute.AOE]
-                                        and (enemy.Solider_Name == SoliderName.VOLTAGE_SOURCE or
-                                             enemy.Solider_Name == SoliderName.CURRENT_SOURCE or
-                                             enemy.Solider_Name == SoliderName.ENIAC or
-                                             enemy.Solider_Name == SoliderName.OPTICAL_FIBER or
-                                             enemy.Solider_Name == SoliderName.ULTRON)):
+                                        and (enemy.Soldier_Name == SoldierName.VOLTAGE_SOURCE or
+                                             enemy.Soldier_Name == SoldierName.CURRENT_SOURCE or
+                                             enemy.Soldier_Name == SoldierName.ENIAC or
+                                             enemy.Soldier_Name == SoldierName.OPTICAL_FIBER or
+                                             enemy.Soldier_Name == SoldierName.ULTRON)):
                                         enemy.HP = (enemy.HP - 3 * (OriginalBuildingAttribute[BuildingType.Ohm][
                                                                 BuildingAttribute.ORIGINAL_ATTACK] * tech_factor))
                             self.instruments[flag]['attack'].append((building.Unit_ID, target_id))
@@ -630,11 +630,11 @@ class GameMain:
                             now_dist = abs(enemy.Position.x - building.Position.x) \
                                        + abs(enemy.Position.y - building.Position.y)
                             if (now_dist < pre_dist and enemy.HP > 0
-                                and (enemy.Solider_Name == SoliderName.VOLTAGE_SOURCE or
-                                     enemy.Solider_Name == SoliderName.CURRENT_SOURCE or
-                                     enemy.Solider_Name == SoliderName.ENIAC or
-                                     enemy.Solider_Name == SoliderName.OPTICAL_FIBER or
-                                     enemy.Solider_Name == SoliderName.ULTRON)):
+                                and (enemy.Soldier_Name == SoldierName.VOLTAGE_SOURCE or
+                                     enemy.Soldier_Name == SoldierName.CURRENT_SOURCE or
+                                     enemy.Soldier_Name == SoldierName.ENIAC or
+                                     enemy.Soldier_Name == SoldierName.OPTICAL_FIBER or
+                                     enemy.Soldier_Name == SoldierName.ULTRON)):
                                 target = enemy
                                 target_id = enemy_id
                                 pre_dist = now_dist
@@ -656,11 +656,11 @@ class GameMain:
                             now_dist = abs(enemy.Position.x - building.Position.x) \
                                        + abs(enemy.Position.y - building.Position.y)
                             if (now_dist < pre_dist and enemy.HP> 0
-                                and (enemy.Solider_Name == SoliderName.VOLTAGE_SOURCE or
-                                     enemy.Solider_Name == SoliderName.CURRENT_SOURCE or
-                                     enemy.Solider_Name == SoliderName.ENIAC or
-                                     enemy.Solider_Name == SoliderName.OPTICAL_FIBER or
-                                     enemy.Solider_Name == SoliderName.ULTRON)):
+                                and (enemy.Soldier_Name == SoldierName.VOLTAGE_SOURCE or
+                                     enemy.Soldier_Name == SoldierName.CURRENT_SOURCE or
+                                     enemy.Soldier_Name == SoldierName.ENIAC or
+                                     enemy.Soldier_Name == SoldierName.OPTICAL_FIBER or
+                                     enemy.Soldier_Name == SoldierName.ULTRON)):
                                 target = enemy
                                 target_id = enemy_id
                                 pre_dist = now_dist
@@ -677,22 +677,30 @@ class GameMain:
                     target = None
                     hit_packet = False
                     for enemy_id, enemy in self.units[1 - flag].items():
+                        if enemy.Soldier_Name != SoldierName.PACKET:
+                            continue
                         now_dist = abs(enemy.Position.x - building.Position.x) \
                                    + abs(enemy.Position.y - building.Position.y)
                         if now_dist < pre_dist and enemy.HP > 0:
-                            if (not hit_packet) or enemy.Solider_Name == SoliderName.PACKET:
+                            target = enemy
+                            target_id = enemy_id
+                            pre_dist = now_dist
+                            hit_packet = True
+                    if not hit_packet:
+                        for enemy_id, enemy in self.units[1 - flag].items():
+                            now_dist = abs(enemy.Position.x - building.Position.x) \
+                                       + abs(enemy.Position.y - building.Position.y)
+                            if now_dist < pre_dist and enemy.HP > 0:
                                 target = enemy
                                 target_id = enemy_id
                                 pre_dist = now_dist
-                                if enemy.Solider_Name == SoliderName.PACKET:
-                                    hit_packet = True
                     if target is not None:
                         target_x = target.Position.x
                         target_y = target.Position.y
                         for enemy_id, enemy in self.units[1 - flag].items():
                             if (abs(enemy.Position.x - target_x) + abs(enemy.Position.y - target_y) <
                                     OriginalBuildingAttribute[BuildingType.Larry_Roberts][BuildingAttribute.AOE]):
-                                if enemy.Solider_Name == SoliderName.PACKET:
+                                if enemy.Soldier_Name == SoldierName.PACKET:
                                     mult_factor = 3
                                 else:
                                     mult_factor = 1
@@ -708,9 +716,9 @@ class GameMain:
                         now_dist = abs(enemy.Position.x - building.Position.x) \
                                    + abs(enemy.Position.y - building.Position.y)
                         if now_dist < pre_dist and enemy.HP > 0 and \
-                                (enemy.Solider_Name == SoliderName.BIT_STREAM or
-                                enemy.Solider_Name == SoliderName.PACKET or
-                                enemy.Solider_Name == SoliderName.TURNING_MACHINE):
+                                (enemy.Soldier_Name == SoldierName.BIT_STREAM or
+                                enemy.Soldier_Name == SoldierName.PACKET or
+                                enemy.Soldier_Name == SoldierName.TURNING_MACHINE):
                             target = enemy
                             target_id = enemy_id
                             pre_dist = now_dist
@@ -719,8 +727,8 @@ class GameMain:
                         enemy_tech_factor = 0.5 * (target.level + 2)
                         fixed_hp = OriginalBuildingAttribute[BuildingType.Robert_Kahn][BuildingAttribute.ORIGINAL_ATTACK] * \
                                 tech_factor
-                        target.HP = (target.HP - fixed_hp - OriginalSoliderAttribute[target.Solider_Name][
-                            SoliderAttr.SOLIDER_ORIGINAL_HP] * enemy_tech_factor * persent)
+                        target.HP = (target.HP - fixed_hp - OriginalSoldierAttribute[target.Soldier_Name][
+                            SoldierAttr.SOLIDER_ORIGINAL_HP] * enemy_tech_factor * persent)
                         self.instruments[flag]['attack'].append((building.Unit_ID, target_id))
 
                 # Hawkin Attack,秒杀三格
@@ -750,9 +758,9 @@ class GameMain:
             # 兵种对建筑的攻击
             for unit_id, unit in self.units[flag].items():
                 tech_factor = 0.5 * ( unit.level + 2)
-                action_mode = OriginalSoliderAttribute[unit.Solider_Name][SoliderAttr.ACTION_MODE]
-                pre_dist = OriginalSoliderAttribute[unit.Solider_Name][SoliderAttr.ATTACK_RANGE] + 1
-                if unit.Solider_Name == SoliderName.TURNING_MACHINE or unit.Solider_Name == SoliderName.ULTRON:
+                action_mode = OriginalSoldierAttribute[unit.Soldier_Name][SoldierAttr.ACTION_MODE]
+                pre_dist = OriginalSoldierAttribute[unit.Soldier_Name][SoldierAttr.ATTACK_RANGE] + 1
+                if unit.Soldier_Name == SoldierName.TURNING_MACHINE or unit.Soldier_Name == SoldierName.ULTRON:
                     can_attack = True
                     for enemy_building in self.buildings[1 - flag]["defence"]:
                         if enemy_building.BuildingType == BuildingType.Musk and \
@@ -786,8 +794,8 @@ class GameMain:
                         if now_dist < pre_dist and self.main_base[1 - flag].HP > 0:
                             target = self.main_base[1 - flag]
                     if target is not None:
-                        target.HP = (target.HP - OriginalSoliderAttribute[unit.Solider_Name][
-                                          SoliderAttr.SOLIDER_ORIGINAL_ATTACK] * tech_factor)
+                        target.HP = (target.HP - OriginalSoldierAttribute[unit.Soldier_Name][
+                                          SoldierAttr.SOLIDER_ORIGINAL_ATTACK] * tech_factor)
                         self.instruments[flag]['attack'].append((unit_id, target.Unit_ID))
 
                 # 冲锋式兵种的攻击
@@ -800,8 +808,8 @@ class GameMain:
                         now_dist_y = 0 if unit.Position.y <= 6 else unit.Position.x - 6
                     now_dist = now_dist_x + now_dist_y
                     if now_dist < pre_dist and self.main_base[1 - flag].HP > 0:
-                        self.main_base[1 - flag].HP -= (OriginalSoliderAttribute[unit.Solider_Name][
-                                                            SoliderAttr.SOLIDER_ORIGINAL_ATTACK] * tech_factor)
+                        self.main_base[1 - flag].HP -= (OriginalSoldierAttribute[unit.Soldier_Name][
+                                                            SoldierAttr.SOLIDER_ORIGINAL_ATTACK] * tech_factor)
                         unit.HP = -1
                         self.instruments[flag]['attack'].append((unit_id, self.main_base[1 - flag].Unit_ID))
 
@@ -830,7 +838,7 @@ class GameMain:
 
             for unit_id, unit in self.units[current_flag].items():
                 # Building Musk's skill : AI cannot move in its shot range.
-                if unit.Solider_Name == SoliderName.TURNING_MACHINE or unit.Solider_Name == SoliderName.ULTRON:
+                if unit.Soldier_Name == SoldierName.TURNING_MACHINE or unit.Soldier_Name == SoldierName.ULTRON:
                     can_move = True
                     for enemy_building in self.buildings[1 - current_flag]['defence']:
                         if (enemy_building.BuildingType == BuildingType.Musk and
@@ -843,17 +851,17 @@ class GameMain:
                     if not can_move:
                         continue
 
-                if (OriginalSoliderAttribute[unit.Solider_Name][SoliderAttr.ACTION_MODE] ==
+                if (OriginalSoldierAttribute[unit.Soldier_Name][SoldierAttr.ACTION_MODE] ==
                         ActionMode.BUILDING_ATTACK):
-                    for i in range(OriginalSoliderAttribute[unit.Solider_Name][SoliderAttr.SPEED]):
-                        # When solider is moving, if there are buildings in solider's shot range,
+                    for i in range(OriginalSoldierAttribute[unit.Soldier_Name][SoldierAttr.SPEED]):
+                        # When Soldier is moving, if there are buildings in Soldier's shot range,
                         # stop to attack the building, else continue moving.
                         can_move = True
                         for building_type, building_array in self.buildings[1 - current_flag].items():
                             for enemy_building in building_array:
                                 if (abs(enemy_building.Position.x - unit.Position.x) +
                                         abs(enemy_building.Position.y - unit.Position.y) <=
-                                        OriginalSoliderAttribute[unit.Solider_Name][SoliderAttr.ATTACK_RANGE]):
+                                        OriginalSoldierAttribute[unit.Soldier_Name][SoldierAttr.ATTACK_RANGE]):
                                     can_move = False
                                     break
                             if not can_move:
@@ -871,7 +879,7 @@ class GameMain:
                         (unit_id, unit.Position))
 
                 else:
-                    for i in range(OriginalSoliderAttribute[unit.Solider_Name][SoliderAttr.SPEED]):
+                    for i in range(OriginalSoldierAttribute[unit.Soldier_Name][SoldierAttr.SPEED]):
                         if _map[unit.Position.x + direction][unit.Position.y] == 1:
                             unit.Position = Position(unit.Position.x + direction, unit.Position.y)
                         elif _map[unit.Position.x][unit.Position.y + direction] == 1:
@@ -1034,14 +1042,14 @@ class GameMain:
             for building in self.buildings[current_flag]['produce']:
                 if building.CD_left <= 0:
                     solider_name = OriginalBuildingAttribute[building.BuildingType][BuildingAttribute.TARGET]
-                    solider_hp = OriginalSoliderAttribute[solider_name][SoliderAttr.SOLIDER_ORIGINAL_HP]
+                    solider_hp = OriginalSoldierAttribute[solider_name][SoldierAttr.SOLIDER_ORIGINAL_HP]
                     solider_pos = building.ProducePos
                     solider_flag = current_flag
                     solider_id = self.total_id
                     solider_level = building.level
                     cd = OriginalBuildingAttribute[building.BuildingType][BuildingAttribute.CD]
                     self.units[current_flag][solider_id]=\
-                        Solider(solider_name, solider_hp, solider_pos, solider_flag, solider_id, solider_level)
+                        Soldier(solider_name, solider_hp, solider_pos, solider_flag, solider_id, solider_level)
                     building.CD_left = cd  # 重置CD
                     self.total_id += 1
                     self.instruments[current_flag]['produce'].append(solider_id)
@@ -1121,10 +1129,10 @@ class GameMain:
                out.write(line)
             tech_factor = 0.5 * (self.status[flag]['tech'] + 2)
             for unit_id, unit in self.units[flag].items():
-                line = "\t\t\tID:" + str(unit_id) + " Type:" + str(int(unit.Solider_Name)) \
+                line = "\t\t\tID:" + str(unit_id) + " Type:" + str(int(unit.Soldier_Name)) \
                       + " Position:" + str(unit.Position.x) + ' ' + str(unit.Position.y) \
-                      + " Attack:" + str(OriginalSoliderAttribute[unit.Solider_Name][
-                                SoliderAttr.SOLIDER_ORIGINAL_ATTACK] * tech_factor) \
+                      + " Attack:" + str(OriginalSoldierAttribute[unit.Soldier_Name][
+                                SoldierAttr.SOLIDER_ORIGINAL_ATTACK] * tech_factor) \
                       + " HP:" + str(unit.HP) + '\n'
                 with open("debug.txt", "a") as out:
                     out.write(line)
@@ -1166,7 +1174,7 @@ class GameMain:
             jbase[i]['base_HP']=self.main_base[i].HP
             jbase[i]['base_pos']=(self.main_base[i].Position.x,self.main_base[i].Position.y)
             for unit_id,unit in self.units[i].items():
-                unit_temp={'name':str(unit.Solider_Name),'hp':unit.HP,'pos':(unit.Position.x,unit.Position.y),'flag':unit.Flag,'id':unit.Unit_ID}
+                unit_temp={'name':str(unit.Soldier_Name),'hp':unit.HP,'pos':(unit.Position.x,unit.Position.y),'flag':unit.Flag,'id':unit.Unit_ID}
                 junits[i].append(unit_temp)
             for building in self.buildings[i]['produce']:
                 building_temp={'type':str(building.BuildingType),'pos':(building.Position.x,building.Position.y),'hp':building.HP,'flag':building.Flag,'id':building.Unit_ID,

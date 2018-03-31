@@ -78,7 +78,7 @@ class BuildingAttribute(IntEnum):
     CD = 9
 
 
-class SoliderName(IntEnum):
+class SoldierName(IntEnum):
     BIT_STREAM = 0
     VOLTAGE_SOURCE = 1
     CURRENT_SOURCE = 2
@@ -89,7 +89,7 @@ class SoliderName(IntEnum):
     ULTRON = 7
 
 
-class SoliderAttr(IntEnum):
+class SoldierAttr(IntEnum):
     SOLIDER_TYPE = 0
     ACTION_MODE = 1
     SOLIDER_ORIGINAL_HP = 2
@@ -115,50 +115,50 @@ OriginalBuildingAttribute = {
 ,  # need to complete
     BuildingType.Shannon: {BuildingAttribute.BUILDING_TYPE: UnitType.PRODUCTION_BUILDING,
                            BuildingAttribute.ORIGINAL_HP: 150, BuildingAttribute.ORIGINAL_ATTACK: None,
-                           BuildingAttribute.ORIGINAL_RANGE: 10, BuildingAttribute.TARGET: SoliderName.BIT_STREAM,
+                           BuildingAttribute.ORIGINAL_RANGE: 10, BuildingAttribute.TARGET: SoldierName.BIT_STREAM,
                            BuildingAttribute.AGE: Age.BIT, BuildingAttribute.ORIGINAL_RESOURCE: 150,
                            BuildingAttribute.ORIGINAL_BUILDING_POINT: 15, BuildingAttribute.AOE: None,
                            BuildingAttribute.CD: 2},
     BuildingType.Thevenin: {BuildingAttribute.BUILDING_TYPE: UnitType.PRODUCTION_BUILDING,
                             BuildingAttribute.ORIGINAL_HP: 200, BuildingAttribute.ORIGINAL_ATTACK: None,
-                            BuildingAttribute.ORIGINAL_RANGE: 5, BuildingAttribute.TARGET: SoliderName.VOLTAGE_SOURCE,
+                            BuildingAttribute.ORIGINAL_RANGE: 5, BuildingAttribute.TARGET: SoldierName.VOLTAGE_SOURCE,
                             BuildingAttribute.AGE: Age.CIRCUIT, BuildingAttribute.ORIGINAL_RESOURCE: 160,
                             BuildingAttribute.ORIGINAL_BUILDING_POINT: 16, BuildingAttribute.AOE: None,
                             BuildingAttribute.CD: 6},
     BuildingType.Norton: {BuildingAttribute.BUILDING_TYPE: UnitType.PRODUCTION_BUILDING,
                           BuildingAttribute.ORIGINAL_HP: 180, BuildingAttribute.ORIGINAL_ATTACK: None,
-                          BuildingAttribute.ORIGINAL_RANGE: 5, BuildingAttribute.TARGET: SoliderName.CURRENT_SOURCE,
+                          BuildingAttribute.ORIGINAL_RANGE: 5, BuildingAttribute.TARGET: SoldierName.CURRENT_SOURCE,
                           BuildingAttribute.AGE: Age.CIRCUIT, BuildingAttribute.ORIGINAL_RESOURCE: 160,
                           BuildingAttribute.ORIGINAL_BUILDING_POINT: 16, BuildingAttribute.AOE: None,
                           BuildingAttribute.CD: 6},
     BuildingType.Von_Neumann: {BuildingAttribute.BUILDING_TYPE: UnitType.PRODUCTION_BUILDING,
                                BuildingAttribute.ORIGINAL_HP: 200, BuildingAttribute.ORIGINAL_ATTACK: None,
-                               BuildingAttribute.ORIGINAL_RANGE: 15, BuildingAttribute.TARGET: SoliderName.ENIAC,
+                               BuildingAttribute.ORIGINAL_RANGE: 15, BuildingAttribute.TARGET: SoldierName.ENIAC,
                                BuildingAttribute.AGE: Age.PROCESSOR, BuildingAttribute.ORIGINAL_RESOURCE: 200,
                                BuildingAttribute.ORIGINAL_BUILDING_POINT: 20, BuildingAttribute.AOE: None,
                                BuildingAttribute.CD: 15},
     BuildingType.Berners_Lee: {BuildingAttribute.BUILDING_TYPE: UnitType.PRODUCTION_BUILDING,
                                BuildingAttribute.ORIGINAL_HP: 150, BuildingAttribute.ORIGINAL_ATTACK: None,
-                               BuildingAttribute.ORIGINAL_RANGE: 20, BuildingAttribute.TARGET: SoliderName.PACKET,
+                               BuildingAttribute.ORIGINAL_RANGE: 20, BuildingAttribute.TARGET: SoldierName.PACKET,
                                BuildingAttribute.AGE: Age.NETWORK, BuildingAttribute.ORIGINAL_RESOURCE: 250,
                                BuildingAttribute.ORIGINAL_BUILDING_POINT: 25, BuildingAttribute.AOE: None,
                                BuildingAttribute.CD: 3},
     BuildingType.Kuen_Kao: {BuildingAttribute.BUILDING_TYPE: UnitType.PRODUCTION_BUILDING,
                             BuildingAttribute.ORIGINAL_HP: 160, BuildingAttribute.ORIGINAL_ATTACK: None,
-                            BuildingAttribute.ORIGINAL_RANGE: 15, BuildingAttribute.TARGET: SoliderName.OPTICAL_FIBER,
+                            BuildingAttribute.ORIGINAL_RANGE: 15, BuildingAttribute.TARGET: SoldierName.OPTICAL_FIBER,
                             BuildingAttribute.AGE: Age.NETWORK, BuildingAttribute.ORIGINAL_RESOURCE: 300,
                             BuildingAttribute.ORIGINAL_BUILDING_POINT: 30, BuildingAttribute.AOE: None,
                             BuildingAttribute.CD: 8},
     BuildingType.Turing: {BuildingAttribute.BUILDING_TYPE: UnitType.PRODUCTION_BUILDING,
                           BuildingAttribute.ORIGINAL_HP: 250, BuildingAttribute.ORIGINAL_ATTACK: None,
-                          BuildingAttribute.ORIGINAL_RANGE: 15, BuildingAttribute.TARGET: SoliderName.TURNING_MACHINE,
+                          BuildingAttribute.ORIGINAL_RANGE: 15, BuildingAttribute.TARGET: SoldierName.TURNING_MACHINE,
                           BuildingAttribute.AGE: Age.AI, BuildingAttribute.ORIGINAL_RESOURCE: 600,
                           BuildingAttribute.ORIGINAL_BUILDING_POINT: 60, BuildingAttribute.AOE: None,
                           BuildingAttribute.CD: 20},
     BuildingType.Tony_Stark: {BuildingAttribute.BUILDING_TYPE: UnitType.PRODUCTION_BUILDING,
                               BuildingAttribute.ORIGINAL_HP: 220, BuildingAttribute.ORIGINAL_ATTACK: None,
                               BuildingAttribute.ORIGINAL_RANGE: 10,
-                              BuildingAttribute.TARGET: SoliderName.ULTRON, BuildingAttribute.AGE: Age.AI,
+                              BuildingAttribute.TARGET: SoldierName.ULTRON, BuildingAttribute.AGE: Age.AI,
                               BuildingAttribute.ORIGINAL_RESOURCE: 600, BuildingAttribute.ORIGINAL_BUILDING_POINT: 60,
                               BuildingAttribute.AOE: None, BuildingAttribute.CD: 20},
 
@@ -204,14 +204,14 @@ OriginalBuildingAttribute = {
                         BuildingAttribute.ORIGINAL_BUILDING_POINT: 50, BuildingAttribute.AOE: 0,
                         BuildingAttribute.CD: 1},
     BuildingType.Hawkin: {BuildingAttribute.BUILDING_TYPE: UnitType.DEFENSIVE_BUILDING,
-                          BuildingAttribute.ORIGINAL_HP: 400, BuildingAttribute.ORIGINAL_ATTACK: Inf,
+                          BuildingAttribute.ORIGINAL_HP: 480, BuildingAttribute.ORIGINAL_ATTACK: Inf,
                           BuildingAttribute.ORIGINAL_RANGE: 20, BuildingAttribute.TARGET: UnitType.ALL,
                           BuildingAttribute.AGE: Age.AI, BuildingAttribute.ORIGINAL_RESOURCE: 500,
                           BuildingAttribute.ORIGINAL_BUILDING_POINT: 50, BuildingAttribute.AOE: 1,
                           BuildingAttribute.CD: 2},
 
     BuildingType.Programmer: {BuildingAttribute.BUILDING_TYPE: UnitType.RESOURCE_BUILDING,
-                        BuildingAttribute.ORIGINAL_HP: 480, BuildingAttribute.ORIGINAL_ATTACK: 10,
+                        BuildingAttribute.ORIGINAL_HP: 100, BuildingAttribute.ORIGINAL_ATTACK: 10,
                         BuildingAttribute.ORIGINAL_RANGE: 0, BuildingAttribute.TARGET: UnitType.ALL,
                         BuildingAttribute.AGE: Age.BIT, BuildingAttribute.ORIGINAL_RESOURCE: 100,
                         BuildingAttribute.ORIGINAL_BUILDING_POINT: 10, BuildingAttribute.AOE: 0,
@@ -219,36 +219,35 @@ OriginalBuildingAttribute = {
     # use attack stand for the ability of resource building to get resource
 }
 
-OriginalSoliderAttribute = {
-    SoliderName.BIT_STREAM: {SoliderAttr.SOLIDER_TYPE: UnitType.DATA,
-                             SoliderAttr.ACTION_MODE: ActionMode.BUILDING_ATTACK, SoliderAttr.SOLIDER_ORIGINAL_HP: 16,
-                             SoliderAttr.SOLIDER_ORIGINAL_ATTACK: 10, SoliderAttr.ATTACK_RANGE: 16,
-                             SoliderAttr.SPEED: 12},
-    SoliderName.VOLTAGE_SOURCE: {SoliderAttr.SOLIDER_TYPE: UnitType.SUBSTANCE,
-                                 SoliderAttr.ACTION_MODE: ActionMode.BUILDING_ATTACK,
-                                 SoliderAttr.SOLIDER_ORIGINAL_HP: 60, SoliderAttr.SOLIDER_ORIGINAL_ATTACK: 18,
-                                 SoliderAttr.ATTACK_RANGE: 24, SoliderAttr.SPEED: 8},
-    SoliderName.CURRENT_SOURCE: {SoliderAttr.SOLIDER_TYPE: UnitType.SUBSTANCE,
-                                 SoliderAttr.ACTION_MODE: ActionMode.BASE_ATTACK, SoliderAttr.SOLIDER_ORIGINAL_HP: 80,
-                                 SoliderAttr.SOLIDER_ORIGINAL_ATTACK: 160, SoliderAttr.ATTACK_RANGE: 6,
-                                 SoliderAttr.SPEED: 15},
-    SoliderName.ENIAC: {SoliderAttr.SOLIDER_TYPE: UnitType.SUBSTANCE, SoliderAttr.ACTION_MODE: ActionMode.MOVING_ATTACK,
-                        SoliderAttr.SOLIDER_ORIGINAL_HP: 550, SoliderAttr.SOLIDER_ORIGINAL_ATTACK: 12,
-                        SoliderAttr.ATTACK_RANGE: 10, SoliderAttr.SPEED: 4},
-    SoliderName.PACKET: {SoliderAttr.SOLIDER_TYPE: UnitType.DATA, SoliderAttr.ACTION_MODE: ActionMode.BASE_ATTACK,
-                         SoliderAttr.SOLIDER_ORIGINAL_HP: 50, SoliderAttr.SOLIDER_ORIGINAL_ATTACK: 300,
-                         SoliderAttr.ATTACK_RANGE: 6, SoliderAttr.SPEED: 16},
-    SoliderName.OPTICAL_FIBER: {SoliderAttr.SOLIDER_TYPE: UnitType.SUBSTANCE,
-                                SoliderAttr.ACTION_MODE: ActionMode.BUILDING_ATTACK,
-                                SoliderAttr.SOLIDER_ORIGINAL_HP: 40, SoliderAttr.SOLIDER_ORIGINAL_ATTACK: 25,
-                                SoliderAttr.ATTACK_RANGE: 40, SoliderAttr.SPEED: 12},
-    SoliderName.TURNING_MACHINE: {SoliderAttr.SOLIDER_TYPE: UnitType.DATA,
-                                  SoliderAttr.ACTION_MODE: ActionMode.MOVING_ATTACK,
-                                  SoliderAttr.SOLIDER_ORIGINAL_HP: 850, SoliderAttr.SOLIDER_ORIGINAL_ATTACK: 8,
-                                  SoliderAttr.ATTACK_RANGE: 12, SoliderAttr.SPEED: 3},
-    SoliderName.ULTRON: {SoliderAttr.SOLIDER_TYPE: UnitType.SUBSTANCE,
-                         SoliderAttr.ACTION_MODE: ActionMode.BUILDING_ATTACK, SoliderAttr.SOLIDER_ORIGINAL_HP: 100,
-                         SoliderAttr.SOLIDER_ORIGINAL_ATTACK: 500, SoliderAttr.ATTACK_RANGE: 20, SoliderAttr.SPEED: 8},
+OriginalSoldierAttribute = {
+    SoldierName.BIT_STREAM: {SoldierAttr.SOLIDER_TYPE: UnitType.DATA,
+                             SoldierAttr.ACTION_MODE: ActionMode.BUILDING_ATTACK, SoldierAttr.SOLIDER_ORIGINAL_HP: 16,
+                             SoldierAttr.SOLIDER_ORIGINAL_ATTACK: 10, SoldierAttr.ATTACK_RANGE: 16,
+                             SoldierAttr.SPEED: 12},
+    SoldierName.VOLTAGE_SOURCE: {SoldierAttr.SOLIDER_TYPE: UnitType.SUBSTANCE,
+                                 SoldierAttr.ACTION_MODE: ActionMode.BUILDING_ATTACK,
+                                 SoldierAttr.ATTACK_RANGE: 24, SoldierAttr.SPEED: 8},
+    SoldierName.CURRENT_SOURCE: {SoldierAttr.SOLIDER_TYPE: UnitType.SUBSTANCE,
+                                 SoldierAttr.ACTION_MODE: ActionMode.BASE_ATTACK, SoldierAttr.SOLIDER_ORIGINAL_HP: 80,
+                                 SoldierAttr.SOLIDER_ORIGINAL_ATTACK: 160, SoldierAttr.ATTACK_RANGE: 6,
+                                 SoldierAttr.SPEED: 15},
+    SoldierName.ENIAC: {SoldierAttr.SOLIDER_TYPE: UnitType.SUBSTANCE, SoldierAttr.ACTION_MODE: ActionMode.MOVING_ATTACK,
+                        SoldierAttr.SOLIDER_ORIGINAL_HP: 550, SoldierAttr.SOLIDER_ORIGINAL_ATTACK: 12,
+                        SoldierAttr.ATTACK_RANGE: 10, SoldierAttr.SPEED: 4},
+    SoldierName.PACKET: {SoldierAttr.SOLIDER_TYPE: UnitType.DATA, SoldierAttr.ACTION_MODE: ActionMode.BASE_ATTACK,
+                         SoldierAttr.SOLIDER_ORIGINAL_HP: 50, SoldierAttr.SOLIDER_ORIGINAL_ATTACK: 300,
+                         SoldierAttr.ATTACK_RANGE: 6, SoldierAttr.SPEED: 16},
+    SoldierName.OPTICAL_FIBER: {SoldierAttr.SOLIDER_TYPE: UnitType.SUBSTANCE,
+                                SoldierAttr.ACTION_MODE: ActionMode.BUILDING_ATTACK,
+                                SoldierAttr.SOLIDER_ORIGINAL_HP: 40, SoldierAttr.SOLIDER_ORIGINAL_ATTACK: 25,
+                                SoldierAttr.ATTACK_RANGE: 40, SoldierAttr.SPEED: 12},
+    SoldierName.TURNING_MACHINE: {SoldierAttr.SOLIDER_TYPE: UnitType.DATA,
+                                  SoldierAttr.ACTION_MODE: ActionMode.MOVING_ATTACK,
+                                  SoldierAttr.SOLIDER_ORIGINAL_HP: 850, SoldierAttr.SOLIDER_ORIGINAL_ATTACK: 8,
+                                  SoldierAttr.ATTACK_RANGE: 12, SoldierAttr.SPEED: 3},
+    SoldierName.ULTRON: {SoldierAttr.SOLIDER_TYPE: UnitType.SUBSTANCE,
+                         SoldierAttr.ACTION_MODE: ActionMode.BUILDING_ATTACK, SoldierAttr.SOLIDER_ORIGINAL_HP: 100,
+                         SoldierAttr.SOLIDER_ORIGINAL_ATTACK: 500, SoldierAttr.ATTACK_RANGE: 20, SoldierAttr.SPEED: 8},
 }
 
 
@@ -357,9 +356,9 @@ class Building(object):
         self.__CD_left = cd_left
 
 
-class Solider(object):
+class Soldier(object):
     def __init__(self, solider_name, hp, pos, flag, unit_id, level):
-        self.__Solider_Name = solider_name
+        self.__Soldier_Name = solider_name
         self.__HP = hp
         self.__Position = pos
         self.__Flag = flag
@@ -376,8 +375,8 @@ class Solider(object):
         self.__HP = hp
 
     @property
-    def Solider_Name(self):
-        return self.__Solider_Name
+    def Soldier_Name(self):
+        return self.__Soldier_Name
 
     @property
     def Position(self):

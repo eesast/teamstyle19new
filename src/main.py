@@ -21,7 +21,7 @@ def building2dict(std):
 
 
 def unit2dict(std):
-    return {"flag": std.Flag, "type": str(std.Solider_Name), "HP": std.HP,
+    return {"flag": std.Flag, "type": str(std.Soldier_Name), "HP": std.HP,
             "Pos": std.Position}
 
 
@@ -29,7 +29,7 @@ def BuildingType2Str(std):
     return str(std)
 
 
-def SoliderName2Str(std):
+def SoldierName2Str(std):
     return str(std)
 
 
@@ -45,7 +45,7 @@ def logist_platform(server, game, turn):
     winner = copy.deepcopy(game.winner)
     # print("********************************************************************")
     # print(building)
-    # units[0]=[Solider(4,100,unit.Position(7,7),1,100)]
+    # units[0]=[Soldier(4,100,unit.Position(7,7),1,100)]
     # units[1]=units[0]
     # building[0]=[Building(BuildingType.Hawkin,unit.Position(9,9),1,4,0,3,unit.Position(22,22))]
     '''print(status)
