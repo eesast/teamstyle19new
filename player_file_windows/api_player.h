@@ -1,7 +1,8 @@
 #pragma once
 
+#include <limits.h>
+
 #define _NULL -1
-#define INT_MAX 1000000000
 
 //global const for player
 const int UPDATE_COST        = 2000;
