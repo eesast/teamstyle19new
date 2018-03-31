@@ -971,7 +971,6 @@ class GameMain:
                                     self.status[current_flag]['money'] -= lost_percent * construct_money
                                     self.instruments[current_flag]['maintain'].append(building.Unit_ID)
                                 break
-
         maintain_phase(self)
 
         def upgrade_phase(self):
@@ -1034,7 +1033,7 @@ class GameMain:
             age_increase_factor = 0.5 * (self.status[current_flag]['tech'] + 2)
             for building in self.buildings[current_flag]['produce']:
                 if building.CD_left <= 0:
-                    solider_name = OriginalBuildingAttribute[building.BuildingType][BuildingAttribute.TRAGET]
+                    solider_name = OriginalBuildingAttribute[building.BuildingType][BuildingAttribute.TARGET]
                     solider_hp = OriginalSoliderAttribute[solider_name][SoliderAttr.SOLIDER_ORIGINAL_HP]
                     solider_pos = building.ProducePos
                     solider_flag = current_flag
