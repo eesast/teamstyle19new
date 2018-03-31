@@ -74,14 +74,16 @@ def logist_platform(server, game, turn):
                 game.raw_instruments[flag]['maintain'].append(command_now['unitid'])
 
     #  print("player0:",player_0,"player1:",player_1)
-    if player_0 == 0 and player_1 != 0:
-        game.winner = 1
-        game.turn_num = 1001
-    if player_1 == 0 and player_0 != 0:
-        game.winner = 0
-        game.turn_num = 1001
-    if player_0 == player_1 == 0:
-        game.turn_num = 1001
+    
+    # if player_0 == 0 and player_1 != 0:
+    #     game.winner = 1
+    #     game.turn_num = 1001
+    # if player_1 == 0 and player_0 != 0:
+    #     game.winner = 0
+    #     game.turn_num = 1001
+    # if player_0 == player_1 == 0:
+    #     game.turn_num = 1001
+                
     # game在这里处理命令command
 
 

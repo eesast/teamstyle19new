@@ -123,8 +123,8 @@ const int OriginalBuildingAttribute[Building_Type][Attr_Num] = {
     {PRODUCTION_BUILDING, 200,  _NULL,  15,   ENIAC,           PROCESSOR, 200,    20,    _NULL,  15},
     {PRODUCTION_BUILDING, 150,  _NULL,  20,   PACKET,          NETWORK,   250,    25,    _NULL,  3},
     {PRODUCTION_BUILDING, 160,  _NULL,  15,   OPTICAL_FIBER,   NETWORK,   300,    30,    _NULL,  8},
-    {PRODUCTION_BUILDING, 300,  _NULL,  15,   TURING_MACHINE,  AI,        600,    60,    _NULL,  20},
-    {PRODUCTION_BUILDING, 250, _NULL,   10,   ULTRON,          AI,        600,    60,    _NULL,  20},
+    {PRODUCTION_BUILDING, 250,  _NULL,  15,   TURING_MACHINE,  AI,        600,    60,    _NULL,  20},
+    {PRODUCTION_BUILDING, 220, _NULL,   10,   ULTRON,          AI,        600,    60,    _NULL,  20},
 
     {DEFENSIVE_BUILDING,  300,  16,     36,   DATA,            BIT,       150,    15,    0,      1},
     {DEFENSIVE_BUILDING,  280,  20,     30,   SUBSTANCE,       CIRCUIT,   200,    20,    6,      3},
@@ -140,12 +140,12 @@ const int OriginalBuildingAttribute[Building_Type][Attr_Num] = {
 
 const int OriginalSoldierAttribute[Soldier_Type][Soldier_Attr_Num] = {
     {DATA,      BUILDING_ATTACK,        16,     10,     16,     12},
-    {SUBSTANCE, BUILDING_ATTACK,        60,     16,     24,     8},
+    {SUBSTANCE, BUILDING_ATTACK,        60,     18,     24,     8},
     {SUBSTANCE, BASE_ATTACK,            100,    160,    6,      15},
-    {SUBSTANCE, MOVING_ATTACK,          500,    15,     10,     4},
+    {SUBSTANCE, MOVING_ATTACK,          550,    12,     10,     4},
     {DATA,      BASE_ATTACK,            70,     300,    6,      16},
-    {SUBSTANCE, BUILDING_ATTACK,        40,     15,     40,     12},
-    {DATA,      MOVING_ATTACK,          800,    10,     12,     3},
+    {SUBSTANCE, BUILDING_ATTACK,        40,     25,     40,     12},
+    {DATA,      MOVING_ATTACK,          850,    8,      12,     3},
     {SUBSTANCE, BUILDING_ATTACK,        100,    500,    20,     8}
 };
 
