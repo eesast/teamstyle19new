@@ -81,8 +81,8 @@ def logist_platform(server, game, turn):
     # if player_1 == 0 and player_0 != 0:
     #     game.winner = 0
     #     game.turn_num = 1001
-    # if player_0 == player_1 == 0:
-    #     game.turn_num = 1001
+    if player_0 == player_1 == 0:
+        game.turn_num = 1001
                 
     # game在这里处理命令command
 
