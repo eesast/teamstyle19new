@@ -960,11 +960,17 @@ class GameMain:
 
         def maintain_phase(self):
             for current_flag in range(2):
-                for building_type, building_array in self.buildings[current_flag].items():
-                    for building in building_array:
-                        # Change the status if The building is maintaining.
-                        for maintain_instrument in self.raw_instruments[current_flag]['maintain']:
+                for maintain_instrument in self.raw_instruments[current_flag]['maintain']:
+                    maintain_base = False
+                    for building_type, building_array in self.buildings[current_flag].items():
+                        if maintain_base:
+                            break
+                        for building in building_array:
+                            # Change the status if The building is maintaining.
                             if building.Unit_ID == maintain_instrument:
+                                if building.BuildingType == BuildingType.Base:
+                                    maintain_base = True
+                                    break
                                 # Change the status of the true building, not its copy.
                                 max_HP = (
                                 OriginalBuildingAttribute[building.BuildingType][BuildingAttribute.ORIGINAL_HP] *
