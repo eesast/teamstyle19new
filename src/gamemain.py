@@ -425,6 +425,13 @@ class GameMain:
                                 print("指令因为建造时代不符合要求而被消除")
                             continue
                         # 判断建造位置是否符合要求
+                        if new_construct_pos.x < 0 or new_construct_pos.y < 0 or \
+                            new_construct_pos.x > 199 or new_construct_pos.y >199:
+                            new_instrument_list.remove(instrument)
+                            instrument_num -= 1
+                            if print_info:
+                                print("指令因为建造位置不符合要求而被消除")
+                            continue
                         if (self._map[new_construct_pos.x][new_construct_pos.y] == 1 or
                                     self._map[new_construct_pos.x][new_construct_pos.y] == 2):
                             new_instrument_list.remove(instrument)
