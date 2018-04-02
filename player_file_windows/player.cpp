@@ -114,7 +114,6 @@ void f_player()
     }
     */
     if (ts19_flag == 0) {
-        Sleep(1000);
         player0();
     }
     else
