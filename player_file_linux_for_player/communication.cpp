@@ -68,7 +68,7 @@ cout<<"start connection 1"<<cflag<<endl;
 		return ;
 	}
 }
-cout<<"start connection 2"<<smap<<endl;
+//cout<<"start connection 2"<<smap<<endl;
 	smap[size] = '\0';
 	char can_start[3];
 	temp=0;
@@ -145,7 +145,7 @@ void MyClient::send_command(bool _update, vector<command1> &v1, vector<command2>
 
 State* MyClient::recv_state()
 {
-cout<<"start_recv"<<endl;
+//cout<<"start_recv"<<endl;
 	char start[6];
 	start[5] = '\0';
 	const char* cpstart = "start";
@@ -181,7 +181,7 @@ cout<<"start_recv"<<endl;
 		if (flag)
 			break;*/
 	}
-cout<<"start is ok"<<endl;
+//cout<<"start is ok"<<endl;
 	use=true;
 	char number[10];
 	for (int i = 0; i < 9; i++)

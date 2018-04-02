@@ -7,6 +7,8 @@
 #include <chrono>  
 #include <random>  
 #include<sstream>
+#include <sys/types.h>
+#include <unistd.h>
 
 //#include<ctime>
 using namespace std;
@@ -18,6 +20,7 @@ extern vector<command2> c2;
 void f_player();
 
 State* state=NULL;
+State* _state=NULL;
 vector<State* > all_state;
 MyClient cilent;
 int** map;
@@ -29,7 +32,6 @@ bool discon=false;
 
 void* Listen(void* arg)
 {
-	cout<<"start listening"<<endl;
 	State* t;
 	while (goon)
 	{
@@ -39,14 +41,10 @@ void* Listen(void* arg)
 				sem_post(sg);
 				break;
 			}
-		state=s;
-		all_state.push_back(state);
-		cout<<"I was listening"<<state->turn<<endl;
-		/*t=state;
-		state = s;
-		delete t;*/
+		_state=s;
+		all_state.push_back(_state);
 		sem_post(sg);
-		if(state->winner!=2)
+		if(_state->winner!=2)
 			break;	
 	}
 	return NULL;
@@ -84,7 +82,6 @@ int main()
 	#else
 	{
 		int v=sem_init(sg,0,0);
-		cout<<"VVVVV"<<v<<endl;
 		if(v==-1)
 		{
 			cout<<"信号量启动失败,程序自动退出"<<endl;
@@ -94,21 +91,13 @@ int main()
 	#endif
     pthread_t com_thread;
     pthread_create(&com_thread,NULL,Listen,(void*)NULL);
-	cout<<"end at here"<<endl;	
-sem_wait(sg);
-	cout<<"start at here"<<endl;
+	sem_wait(sg);
 	while (state->turn < 1000)
 	{
-		cout<<"*********"<<state->turn<<"************"<<endl;
 		if (state->winner != 2)
 			break;
+		state=_state;
 		f_player();
-		cout<<state->winner<<endl;
-		for(int i=0;i<state->building[flag].size();i++)
-		{
-			if(state->building[flag][i].building_type==0)
-				cout<<state->building[flag][i].heal<<endl;
-		}
 		if(!use)
 			cilent.send_command(_updateAge,c1,c2);
 		_updateAge = false;
