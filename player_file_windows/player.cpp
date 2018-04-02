@@ -2,9 +2,6 @@
 #include<vector>
 #include<iostream>
 
-extern	bool ts19_updageAge;
-extern std::vector<command1> ts19_c1;
-extern std::vector<command2>ts19_c2;
 extern State* state;
 extern std::vector<State* > all_state;
 extern int** ts19_map;
