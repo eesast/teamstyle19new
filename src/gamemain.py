@@ -866,15 +866,27 @@ class GameMain:
                         # When Soldier is moving, if there are buildings in Soldier's shot range,
                         # stop to attack the building, else continue moving.
                         can_move = True
-                        for building_type, building_array in self.buildings[1 - current_flag].items():
-                            for enemy_building in building_array:
-                                if (abs(enemy_building.Position.x - unit.Position.x) +
-                                        abs(enemy_building.Position.y - unit.Position.y) <=
-                                        OriginalSoldierAttribute[unit.Soldier_Name][SoldierAttr.ATTACK_RANGE]):
-                                    can_move = False
+                        
+                        if current_flag:
+                            now_dist_x = 0 if unit.Position.x <= 6 else unit.Position.x - 6
+                            now_dist_y = 0 if unit.Position.y <= 6 else unit.Position.y - 6
+                        else:
+                            now_dist_x = 0 if unit.Position.x >= 193 else 193 - unit.Position.x
+                            now_dist_y = 0 if unit.Position.y >= 193 else 193 - unit.Position.y
+                        now_dist = now_dist_x + now_dist_y
+                        if now_dist <= OriginalSoldierAttribute[unit.Soldier_Name][SoldierAttr.ATTACK_RANGE]:
+                            can_move = False
+                            
+                        if can_move:
+                            for building_type, building_array in self.buildings[1 - current_flag].items():
+                                for enemy_building in building_array:
+                                    if (abs(enemy_building.Position.x - unit.Position.x) +
+                                            abs(enemy_building.Position.y - unit.Position.y) <=
+                                            OriginalSoldierAttribute[unit.Soldier_Name][SoldierAttr.ATTACK_RANGE]):
+                                        can_move = False
+                                        break
+                                if not can_move:
                                     break
-                            if not can_move:
-                                break
 
                         if can_move:
                             if _map[unit.Position.x + direction][unit.Position.y] == 1:
