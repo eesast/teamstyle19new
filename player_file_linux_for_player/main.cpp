@@ -91,9 +91,9 @@ int main()
     pthread_t com_thread;
     pthread_create(&com_thread,NULL,Listen,(void*)NULL);
 	sem_wait(sg);
-	while (state->turn < 1000)
+	while (_state->turn < 1000)
 	{
-		if (state->winner != 2)
+		if (_state->winner != 2)
 			break;
 		state=_state;
 		f_player();
@@ -102,7 +102,7 @@ int main()
 		_updateAge = false;
 		c1.clear();
 		c2.clear();
-		if(state->winner!=2)
+		if(_state->winner!=2)
 			break;
 		sem_wait(sg);
 		if(discon)
@@ -110,11 +110,11 @@ int main()
 			return 0;
 		}
 	}
-	if (state->winner == 1)
+	if (_state->winner == 1)
 		cout << "Winner is 1" << endl;
-	else if (state->winner == 0)
+	else if (_state->winner == 0)
 		cout << "Winner is 0" << endl;
-	else if (state->winner == 2)
+	else if (_state->winner == 2)
 		cout << "draw" << endl;
 	goon = false;
 

@@ -35,7 +35,8 @@ void MyClient::change_map(char* map0)
 void MyClient::start_connection()
 {
     connect(sockClient,(struct sockaddr*)&addrServer,sizeof(struct sockaddr_in));
-    char cflag[1];
+    char cflag[2];
+	cflag[1]='\0';
 int t=0;
 int temp=0;
 int now=0;
@@ -50,7 +51,7 @@ int now=0;
 		return ;
 	}
 }
-cout<<"start connection 1"<<cflag<<endl;
+	cout<<"start connection "<<cflag<<endl;
 	string sflag(cflag);
 	istringstream os(sflag);
 	os >> flag;
@@ -68,20 +69,10 @@ cout<<"start connection 1"<<cflag<<endl;
 		return ;
 	}
 }
-//cout<<"start connection 2"<<smap<<endl;
 	smap[size] = '\0';
 	char can_start[3];
 	temp=0;
 	now=0;
-/*	while(true)
-{
-	temp=recv(sockClient, can_start+now, 2-now, 0);
-	now=now+temp;
-	if(now==2)
-		break;
-}
-cout<<"start connection 3"<<can_start<<endl;
-    */ //	can_start[2] = '\0';
 	fflag = flag;
 	change_map(smap);
 send(sockClient,"ok",2,0);
