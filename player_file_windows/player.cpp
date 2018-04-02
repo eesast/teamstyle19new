@@ -1,15 +1,14 @@
 #include"communication.h"
 #include<vector>
 #include<iostream>
-using namespace std;
 
-extern	bool _updateAge;
-extern vector<command1> c1;
-extern vector<command2>c2;
+extern	bool ts19_updageAge;
+extern std::vector<command1> ts19_c1;
+extern std::vector<command2>ts19_c2;
 extern State* state;
-extern vector<State* > all_state;
-extern int** map;
-extern bool flag;
+extern std::vector<State* > all_state;
+extern int** ts19_map;
+extern bool ts19_flag;
 
 
 void player0();
@@ -23,14 +22,14 @@ int dist(Position p1, Position p2) {
 bool near_a_road(Position p) {
     int x = p.x;
     int y = p.y;
-    if (map[x][y] == 0) {
-        if (map[x - 1][y] == 1)
+    if (ts19_map[x][y] == 0) {
+        if (ts19_map[x - 1][y] == 1)
             return 1;
-        if (map[x + 1][y] == 1)
+        if (ts19_map[x + 1][y] == 1)
             return 1;
-        if (map[x][y - 1] == 1)
+        if (ts19_map[x][y - 1] == 1)
             return 1;
-        if (map[x][y + 1] == 1)
+        if (ts19_map[x][y + 1] == 1)
             return 1;
     }
     return 0;
@@ -38,20 +37,20 @@ bool near_a_road(Position p) {
 Position find_road(Position p) {
     int x = p.x;
     int y = p.y;
-    if (map[x][y] == 0) {
-        if (map[x - 1][y] == 1)
+    if (ts19_map[x][y] == 0) {
+        if (ts19_map[x - 1][y] == 1)
             return Position(x - 1, y);
-        if (map[x + 1][y] == 1)
+        if (ts19_map[x + 1][y] == 1)
             return Position(x + 1, y);
-        if (map[x][y - 1] == 1)
+        if (ts19_map[x][y - 1] == 1)
             return Position(x, y - 1);
-        if (map[x][y + 1] == 1)
+        if (ts19_map[x][y + 1] == 1)
             return Position(x, y + 1);
     }
     return Position(-1, -1);
 }
 bool near_my_base(Position p) {
-    if (flag == 0) {
+    if (ts19_flag == 0) {
         if (p.x < 11 && p.y < 11)
             return 1;
         else
@@ -66,33 +65,33 @@ bool near_my_base(Position p) {
 }
 bool near_my_building(Position p) {
     bool yes = 0;
-    for (int i = 0; i < state->building[flag].size(); i++) {
-        if (dist(p, state->building[flag][i].pos) <= 8)
+    for (int i = 0; i < state->building[ts19_flag].size(); i++) {
+        if (dist(p, state->building[ts19_flag][i].pos) <= 8)
             yes = 1;
-        if (p.x == state->building[flag][i].pos.x && p.y == state->building[flag][i].pos.y)
+        if (p.x == state->building[ts19_flag][i].pos.x && p.y == state->building[ts19_flag][i].pos.y)
             yes = 0;
     }
     return yes;
 }
 bool can_cons(Position p) {
-    if (map[p.x][p.y] == 0 && (near_my_base(p) || near_my_building(p)))
+    if (ts19_map[p.x][p.y] == 0 && (near_my_base(p) || near_my_building(p)))
         return 1;
     else
         return 0;
 }
 void print_my_bd() {
-    for (int i = 0; i < state->building[flag].size(); i++) {
-        Building bd = state->building[flag][i];
+    for (int i = 0; i < state->building[ts19_flag].size(); i++) {
+        Building bd = state->building[ts19_flag][i];
         cout << "id:" << bd.unit_id << " type:" << bd.building_type << " HP:" << bd.heal << " pos:" << bd.pos.x << ' ' << bd.pos.y << endl;
     }
 }
 void print_my_re() {
-    cout << "resourse:" << state->resource[flag].resource << endl;
+    cout << "resourse:" << state->resource[ts19_flag].resource << endl;
 }
 void print_my_base() {
-    for (int i = 0; i < state->building[flag].size(); i++) {
-        if (state->building[flag][i].building_type == 0) {
-            cout << "baseHP:" << state->building[flag][i].heal << endl;
+    for (int i = 0; i < state->building[ts19_flag].size(); i++) {
+        if (state->building[ts19_flag][i].building_type == 0) {
+            cout << "baseHP:" << state->building[ts19_flag][i].heal << endl;
         }
     }
 }
@@ -108,13 +107,13 @@ void f_player()
     if (state->turn == 1) {
     for (int i = 0; i < 200; i++) {
     for (int j = 0; j < 200; j++) {
-    cout << map[i][j];
+    cout << ts19_map[i][j];
     }
     cout << endl;
     }
     }
     */
-    if (flag == 0)
+    if (ts19_flag == 0)
         player0();
     else
         player1();
@@ -129,7 +128,7 @@ void player0() {
         for (int i = 6; i < 20; i++) {
             for (int j = 6; j < 20; j++) {
                 if (can_cons(Position(i, j))) {
-                    if (near_a_road(Position(i, j)) && state->resource[flag].resource >= 1000)
+                    if (near_a_road(Position(i, j)) && state->resource[ts19_flag].resource >= 1000)
                         construct(Shannon, Position(i, j), find_road(Position(i, j)));
                     else
                         construct(Programmer, Position(i, j), Position(0, 0));
@@ -147,7 +146,7 @@ void player1() {
         for (int i = 193; i > 180; i--) {
             for (int j = 193; j > 180; j--) {
                 if (can_cons(Position(i, j))) {
-                    if (near_a_road(Position(i, j)) && state->resource[flag].resource >= 1000)
+                    if (near_a_road(Position(i, j)) && state->resource[ts19_flag].resource >= 1000)
                         construct(Shannon, Position(i, j), find_road(Position(i, j)));
                     else
                         construct(Programmer, Position(i, j), Position(0, 0));

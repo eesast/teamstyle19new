@@ -6,16 +6,16 @@
 //#include<ctime>
 using namespace std;
 
-extern	bool _updateAge;
-extern vector<command1> c1;
-extern vector<command2> c2;
+extern	bool ts19_updageAge;
+extern vector<command1> ts19_c1;
+extern vector<command2> ts19_c2;
 void f_player();
 
 State* state = NULL;
 vector<State* > all_state;
 MyClient cilent;
-int** map;
-bool flag;
+int** ts19_map;
+bool ts19_flag;
 bool goon = true;
 bool use = false;
 HANDLE signal;
@@ -43,8 +43,8 @@ int main()
 {
     signal = CreateSemaphore(NULL, 0, 1, NULL);
     cilent.start_connection();
-    map = cilent.map;
-    flag = cilent.flag;
+    ts19_map = cilent.map;
+    ts19_flag = cilent.flag;
     int turn = 0;
     thread th_communication(Listen);
     WaitForSingleObject(signal, INFINITE);
@@ -55,10 +55,10 @@ int main()
             break;
         f_player();
         if (!use)
-            cilent.send_command(_updateAge, c1, c2);
-        _updateAge = false;
-        c1.clear();
-        c2.clear();
+            cilent.send_command(ts19_updageAge, ts19_c1, ts19_c2);
+        ts19_updageAge = false;
+        ts19_c1.clear();
+        ts19_c2.clear();
         WaitForSingleObject(signal, INFINITE);
     }
     if (state->winner == 1)
