@@ -13,9 +13,9 @@
 using namespace std;
 
 bool fail=false;
-extern	bool _updateAge;
-extern vector<command1> c1;
-extern vector<command2> c2;
+extern	bool ts19_updateAge;
+extern vector<command1> ts19_c1;
+extern vector<command2> ts19_c2;
 void f_player();
 
 State* state=NULL;
@@ -98,10 +98,10 @@ int main()
 		state=_state;
 		f_player();
 		if(!use)
-			cilent.send_command(_updateAge,c1,c2);
-		_updateAge = false;
-		c1.clear();
-		c2.clear();
+			cilent.send_command(ts19_updateAge,ts19_c1,ts19_c2);
+		ts19_updateAge = false;
+		ts19_c1.clear();
+		ts19_c2.clear();
 		if(_state->winner!=2)
 			break;
 		sem_wait(sg);
