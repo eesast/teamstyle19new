@@ -798,7 +798,7 @@ class GameMain:
                             now_dist_y = 0 if unit.Position.y >= 193 else 193 - unit.Position.y
                         else:
                             now_dist_x = 0 if unit.Position.x <= 6 else unit.Position.x - 6
-                            now_dist_y = 0 if unit.Position.y <= 6 else unit.Position.x - 6
+                            now_dist_y = 0 if unit.Position.y <= 6 else unit.Position.y - 6
                         now_dist = now_dist_x + now_dist_y
                         if now_dist < pre_dist and self.main_base[1 - flag].HP > 0:
                             target = self.main_base[1 - flag]
@@ -811,10 +811,10 @@ class GameMain:
                 else:
                     if not flag:
                         now_dist_x = 0 if unit.Position.x >= 193 else 193 - unit.Position.x
-                        now_dist_y = 0 if unit.Position.y >= 193 else 193 - unit.Position.x
+                        now_dist_y = 0 if unit.Position.y >= 193 else 193 - unit.Position.y
                     else:
                         now_dist_x = 0 if unit.Position.x <= 6 else unit.Position.x - 6
-                        now_dist_y = 0 if unit.Position.y <= 6 else unit.Position.x - 6
+                        now_dist_y = 0 if unit.Position.y <= 6 else unit.Position.y - 6
                     now_dist = now_dist_x + now_dist_y
                     if now_dist < pre_dist and self.main_base[1 - flag].HP > 0:
                         self.main_base[1 - flag].HP -= (OriginalSoldierAttribute[unit.Soldier_Name][
