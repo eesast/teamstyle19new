@@ -163,7 +163,7 @@ OriginalBuildingAttribute = {
                               BuildingAttribute.AOE: None, BuildingAttribute.CD: 20},
 
     BuildingType.Bool: {BuildingAttribute.BUILDING_TYPE: UnitType.DEFENSIVE_BUILDING,
-                        BuildingAttribute.ORIGINAL_HP: 350, BuildingAttribute.ORIGINAL_ATTACK: 16,
+                        BuildingAttribute.ORIGINAL_HP: 250, BuildingAttribute.ORIGINAL_ATTACK: 16,
                         BuildingAttribute.ORIGINAL_RANGE: 36, BuildingAttribute.TARGET: UnitType.DATA,
                         BuildingAttribute.AGE: Age.BIT, BuildingAttribute.ORIGINAL_RESOURCE: 150,
                         BuildingAttribute.ORIGINAL_BUILDING_POINT: 15, BuildingAttribute.AOE: 0,

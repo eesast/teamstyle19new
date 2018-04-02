@@ -754,7 +754,9 @@ class GameMain:
                                         OriginalBuildingAttribute[BuildingType.Hawkin][BuildingAttribute.AOE]):
                                     enemy.HP = -1
                             self.instruments[flag]['attack'].append((building.Unit_ID, target_id))
-
+                            
+                self.clean_up_phase()
+                
             # 兵种对建筑的攻击
             for unit_id, unit in self.units[flag].items():
                 tech_factor = 0.5 * ( unit.level + 2)

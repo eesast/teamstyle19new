@@ -127,7 +127,7 @@ const int OriginalBuildingAttribute[Building_Type][Attr_Num] = {
     {PRODUCTION_BUILDING, 250,  _NULL,  15,   TURING_MACHINE,  AI,        600,    60,    _NULL,  20},
     {PRODUCTION_BUILDING, 220, _NULL,   10,   ULTRON,          AI,        600,    60,    _NULL,  20},
 
-    {DEFENSIVE_BUILDING,  350,  16,     36,   DATA,            BIT,       150,    15,    0,      1},
+    {DEFENSIVE_BUILDING,  250,  16,     36,   DATA,            BIT,       150,    15,    0,      1},
     {DEFENSIVE_BUILDING,  320,  20,     30,   SUBSTANCE,       CIRCUIT,   200,    20,    6,      3},
     {DEFENSIVE_BUILDING,  250,  4,      60,   DATA,            PROCESSOR, 225,    22,    0,      1},
     {DEFENSIVE_BUILDING,  350,  25,     40,   SUBSTANCE,       ALGORITHM, 200,    20,    0,      2},
