@@ -2,6 +2,9 @@
 #include<vector>
 #include<iostream>
 
+using std::cout;
+using std::endl;
+
 extern State* state;
 extern std::vector<State* > all_state;
 extern int** ts19_map;
