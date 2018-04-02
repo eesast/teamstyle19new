@@ -1,5 +1,7 @@
 #include"communication.h"
 #include<vector>
+#include <unistd.h>
+
 
 extern State* state ;
 extern std::vector<State* > all_state;
@@ -78,7 +80,11 @@ void f_player()
 {
 
     if(ts19_flag==0)
+    {
+        int aaa=1;
+        sleep(1);
         player0();
+    }
     else
         player1();
 
