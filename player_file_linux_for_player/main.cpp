@@ -22,8 +22,8 @@ State* state=NULL;
 State* _state=NULL;
 vector<State* > all_state;
 MyClient cilent;
-int** map;
-bool flag;
+int** ts19_map;
+bool ts19_flag;
 bool goon = true;
 bool use=false;
 sem_t *sg=new sem_t;
@@ -56,8 +56,8 @@ int main()
 	{
 		return 0;
 	}
-	map = cilent.map;
-	flag = cilent.flag;
+	ts19_map = cilent.map;
+	ts19_flag = cilent.flag;
 	#ifdef __APPLE__
 	{
 		unsigned seed1 = std::chrono::system_clock::now().time_since_epoch().count();
@@ -65,7 +65,7 @@ int main()
 		int r1=g1();
 		int r2=r1+1;
 		stringstream s;
-		if(flag==0)
+		if(ts19_flag==0)
 			{
 				s<<"ts_00_";
 				s<<r1;
