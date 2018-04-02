@@ -1,13 +1,11 @@
 #include"communication.h"
 #include<vector>
 
-extern	bool ts19_updateAge;
-extern std::vector<command1> ts19_c1;
-extern std::vector<command2> ts19_c2;
 extern State* state ;
 extern std::vector<State* > all_state;
 extern int** ts19_map;
 extern bool ts19_flag;
+
 void player0();
 void player1();
 
