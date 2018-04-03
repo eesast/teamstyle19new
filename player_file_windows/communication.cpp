@@ -40,7 +40,7 @@ void MyClient::start_connection()
     string sflag(cflag);
     istringstream os(sflag);
     os >> flag;
-    cout << "my flag is" << flag;
+    cout << "my flag is" << flag << endl;
     int size = 200 * 200;
     smap = new char[size + 1];
     int now=0;
@@ -240,7 +240,7 @@ State* MyClient::recv_state()
             soldiers >> hp;
             soldiers >> posx;
             soldiers >> posy;
-            soliders>>s_level;
+            soldiers >> s_level;
             soldiers >> temp;
             SoldierName q;
             q = (SoldierName)soldier_name;
