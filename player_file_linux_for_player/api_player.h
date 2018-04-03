@@ -176,9 +176,10 @@ struct Soldier {
     Position pos;
     int flag;
     int unit_id;
+    int level;
 
 	Soldier() {};
-	Soldier(SoldierName soldier_name, int heal, Position pos, int flag, int unit_id) :soldier_name(soldier_name),heal(heal),pos(pos),flag(flag),unit_id(unit_id){};
+	Soldier(SoldierName soldier_name, int heal, Position pos, int flag, int unit_id,int level) :soldier_name(soldier_name),heal(heal),pos(pos),flag(flag),unit_id(unit_id),level(level){};
 };
 
 struct Building {

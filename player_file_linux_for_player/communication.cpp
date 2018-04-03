@@ -277,6 +277,7 @@ while(true)
 		}
 	}
 	int soldier_name;
+	int s_level;
 	for (int i = 0; i < 2; i++)
 	{
 		istringstream soldiers(m0.str(4 + i * 3));
@@ -291,9 +292,10 @@ while(true)
 			soldiers >> posx;
 			soldiers >> posy;
 			soldiers >> temp;
+			soldiers>>s_level;
 			SoldierName q;
 			q = (SoldierName)soldier_name;
-			state->soldier[i].push_back(Soldier(q, hp, Position(posx, posy), i, unit_id));
+			state->soldier[i].push_back(Soldier(q, hp, Position(posx, posy), i, unit_id,s_level));
 		}
 	}
 	use=false;

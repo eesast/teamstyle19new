@@ -94,7 +94,7 @@ class MainServer(object):
             state[number]+=';'
             #再之后传入unit的信息 Unit_ID Soldier_Name HP Position
             for vkey,v in unit[number].items():
-                state[number]+=str(v.Unit_ID)+' '+str(int(v.Soldier_Name))+' '+str(int(v.HP))+' '+str(v.Position.x)+' '+str(v.Position.y)+','
+                state[number]+=str(v.Unit_ID)+' '+str(int(v.Soldier_Name))+' '+str(int(v.HP))+' '+str(v.Position.x)+' '+str(v.Position.y)+' '+str(int(v.level))+','
             state[number]+=';'
             state[number] += '#'
             #state[number]=state[number].encode('utf-8')
