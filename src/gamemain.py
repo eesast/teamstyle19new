@@ -540,7 +540,6 @@ class GameMain:
         """Defence towers attack the units and units attack towers"""
 
         for flag in range(2):
-            tech_factor = 0.5 * (self.status[flag]['tech'] + 2)
 
             # 建筑对兵种攻击
             for building in self.buildings[flag]['defence']:
@@ -1076,11 +1075,12 @@ class GameMain:
     def produce_phase(self):
         """Unit production by producing building"""
         for current_flag in range(2):
-            age_increase_factor = 0.5 * (self.status[current_flag]['tech'] + 2)
             for building in self.buildings[current_flag]['produce']:
+                age_increase_factor = 0.5 * (building.level + 2)
                 if building.CD_left <= 0:
                     solider_name = OriginalBuildingAttribute[building.BuildingType][BuildingAttribute.TARGET]
-                    solider_hp = OriginalSoldierAttribute[solider_name][SoldierAttr.SOLIDER_ORIGINAL_HP]
+                    solider_hp = OriginalSoldierAttribute[solider_name][SoldierAttr.SOLIDER_ORIGINAL_HP] * \
+                                 age_increase_factor
                     solider_pos = building.ProducePos
                     solider_flag = current_flag
                     solider_id = self.total_id
@@ -1311,14 +1311,14 @@ class GameMain:
         self.clean_up_phase()
         self.move_phase()
         # print(self.raw_instruments[1])
-        print("传回的指令：")
-        for flag in range(2):
-            print("flag:",flag)
-            print('construct:',self.raw_instruments[flag]['construct'])
-            print('maintain:',self.raw_instruments[flag]['maintain'])
-            print('upgrade:',self.raw_instruments[flag]['upgrade'])
-            print('sell:',self.raw_instruments[flag]['sell'])
-            print('update_age:',self.raw_instruments[flag]['update_age'])
+        # print("传回的指令：")
+        # for flag in range(2):
+        #     print("flag:",flag)
+        #     print('construct:',self.raw_instruments[flag]['construct'])
+        #     print('maintain:',self.raw_instruments[flag]['maintain'])
+        #     print('upgrade:',self.raw_instruments[flag]['upgrade'])
+        #     print('sell:',self.raw_instruments[flag]['sell'])
+        #     print('update_age:',self.raw_instruments[flag]['update_age'])
         self.check_legal()
         # print(self.raw_instruments[1])
         # print(self.raw_instruments)

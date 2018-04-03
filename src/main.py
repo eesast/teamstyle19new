@@ -55,6 +55,12 @@ def logist_platform(server, game, turn):
     player_0, player_1 = server.send_state(turn, status, building, units, winner)
     command, player_0, player_1 = server.recv_command()
     # print(len(command[0]))
+    print("传回的指令")
+    print("flag:",0)
+    print(command[0])
+    print("flag:",1)
+    print(command[1])
+    
     for flag in range(2):
         if len(command[flag]) == 0:
             continue
