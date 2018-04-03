@@ -6,6 +6,9 @@ import json
 
 from unit import *
 
+
+print_info = 0
+
 class GameMain:
     save_num = 0
     _map_size = 200
@@ -373,7 +376,7 @@ class GameMain:
             self.winner = 2
 
     def check_legal(self):
-        print_info = 0
+        
 
         """Remove the repeated instruments, or instruments on the wrong units"""
         from functools import reduce
@@ -405,7 +408,7 @@ class GameMain:
                                 new_instrument_list.remove(instrument)
                                 instrument_num -=1
                                 if print_info:
-                                    print("指令因为生产建筑没有指定生产位置而被消除")
+                                    print("生产建筑没有指定生产位置")
                                 continue
                             if abs(instrument[2][0] - instrument[1][0]) + \
                                 abs (instrument[2][1] - instrument[1][1]) > \
@@ -413,7 +416,7 @@ class GameMain:
                                 new_instrument_list.remove(instrument)
                                 instrument_num -= 1
                                 if print_info:
-                                    print("指令因为生产建筑指定的生产位置超出范围而被消除")
+                                    print("生产建筑指定的生产位置超出范围")
                                 continue
                             new_produce_pos = Position(instrument[2][0],instrument[2][1])
                         # 判断建造时代是否符合要求
@@ -422,7 +425,7 @@ class GameMain:
                             new_instrument_list.remove(instrument)
                             instrument_num -= 1
                             if print_info:
-                                print("指令因为建造时代不符合要求而被消除")
+                                print("建造时代不符合要求")
                             continue
                         # 判断建造位置是否符合要求
                         if new_construct_pos.x < 0 or new_construct_pos.y < 0 or \
@@ -430,14 +433,14 @@ class GameMain:
                             new_instrument_list.remove(instrument)
                             instrument_num -= 1
                             if print_info:
-                                print("指令因为建造位置不符合要求而被消除")
+                                print("建造位置超出地图")
                             continue
                         if (self._map[new_construct_pos.x][new_construct_pos.y] == 1 or
                                     self._map[new_construct_pos.x][new_construct_pos.y] == 2):
                             new_instrument_list.remove(instrument)
                             instrument_num -= 1
                             if print_info:
-                                print("指令因为建造位置不符合要求而被消除")
+                                print("建造位置不在空地上")
                             continue
 
 
@@ -473,7 +476,7 @@ class GameMain:
                             new_instrument_list.remove(instrument)
                             instrument_num -= 1
                             if print_info:
-                                print("指令因为不在建造范围内或与已有建筑重叠而被消除")
+                                print("不在建造范围内或与已有建筑重叠")
                             continue
                         # 判断生产位置是否符合要求
                         if (OriginalBuildingAttribute[building_type][BuildingAttribute.BUILDING_TYPE] ==
@@ -484,13 +487,13 @@ class GameMain:
                                 new_instrument_list.remove(instrument)
                                 instrument_num -= 1
                                 if print_info:
-                                    print("指令因为生产建筑指定的生产位置超出范围而被消除")
+                                    print("生产建筑指定的生产位置超出范围")
                                 continue
                             elif self._map[new_produce_pos.x][new_produce_pos.y] != 1:
                                 new_instrument_list.remove(instrument)
                                 instrument_num -= 1
                                 if print_info:
-                                    print("指令因为生产建筑指定的生产位置不在路上而被消除")
+                                    print("生产建筑指定的生产位置不在路上")
                                 continue
 
 
@@ -504,7 +507,7 @@ class GameMain:
                             new_instrument_list.remove(instrument)
                             instrument_num -= 1
                             if print_info:
-                                print("指令因为id超过最大id而被消除")
+                                print("指令id超过最大id")
                             continue
                         # 去除指令对象不是building的情况
                         is_building = False
@@ -524,7 +527,7 @@ class GameMain:
                             new_instrument_list.remove(instrument)
                             instrument_num -= 1
                             if print_info:
-                                print("指令因为指定了非建筑目标而被消除")
+                                print("建筑id中未找到目标id或目标在该回合被摧毁")
                             continue
 
                             # 资源不足，建筑和时代已经到达最高级的情况已经在操作函数中处理
@@ -945,6 +948,8 @@ class GameMain:
                     # Ignore the instruments that spend too much.
                     if (self.status[current_flag]['money'] < money_cost or
                                 self.status[current_flag]['building'] < building_point_cost):
+                        if print_info:
+                            print("建造指令资源或建造点不足")
                         continue
                     # print('money')
                     # print(current_flag,self.status[current_flag]['money'],money_cost)
@@ -1005,6 +1010,9 @@ class GameMain:
                                     building.HP = max_HP
                                     self.status[current_flag]['money'] -= lost_percent * construct_money
                                     self.instruments[current_flag]['maintain'].append(building.Unit_ID)
+                                else:
+                                    if print_info:
+                                        print("修理指令资源不足")
                                 break
         maintain_phase(self)
 
@@ -1034,6 +1042,9 @@ class GameMain:
                                     building.HP = max_HP + upgrade_diff_max_HP
                                     self.status[current_flag]['money'] -= upgrade_diff_money + lost_percent * construct_money
                                     self.instruments[current_flag]['upgrade'].append(upgrade_instrument)
+                                else:
+                                    if print_info:
+                                        print("升级建筑指令科技等级或资源不足")
                                 break
         upgrade_phase(self)
 
@@ -1103,6 +1114,8 @@ class GameMain:
                     self.status[flag]['tech'] += 1
                     self.instruments[flag]['update_age'].append(True)
                 else:
+                    if print_info:
+                        print("升级时代资源不足")
                     self.instruments[flag]['update_age'].append(False)
 
     def resource_phase(self):
