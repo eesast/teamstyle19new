@@ -90,7 +90,7 @@ class MainServer(object):
             #之后传入建筑  Unit_ID Building_Type HP Position Is_Maintain 为所传属性 属性之间用空格分割 不同单位用,分隔
             for key in building[number]:
                 for v in building[number][key]:
-                    state[number]+=str(v.Unit_ID)+' '+str(int(v.BuildingType))+' '+str(int(v.HP))+' '+str(v.Position.x)+' '+str(v.Position.y)+' '+str(int(v.Is_Maintain))+','
+                    state[number]+=str(v.Unit_ID)+' '+str(int(v.BuildingType))+' '+str(int(v.HP))+' '+str(v.Position.x)+' '+str(v.Position.y)+' '+str(int(v.level))+','
             state[number]+=';'
             #再之后传入unit的信息 Unit_ID Soldier_Name HP Position
             for vkey,v in unit[number].items():
