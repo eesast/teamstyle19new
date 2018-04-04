@@ -32,7 +32,7 @@ class GameMain:
     status = [{
         'money': 1000,
         'tech': 0,
-        'building': 80,
+        'building': 60,
     } for _ in range(2)]
 
     # 通信模块将收到的指令写入，各阶段函数从中读取指令，指令格式同api_player.h
@@ -745,7 +745,8 @@ class GameMain:
                     building.CD_left = building.CD_left - 1
                     if building.CD_left <= 0:
 
-                        building.CD_left = OriginalBuildingAttribute[BuildingType.Hawkin][BuildingAttribute.CD]
+                        building.CD_left = OriginalBuildingAttribute[BuildingType.Hawkin][BuildingAttribute.CD] \
+                                            - building.level
                         pre_dist = OriginalBuildingAttribute[BuildingType.Hawkin][BuildingAttribute.ORIGINAL_RANGE] + 1
                         target = None
                         for enemy_id, enemy in self.units[1 - flag].items():
@@ -934,11 +935,9 @@ class GameMain:
                     building_name = construct_instrument[0]
                     building_pos = Position(*construct_instrument[1])
                     money_cost = (
-                        OriginalBuildingAttribute[construct_instrument[0]][BuildingAttribute.ORIGINAL_RESOURCE] *
-                        age_increase_factor)
+                        OriginalBuildingAttribute[construct_instrument[0]][BuildingAttribute.ORIGINAL_RESOURCE])
                     building_point_cost = (
-                        OriginalBuildingAttribute[construct_instrument[0]][BuildingAttribute.ORIGINAL_BUILDING_POINT] *
-                        age_increase_factor)
+                        OriginalBuildingAttribute[construct_instrument[0]][BuildingAttribute.ORIGINAL_BUILDING_POINT])
                     if building_name < 9 and building_name >0:
                         produce_pos = Position(*construct_instrument[2])
                     else:
@@ -959,7 +958,7 @@ class GameMain:
                             UnitType.PRODUCTION_BUILDING):
                         self.buildings[current_flag]['produce'].append(
                             Building(building_name, building_pos, current_flag, self.total_id, False,
-                                     self.status[current_flag]['tech'], produce_pos)
+                                     0, produce_pos)
                             )
 
                     elif (OriginalBuildingAttribute[construct_instrument[0]][BuildingAttribute.BUILDING_TYPE] ==
@@ -967,13 +966,13 @@ class GameMain:
                             UnitType.DEFENSIVE_BUILDING):
                         self.buildings[current_flag]['defence'].append(
                             Building(building_name, building_pos, current_flag, self.total_id, False,
-                                     self.status[current_flag]['tech'], produce_pos)
+                                     0, produce_pos)
                             )
 
                     else:
                         self.buildings[current_flag]['resource'].append(
                             Building(building_name, building_pos, current_flag, self.total_id, False,
-                                     self.status[current_flag]['tech'], produce_pos)
+                                     0, produce_pos)
                             )
 
                     bd_num += 1
@@ -1002,49 +1001,64 @@ class GameMain:
                                 0.5 * (building.level + 2))
                                 lost_percent = (max_HP - building.HP) / max_HP  # The ratio of lost HP to max HP.
                                 construct_money = (
-                                    OriginalBuildingAttribute[building.BuildingType][
-                                        BuildingAttribute.ORIGINAL_RESOURCE] *
-                                    0.5 * (building.level + 2))
-                                if (self.status[current_flag]['money'] > lost_percent * construct_money):
-                                    building.HP = max_HP
-                                    self.status[current_flag]['money'] -= lost_percent * construct_money
-                                    self.instruments[current_flag]['maintain'].append(building.Unit_ID)
+                                    OriginalBuildingAttribute[building.BuildingType]
+                                                            [BuildingAttribute.ORIGINAL_RESOURCE] *
+                                                            0.5 * (building.level + 2))
+                                if lost_percent < 0.2:
+                                    if (self.status[current_flag]['money'] > lost_percent * construct_money):
+                                        building.HP = max_HP
+                                        self.status[current_flag]['money'] -= lost_percent * construct_money
+                                        self.instruments[current_flag]['maintain'].append(building.Unit_ID)
+                                    else:
+                                        if print_info:
+                                            print("修理指令资源不足")
+                                    break
                                 else:
-                                    if print_info:
-                                        print("修理指令资源不足")
-                                break
+                                    if (self.status[current_flag]['money'] > 0.2 * construct_money):
+                                        building.HP = building.HP + 0.2 * max_HP
+                                        self.status[current_flag]['money'] -= 0.2 * construct_money
+                                        self.instruments[current_flag]['maintain'].append(building.Unit_ID)
+                                    else:
+                                        if print_info:
+                                            print("修理指令资源不足")
+                                    break
         maintain_phase(self)
 
         def upgrade_phase(self):
             for current_flag in range(2):
-                for building_type, building_array in self.buildings[current_flag].items():
-                    for building in building_array:
-                        for upgrade_instrument in self.raw_instruments[current_flag]['upgrade']:
+                for upgrade_instrument in self.raw_instruments[current_flag]['upgrade']:
+                    have_found = False
+                    for building_type, building_array in self.buildings[current_flag].items():
+                        for building in building_array:
                             if building.Unit_ID == upgrade_instrument:
                                 #building_index = building_array.index(element)
                                 max_HP = (
                                     OriginalBuildingAttribute[building.BuildingType][BuildingAttribute.ORIGINAL_HP] *
                                     0.5 * (building.level + 2))
-                                lost_percent = (max_HP - building.HP) / max_HP  # The ratio of lost HP to max HP.
-                                construct_money = (OriginalBuildingAttribute[building.BuildingType][
-                                                       BuildingAttribute.ORIGINAL_RESOURCE] *
-                                                   0.5 * (building.level + 2))
+                                hp_persent = building.HP / max_HP
                                 # The difference of construct money and max HP between old and upgraded towers.
                                 upgrade_diff_money = OriginalBuildingAttribute[building.BuildingType][
                                                          BuildingAttribute.ORIGINAL_RESOURCE] * 0.5
+                                upgrade_diff_bdpoint = OriginalBuildingAttribute[building.BuildingType][
+                                                        BuildingAttribute.ORIGINAL_BUILDING_POINT] * 0.5
                                 upgrade_diff_max_HP = OriginalBuildingAttribute[building.BuildingType][
                                                           BuildingAttribute.ORIGINAL_HP] * 0.5
 
-                                if (self.status[current_flag]['money'] > lost_percent * construct_money + upgrade_diff_money
+                                if (self.status[current_flag]['money'] > upgrade_diff_money
+                                    and self.status[current_flag]['building'] > upgrade_diff_bdpoint
                                     and self.status[current_flag]['tech'] >= building.level + 1):
                                     building.level += 1
-                                    building.HP = max_HP + upgrade_diff_max_HP
-                                    self.status[current_flag]['money'] -= upgrade_diff_money + lost_percent * construct_money
+                                    building.HP = (max_HP + upgrade_diff_max_HP) * hp_persent
+                                    self.status[current_flag]['money'] -= upgrade_diff_money
+                                    self.status[current_flag]['building'] -= upgrade_diff_bdpoint
                                     self.instruments[current_flag]['upgrade'].append(upgrade_instrument)
                                 else:
                                     if print_info:
                                         print("升级建筑指令科技等级或资源不足")
+                                have_found = True
                                 break
+                        if have_found:
+                            break
         upgrade_phase(self)
 
         def sell_phase(self):
@@ -1125,7 +1139,7 @@ class GameMain:
             for building in self.buildings[flag]['resource']:
                 resource = basic_resource * 0.5 * (building.level + 2)
                 self.status[flag]['money'] += resource
-            self.status[flag]['building'] = 80 + 60 * self.status[flag]['tech']
+            self.status[flag]['building'] = 60 + 40 * self.status[flag]['tech']
             self.instruments[flag]['resource'] = True
 
     def debug_print(self):
