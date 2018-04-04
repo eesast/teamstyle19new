@@ -464,20 +464,20 @@ class GameMain:
                                 break
                         for building_list in self.buildings[current_flag].values():
                             for building in building_list:
-                                if (building.Position.x == new_construct_pos.x and
-                                                building.Position.y == new_construct_pos.y):
+                                if (abs(building.Position.x - new_construct_pos.x) +
+                                        abs(building.Position.y - new_construct_pos.y) <= 1):
                                     can_build = False
                         for building_list in self.buildings[1 - current_flag].values():
                             for building in building_list:
-                                if (building.Position.x == new_construct_pos.x and
-                                                building.Position.y == new_construct_pos.y):
+                                if (abs(building.Position.x - new_construct_pos.x) +
+                                        abs(building.Position.y - new_construct_pos.y) <= 1):
                                     can_build = False
 
                         if not can_build:
                             new_instrument_list.remove(instrument)
                             instrument_num -= 1
                             if print_info:
-                                print("不在建造范围内或与已有建筑重叠")
+                                print("不在建造范围内或与已有建筑邻近或重叠")
                             continue
                         # 判断生产位置是否符合要求
                         if (OriginalBuildingAttribute[building_type][BuildingAttribute.BUILDING_TYPE] ==
