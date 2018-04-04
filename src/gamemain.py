@@ -3,10 +3,11 @@
 
 import random
 import json
+import time
 
 from unit import *
 
-
+random.seed(time.time())
 print_info = 0
 
 class GameMain:
