@@ -444,41 +444,7 @@ class GameMain:
                                 print("建造位置不在空地上")
                             continue
 
-
-                        building_range = 8  # 建造范围暂设为8
-                        can_build = False
-
-                        for building_list in self.buildings[current_flag].values():
-                            if (abs(new_construct_pos.x - current_flag * (self._map_size -1)) <= 10 and
-                                abs(new_construct_pos.y - current_flag * (self._map_size -1)) <=10):
-                                can_build = True
-
-                            for building in building_list:
-                                if (abs(building.Position.x - new_construct_pos.x) +
-                                        abs(building.Position.y - new_construct_pos.y) <=
-                                        building_range):
-                                    can_build = True
-
-                                    break
-                            if can_build:
-                                break
-                        for building_list in self.buildings[current_flag].values():
-                            for building in building_list:
-                                if (abs(building.Position.x - new_construct_pos.x) +
-                                        abs(building.Position.y - new_construct_pos.y) <= 1):
-                                    can_build = False
-                        for building_list in self.buildings[1 - current_flag].values():
-                            for building in building_list:
-                                if (abs(building.Position.x - new_construct_pos.x) +
-                                        abs(building.Position.y - new_construct_pos.y) <= 1):
-                                    can_build = False
-
-                        if not can_build:
-                            new_instrument_list.remove(instrument)
-                            instrument_num -= 1
-                            if print_info:
-                                print("不在建造范围内或与已有建筑邻近或重叠")
-                            continue
+                        
                         # 判断生产位置是否符合要求
                         if (OriginalBuildingAttribute[building_type][BuildingAttribute.BUILDING_TYPE] ==
                                 UnitType.PRODUCTION_BUILDING):
@@ -927,7 +893,6 @@ class GameMain:
                 for building_type,buildings_in_it in self.buildings[current_flag].items():
                     # print(building_type,buildings_in_it)
                     bd_num += len(buildings_in_it)
-
                     # print(bd_num)
 
                 for construct_instrument in self.raw_instruments[current_flag]['construct']:
@@ -954,6 +919,39 @@ class GameMain:
                     # print(current_flag,self.status[current_flag]['money'],money_cost)
                     # print("buildingpoint")
                     # print(current_flag,self.status[current_flag]['building'],building_point_cost)
+
+                    building_range = 8  # 建造范围暂设为8
+                    can_build = False
+                    if (abs(building_pos.x - current_flag * (self._map_size - 1)) <= 10 and
+                                abs(building_pos.y - current_flag * (self._map_size - 1)) <= 10):
+                        can_build = True
+                    for building_list in self.buildings[current_flag].values():
+                        if not can_build:
+                            for building in building_list:
+                                if (abs(building.Position.x - building_pos.x) +
+                                        abs(building.Position.y - building_pos.y) <=
+                                        building_range):
+                                    can_build = True
+                                    break
+                        
+                    for building_list in self.buildings[current_flag].values():
+                        if can_build:
+                            for building in building_list:
+                                if (abs(building.Position.x - building_pos.x) +
+                                        abs(building.Position.y - building_pos.y) <= 1):
+                                    can_build = False
+                                    break
+                    for building_list in self.buildings[1 - current_flag].values():
+                        if can_build:
+                            for building in building_list:
+                                if (abs(building.Position.x - building_pos.x) +
+                                        abs(building.Position.y - building_pos.y) <= 1):
+                                    can_build = False
+                                    break
+                    if not can_build:
+                        if print_info:
+                            print("不在建造范围内或与已有建筑邻近或重叠")
+                        continue
 
                     if (OriginalBuildingAttribute[construct_instrument[0]][BuildingAttribute.BUILDING_TYPE] ==
                             UnitType.PRODUCTION_BUILDING):

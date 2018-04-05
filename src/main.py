@@ -56,11 +56,22 @@ def logist_platform(server, game, turn):
     command, player_0, player_1 = server.recv_command()
     # print(len(command[0]))
     print("传回的指令")
-    print("flag:",0)
-    print(command[0])
-    print("flag:",1)
-    print(command[1])
-    
+    for flag in range(2):
+        print("flag:",flag)
+        print('upgrade_age:','True' if command[flag][0] == '0' else 'False')
+        for i in range(1, len(command[flag])):
+            command_now = command[flag][i]
+            if command_now['commandid'] == 1:
+                print('Construct type:',command_now['unitid'],
+                      ' pos:',[command_now['buildp'].x, command_now['buildp'].y],
+                      ' pro_pos:',[command_now['soliderp'].x, command_now['soliderp'].y])
+            if command_now['commandid'] == 2:
+                print('Upgrade id:',command_now['unitid'])
+            if command_now['commandid'] == 3:
+                print('Sell id:',command_now['unitid'])
+            if command_now['commandid'] == 4:
+                print('Maintain id:',command_now['unitid'])
+
     for flag in range(2):
         if len(command[flag]) == 0:
             continue
