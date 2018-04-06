@@ -57,6 +57,8 @@ def logist_platform(server, game, turn):
     # print(len(command[0]))
     print("传回的指令")
     for flag in range(2):
+        if len(command[flag]) == 0:
+            continue
         print("flag:",flag)
         print('upgrade_age:','True' if command[flag][0] == '0' else 'False')
         for i in range(1, len(command[flag])):
