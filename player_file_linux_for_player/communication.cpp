@@ -291,8 +291,8 @@ while(true)
 			soldiers >> hp;
 			soldiers >> posx;
 			soldiers >> posy;
-			soldiers >> temp;
 			soldiers>>s_level;
+			soldiers >> temp;
 			SoldierName q;
 			q = (SoldierName)soldier_name;
 			state->soldier[i].push_back(Soldier(q, hp, Position(posx, posy), i, unit_id,s_level));
