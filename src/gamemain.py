@@ -377,7 +377,7 @@ class GameMain:
             self.winner = 2
 
     def check_legal(self):
-        
+
 
         """Remove the repeated instruments, or instruments on the wrong units"""
         from functools import reduce
@@ -444,7 +444,7 @@ class GameMain:
                                 print("建造位置不在空地上")
                             continue
 
-                        
+
                         # 判断生产位置是否符合要求
                         if (OriginalBuildingAttribute[building_type][BuildingAttribute.BUILDING_TYPE] ==
                                 UnitType.PRODUCTION_BUILDING):
@@ -731,9 +731,9 @@ class GameMain:
                                         OriginalBuildingAttribute[BuildingType.Hawkin][BuildingAttribute.AOE]):
                                     enemy.HP = -1
                             self.instruments[flag]['attack'].append((building.Unit_ID, target_id))
-                            
+
                 self.clean_up_phase()
-                
+
             # 兵种对建筑的攻击
             for unit_id, unit in self.units[flag].items():
                 tech_factor = 0.5 * ( unit.level + 2)
@@ -836,7 +836,7 @@ class GameMain:
                         # When Soldier is moving, if there are buildings in Soldier's shot range,
                         # stop to attack the building, else continue moving.
                         can_move = True
-                        
+
                         if current_flag:
                             now_dist_x = 0 if unit.Position.x <= 6 else unit.Position.x - 6
                             now_dist_y = 0 if unit.Position.y <= 6 else unit.Position.y - 6
@@ -846,7 +846,7 @@ class GameMain:
                         now_dist = now_dist_x + now_dist_y
                         if now_dist <= OriginalSoldierAttribute[unit.Soldier_Name][SoldierAttr.ATTACK_RANGE]:
                             can_move = False
-                            
+
                         if can_move:
                             for building_type, building_array in self.buildings[1 - current_flag].items():
                                 for enemy_building in building_array:
@@ -935,7 +935,7 @@ class GameMain:
                                         building_range):
                                     can_build = True
                                     break
-                        
+
                     for building_list in self.buildings[current_flag].values():
                         if can_build:
                             for building in building_list:
@@ -1230,7 +1230,7 @@ class GameMain:
             jbase[i]['base_HP']=self.main_base[i].HP
             jbase[i]['base_pos']=(self.main_base[i].Position.x,self.main_base[i].Position.y)
             for unit_id,unit in self.units[i].items():
-                unit_temp={'name':str(unit.Soldier_Name),'hp':unit.HP,'pos':(unit.Position.x,unit.Position.y),'flag':unit.Flag,'id':unit.Unit_ID}
+                unit_temp={'name':str(unit.Soldier_Name),'hp':unit.HP,'pos':(unit.Position.x,unit.Position.y),'flag':unit.Flag,'id':unit.Unit_ID,'level':unit.level}
                 junits[i].append(unit_temp)
             for building in self.buildings[i]['produce']:
                 building_temp={'type':str(building.BuildingType),'pos':(building.Position.x,building.Position.y),'hp':building.HP,'flag':building.Flag,'id':building.Unit_ID,

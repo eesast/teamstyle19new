@@ -1,6 +1,7 @@
 #include"communication.h"
 #include<vector>
 #include <unistd.h>
+#include<iostream>
 
 
 extern State* state ;
@@ -79,14 +80,33 @@ bool can_cons(Position p) {
 void f_player()
 {
 
-    if(ts19_flag==0)
+    /*if(ts19_flag==0)
     {
         int aaa=1;
         sleep(1);
         player0();
     }
     else
-        player1();
+        {
+            player1();
+            std::cout<<"?????"<<state->soldier[1].size()<<std::endl;
+            if(state->soldier[1].size()>1)
+            {
+                for(int i=0;i<5;i++)
+                {
+                    std::cout<<state->soldier[1][i].level<<"aaaaa";
+                }
+                std::cout<<std::endl;
+            }
+        }*/
+        if(ts19_flag==0)
+        {
+            construct(Programmer,Position(8,0),Position(0,0));
+        }
+        else
+        {
+            construct(Programmer,Position(190,0),Position(0,0));
+        }
 
     
     

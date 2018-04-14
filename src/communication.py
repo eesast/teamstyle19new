@@ -199,9 +199,11 @@ class MainServer(object):
                     player[0]=0
                 except BrokenPipeError:
                     player[0]=0
-            self.sock[0].setblocking(1)
-            self.sock[1].setblocking(1)
+                except :
+                    pass
             if flag[0]==True:
+                self.sock[0].setblocking(1)
+                self.sock[1].setblocking(1)
                 _len=sock.recv(10)
                 _len=_len.decode('utf-8')
                 _len=_len.split('#')
