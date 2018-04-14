@@ -884,8 +884,10 @@ class GameMain:
         # Lack the legality judgement temporarily.
 
         def construct_phase(self):
-
-            for current_flag in range(2):
+            
+            first_flag = random.randint(0,1)
+            
+            for current_flag in [first_flag, 1-first_flag]:
                 age_increase_factor = 0.5 * (self.status[current_flag]['tech'] + 2)
                 max_bd_num = 40 * age_increase_factor
                 bd_num = 0
@@ -941,6 +943,7 @@ class GameMain:
                                         abs(building.Position.y - building_pos.y) <= 1):
                                     can_build = False
                                     break
+                                    
                     for building_list in self.buildings[1 - current_flag].values():
                         if can_build:
                             for building in building_list:
