@@ -4,6 +4,7 @@
 import random
 import json
 import time
+import os
 
 from unit import *
 
@@ -1146,6 +1147,11 @@ class GameMain:
 
     def debug_print(self):
         """debug时输出信息"""
+        if self.turn_num == 0:
+            file = "debug.txt"
+            if os.path.exists(file):
+                os.remove(file)
+        
         line = "回合:" + str(self.turn_num) + '\n'
         with open("debug.txt", "a", encoding="utf8") as out:
             out.write(line)
@@ -1322,7 +1328,7 @@ class GameMain:
            'produce': [],
            'resource': False
            } for _ in range(2)]
-        self.turn_num += 1
+        
         self.attack_phase()
         self.clean_up_phase()
         self.move_phase()
@@ -1367,6 +1373,8 @@ class GameMain:
             'sell': [],  # id
             'update_age': False,
             } for _ in range(2)]
+        
+        self.turn_num += 1
 
 
 def main():
