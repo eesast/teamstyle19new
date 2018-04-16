@@ -9,7 +9,7 @@ import os
 from unit import *
 
 random.seed(time.time())
-print_info = 1
+print_info = 0
 
 class GameMain:
     save_num = 0
