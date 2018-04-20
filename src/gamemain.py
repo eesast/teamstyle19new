@@ -5,6 +5,7 @@ import random
 import json
 import time
 import os
+import copy
 
 from unit import *
 
@@ -799,15 +800,14 @@ class GameMain:
             for unit_id in list(self.units[flag].keys()):
                 if self.units[flag][unit_id].HP <= 0:
                     self.units[flag].pop(unit_id)
-            for building in self.buildings[flag]['produce'].copy():
-                if building.HP <= 0:
-                    self.buildings[flag]['produce'].remove(building)
-            for building in self.buildings[flag]['defence'].copy():
-                if building.HP <= 0:
-                    self.buildings[flag]['defence'].remove(building)
-            for building in self.buildings[flag]['resource'].copy():
-                if building.HP <= 0:
-                    self.buildings[flag]['resource'].remove(building)
+            
+            for bd_type, bd_list in self.buildings[flag].items():
+                k = 0
+                while k < len(bd_list):
+                    if bd_list[k].HP <= 0:
+                        del bd_list[k]
+                    else:
+                        k += 1
 
     def move_phase(self):
         """Move the units according to their behaviour mode"""
@@ -833,6 +833,25 @@ class GameMain:
 
                 if (OriginalSoldierAttribute[unit.Soldier_Name][SoldierAttr.ACTION_MODE] ==
                         ActionMode.BUILDING_ATTACK):
+                    enemy_bds = {'produce':list(range(len(self.buildings[1-current_flag]['produce']))),
+                                 'defence':list(range(len(self.buildings[1-current_flag]['defence']))),
+                                 'resource':list(range(len(self.buildings[1-current_flag]['resource'])))}
+                                    
+                    
+                    for bd_type, bd_list in enemy_bds.items():
+                        k=0
+                        while k < len(bd_list):
+                            enemy_bd = self.buildings[1 - current_flag][bd_type][ bd_list[k] ]
+                            if (
+                                (abs(enemy_bd.Position.x - unit.Position.x) +
+                                 abs(enemy_bd.Position.y - unit.Position.y)) >
+                                (OriginalSoldierAttribute[unit.Soldier_Name][SoldierAttr.ATTACK_RANGE] +
+                                 OriginalSoldierAttribute[unit.Soldier_Name][SoldierAttr.SPEED])
+                                ):
+                                del bd_list[k]
+                            else:
+                                k += 1
+                            
                     for i in range(OriginalSoldierAttribute[unit.Soldier_Name][SoldierAttr.SPEED]):
                         # When Soldier is moving, if there are buildings in Soldier's shot range,
                         # stop to attack the building, else continue moving.
@@ -847,10 +866,10 @@ class GameMain:
                         now_dist = now_dist_x + now_dist_y
                         if now_dist <= OriginalSoldierAttribute[unit.Soldier_Name][SoldierAttr.ATTACK_RANGE]:
                             can_move = False
-
                         if can_move:
-                            for building_type, building_array in self.buildings[1 - current_flag].items():
-                                for enemy_building in building_array:
+                            for building_type, building_array in enemy_bds.items():
+                                for enemy_building_No in building_array:
+                                    enemy_building = self.buildings[1 - current_flag][building_type][enemy_building_No]
                                     if (abs(enemy_building.Position.x - unit.Position.x) +
                                             abs(enemy_building.Position.y - unit.Position.y) <=
                                             OriginalSoldierAttribute[unit.Soldier_Name][SoldierAttr.ATTACK_RANGE]):
@@ -1357,7 +1376,7 @@ class GameMain:
         # print('****************************************')
 
         # print(self.main_base[0].BuildingType,self.main_base[0].Position.x)
-        # self.debug_print()
+        self.debug_print()
         print("执行了的指令：")
         for flag in range(2):
             print("flag:",flag)
