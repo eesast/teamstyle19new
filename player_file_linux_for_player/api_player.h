@@ -142,9 +142,9 @@ const int OriginalBuildingAttribute[Building_Type][Attr_Num] = {
 const int OriginalSoldierAttribute[Soldier_Type][Soldier_Attr_Num] = {
     {DATA,      BUILDING_ATTACK,        16,     10,     16,     12},
     {SUBSTANCE, BUILDING_ATTACK,        60,     18,     24,     8},
-    {SUBSTANCE, BASE_ATTACK,            40,     120,    3,      15},
+    {SUBSTANCE, BASE_ATTACK,            40,     160,    3,      15},
     {SUBSTANCE, MOVING_ATTACK,          550,    12,     10,     4},
-    {DATA,      BASE_ATTACK,            50,     200,    3,      16},
+    {DATA,      BASE_ATTACK,            50,     300,    3,      16},
     {SUBSTANCE, BUILDING_ATTACK,        40,     25,     40,     12},
     {DATA,      MOVING_ATTACK,          850,    8,      12,     3},
     {SUBSTANCE, BUILDING_ATTACK,        200,    500,    20,     8}
