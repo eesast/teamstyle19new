@@ -1376,7 +1376,7 @@ class GameMain:
         # print('****************************************')
 
         # print(self.main_base[0].BuildingType,self.main_base[0].Position.x)
-        self.debug_print()
+        # self.debug_print()
         print("执行了的指令：")
         for flag in range(2):
             print("flag:",flag)
