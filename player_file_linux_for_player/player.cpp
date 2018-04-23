@@ -80,7 +80,7 @@ bool can_cons(Position p) {
 void f_player()
 {
 
-    /*if(ts19_flag==0)
+    if(ts19_flag==0)
     {
         int aaa=1;
         sleep(1);
@@ -98,14 +98,6 @@ void f_player()
                 }
                 std::cout<<std::endl;
             }
-        }*/
-        if(ts19_flag==0)
-        {
-            construct(Programmer,Position(8,0),Position(0,0));
-        }
-        else
-        {
-            construct(Programmer,Position(190,0),Position(0,0));
         }
 
     
