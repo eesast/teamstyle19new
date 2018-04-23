@@ -204,25 +204,29 @@ class MainServer(object):
             if flag[0]==True:
                 self.sock[0].setblocking(1)
                 self.sock[1].setblocking(1)
-                _len=sock.recv(10)
-                _len=_len.decode('utf-8')
-                _len=_len.split('#')
-                _len=_len[0]
-                _len=int(_len)
                 try:
-                    data=sock.recv(_len) #size
-                   # print(data)
-                    data=data.decode('utf-8')
-                    data=data.split(',')  #将commandid和unitid分离
-                    command.append(data)
-                except ConnectionResetError:
-                    player[0]=0
-                except BrokenPipeError:
-                    player[0]=0
-            self.sock[0].setblocking(0)
-            self.sock[0].settimeout(0.01)
-            self.sock[1].setblocking(0)
-            self.sock[1].settimeout(0.01)
+                    _len=sock.recv(10)
+                    _len=_len.decode('utf-8')
+                    _len=_len.split('#')
+                    _len=_len[0]
+                    _len=int(_len)
+                    try:
+                        data=sock.recv(_len) #size
+                       # print(data)
+                        data=data.decode('utf-8')
+                        data=data.split(',')  #将commandid和unitid分离
+                        command.append(data)
+                    except ConnectionResetError:
+                        player[0]=0
+                    except BrokenPipeError:
+                        player[0]=0
+                except :
+                    pass
+                finally:
+                    self.sock[0].setblocking(0)
+                    self.sock[0].settimeout(0.01)
+                    self.sock[1].setblocking(0)
+                    self.sock[1].settimeout(0.01)
             '''while flag[0]:  #以上部分应该在正常情况下接受完 这里不应该能够接受东西 如果选手端出错发送了过多信息 在这里进行清空
                 try:
                     data=sock.recv(1024)
