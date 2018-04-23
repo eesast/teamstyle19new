@@ -21,6 +21,7 @@ class GameMain:
     turn_num = 0
     winner = 2
     total_id = 0
+    description = ''
 
     units = [{} for _ in range(2)]
 
@@ -1395,12 +1396,53 @@ class GameMain:
             } for _ in range(2)]
         
         self.turn_num += 1
-    
+    def describe(self):
+        if (self.turn_num >= 10000 and self.winner == 2):
+            self.description = '同时崩溃局'
+            return
+        if (self.winner == 2):
+            if (self.turn_num < 1000):
+                self.description = '同时爆炸局'
+            else:
+                self.description = '龟缩拖平局'
+        else:
+            if abs(self.accumulation[0]['tech'] - self.accumulation[1]['tech']) > 1:
+                if self.accumulation[self.winner]['tech'] > self.accumulation[1 - self.winner]['tech']:
+                    self.description = '高科技碾压局'
+                else:
+                    if self.turn_num <100:
+                        self.description = '低科技速攻局'
+                    else:
+                        self.description = '低科技翻盘局'
+                return
+            if abs(self.accumulation[0]['base_remain_hp'] - self.accumulation[1]['base_remain_hp']) < 5000:
+                if self.turn_num <100:
+                    self.description = '光速对攻局'
+                else:
+                    self.description = '均势对攻局'
+                return
+            if abs(self.accumulation[0]['money'] - self.accumulation[1]['money']) > 10000:
+                self.description = '经济碾压局'
+                return
+            if self.accumulation[self.winner]['sd_pro'] > self.accumulation[1 - self.winner]['sd_pro'] *2:
+                if self.turn_num > 100:
+                    self.description = '大军攻坚局'
+                else:
+                    self.description = '暴兵速推局'
+                return
+            if self.accumulation[self.winner]['sd_pro'] < self.accumulation[1 - self.winner]['sd_pro'] *0.5:
+                if self.turn_num > 100:
+                    self.description = '防守反击局'
+                else:
+                    self.description = '精兵强突局'
+                # if (abs(self.accumulation[0]['tech'] - self.accumulation[1]['tech'])>1)
     def assessment(self):
+        self.describe()
         filename = "assessment" + (str)(self.save_num) + ".txt"
         with open(filename, 'a') as f:
             f.write("winner: ")
             json.dump(self.winner,f)
+            f.write(self.description)
             f.write('\n')
         for flag in range(2):
             self.accumulation[flag]['base_remain_hp'] = self.main_base[flag].HP

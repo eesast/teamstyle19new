@@ -55,7 +55,7 @@ def logist_platform(server, game, turn):
     player_0, player_1 = server.send_state(turn, status, building, units, winner)
     command, player_0, player_1 = server.recv_command()
     # print(len(command[0]))
-    print("传回的指令")
+    print("传回的指令:")
     for flag in range(2):
         if len(command[flag]) == 0:
             continue
@@ -101,7 +101,7 @@ def logist_platform(server, game, turn):
     #     game.winner = 0
     #     game.turn_num = 1001
     if player_0 == player_1 == 0:
-        game.turn_num = 1001
+        game.turn_num = 10000
                 
     # game在这里处理命令command
 
@@ -151,7 +151,7 @@ while game.winner == 2:
     if game.winner != 2:
         break
     game.next_tick()
-    if game.turn_num > 1000:
+    if game.turn_num >= 1000:
         break
 
 if game.winner == 2:
@@ -179,9 +179,11 @@ turn_save_file="turn_save"+(str)(game.save_num)+".txt"
 assessment_file="assessment" + (str)(game.save_num) + ".txt"
 f.write(turn_save_file)
 f.write(map_save_file)
+f.write(assessment_file)
 f.close()
 os.remove(turn_save_file)
 os.remove(map_save_file)
+os.remove(assessment_file)
 
 
 
