@@ -37,6 +37,17 @@ class GameMain:
         'tech': 0,
         'building': 60,
     } for _ in range(2)]
+    
+    accumulation = [{
+        'money': 0,
+        'tech': 0,
+        'bd_cons': 1,
+        'bd_up': 0,
+        'bd_des': 0,
+        'sd_pro': 0,
+        'sd_kill': 0,
+        'base_remain_hp': 0
+    } for _ in range(2)]
 
     # 通信模块将收到的指令写入，各阶段函数从中读取指令，指令格式同api_player.h
     raw_instruments = [{
@@ -349,26 +360,8 @@ class GameMain:
 
     def judge_winnner(self):
        # print("judge，回合：",self.turn_num);
-        if self.turn_num == Inf:
-
-            if self.main_base[0].HP > self.main_base[1].HP:
-                self.winner = 0
-            elif self.main_base[0].HP < self.main_base[1].HP:
-                self.winner = 1
-            elif self.status[0]['tech'] > self.status[1]['tech']:
-                self.winner = 0
-            elif self.status[0]['tech'] < self.status[1]['tech']:
-                self.winner = 1
-            elif len(self.units[0]) > len(self.units[1]):
-                self.winner = 0
-            elif len(self.units[0]) < len(self.units[1]):
-                self.winner = 1
-            elif self.status[0]['money'] > self.status[1]['money']:
-                self.winner = 0
-            elif self.status[0]['money'] < self.status[1]['money']:
-                self.winner = 1
-            else:
-                self.winner = 2
+        if self.turn_num >= Inf:
+            self.draw_judge()
         elif self.main_base[0].HP <= 0 and self.main_base[1].HP > 0:
             self.winner = 1
         elif self.main_base[1].HP <= 0 and self.main_base[0].HP > 0:
@@ -735,6 +728,7 @@ class GameMain:
                             self.instruments[flag]['attack'].append((building.Unit_ID, target_id))
 
                 self.clean_up_phase()
+                
         for flag in range(2):
             # 兵种对建筑的攻击
             for unit_id, unit in self.units[flag].items():
@@ -800,12 +794,14 @@ class GameMain:
             for unit_id in list(self.units[flag].keys()):
                 if self.units[flag][unit_id].HP <= 0:
                     self.units[flag].pop(unit_id)
+                    self.accumulation[1-flag]['sd_kill'] += 1
             
             for bd_type, bd_list in self.buildings[flag].items():
                 k = 0
                 while k < len(bd_list):
                     if bd_list[k].HP <= 0:
                         del bd_list[k]
+                        self.accumulation[1-flag]['bd_des'] += 1
                     else:
                         k += 1
 
@@ -1002,6 +998,7 @@ class GameMain:
                     self.status[current_flag]['money'] -= money_cost
                     self.status[current_flag]['building'] -= building_point_cost
                     self.instruments[current_flag]['construct'].append(construct_instrument)
+                    self.accumulation[current_flag]['bd_cons'] += 1
         construct_phase(self)
 
         def maintain_phase(self):
@@ -1074,6 +1071,7 @@ class GameMain:
                                     self.status[current_flag]['money'] -= upgrade_diff_money
                                     self.status[current_flag]['building'] -= upgrade_diff_bdpoint
                                     self.instruments[current_flag]['upgrade'].append(upgrade_instrument)
+                                    self.accumulation[current_flag]['bd_up'] += 1
                                 else:
                                     if print_info:
                                         print("升级建筑指令科技等级或资源不足")
@@ -1127,6 +1125,7 @@ class GameMain:
                     building.CD_left = cd  # 重置CD
                     self.total_id += 1
                     self.instruments[current_flag]['produce'].append(solider_id)
+                    self.accumulation[current_flag]['sd_pro'] += 1
                 else:
                     building.CD_left = building.CD_left - 1
 
@@ -1149,6 +1148,7 @@ class GameMain:
                                     )
                     self.status[flag]['tech'] += 1
                     self.instruments[flag]['update_age'].append(True)
+                    self.accumulation[flag]['tech'] += 1
                 else:
                     if print_info:
                         print("升级时代资源不足")
@@ -1161,6 +1161,7 @@ class GameMain:
             for building in self.buildings[flag]['resource']:
                 resource = basic_resource * 0.5 * (building.level + 2)
                 self.status[flag]['money'] += resource
+                self.accumulation[flag]['money'] += resource
             self.status[flag]['building'] = 60 + 40 * self.status[flag]['tech']
             self.instruments[flag]['resource'] = True
 
@@ -1330,7 +1331,7 @@ class GameMain:
             elif self.status[0]['money'] < self.status[1]['money']:
                 self.winner = 1
                 return
-
+    
     def next_tick(self):
         """回合演算与指令合法性判断"""
         # print(self.raw_instruments)
@@ -1394,7 +1395,21 @@ class GameMain:
             } for _ in range(2)]
         
         self.turn_num += 1
-
+    
+    def assessment(self):
+        filename = "assessment" + (str)(self.save_num) + ".txt"
+        with open(filename, 'a') as f:
+            f.write("winner: ")
+            json.dump(self.winner,f)
+            f.write('\n')
+        for flag in range(2):
+            self.accumulation[flag]['base_remain_hp'] = self.main_base[flag].HP
+            accumulation = json.dumps( self.accumulation[flag] )
+            with open(filename, 'a') as f:
+                f.write(accumulation)
+                f.write('\n')
+            
+        
 
 def main():
     game = GameMain()

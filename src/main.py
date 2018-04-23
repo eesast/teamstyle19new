@@ -170,9 +170,13 @@ winner = copy.deepcopy(game.winner)
 turn = game.turn_num
 player_0, player_1 = server.send_state(turn, status, building, units, winner)
 print(game.winner)
+
+game.assessment()
+
 f = zipfile.ZipFile(save_path,'w',zipfile.ZIP_DEFLATED)
 map_save_file="map_save"+(str)(game.save_num)+".txt"
 turn_save_file="turn_save"+(str)(game.save_num)+".txt"
+assessment_file="assessment" + (str)(game.save_num) + ".txt"
 f.write(turn_save_file)
 f.write(map_save_file)
 f.close()
@@ -180,9 +184,7 @@ os.remove(turn_save_file)
 os.remove(map_save_file)
 
 
-"""with open(filename, 'w') as f:
-    f.writelines(file)
-    f.write(str(game.winner))"""
+
 
 if result_filename:
     with open(result_filename, 'w') as f:
