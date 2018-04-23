@@ -1442,7 +1442,7 @@ class GameMain:
         with open(filename, 'a') as f:
             f.write("winner: ")
             json.dump(self.winner,f)
-            f.write(self.description)
+            f.write('  '+self.description)
             f.write('\n')
         for flag in range(2):
             self.accumulation[flag]['base_remain_hp'] = self.main_base[flag].HP
