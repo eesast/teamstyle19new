@@ -176,7 +176,7 @@ game.assessment()
 f = zipfile.ZipFile(save_path,'w',zipfile.ZIP_DEFLATED)
 map_save_file="map_save"+(str)(game.save_num)+".txt"
 turn_save_file="turn_save"+(str)(game.save_num)+".txt"
-assessment_file="assessment" + (str)(game.save_num) + ".txt"
+assessment_file="assessment"  + (str)(game.save_num) + game.description + ".txt"
 f.write(turn_save_file)
 f.write(map_save_file)
 f.write(assessment_file)
