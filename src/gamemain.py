@@ -1397,6 +1397,8 @@ class GameMain:
         
         self.turn_num += 1
     def describe(self):
+        tech_factor = max(self.accumulation[0]['tech'],self.accumulation[1]['tech']) * 0.5 + 1
+        
         if (self.turn_num >= 10000 and self.winner == 2):
             self.description = '同时崩溃局'
             return
@@ -1415,13 +1417,13 @@ class GameMain:
                     else:
                         self.description = '低科技翻盘局'
                 return
-            if abs(self.accumulation[0]['base_remain_hp'] - self.accumulation[1]['base_remain_hp']) < 5000:
+            if abs(self.accumulation[0]['base_remain_hp'] - self.accumulation[1]['base_remain_hp']) < 2000 * tech_factor:
                 if self.turn_num <80:
                     self.description = '光速对攻局'
                 else:
                     self.description = '均势对攻局'
                 return
-            if abs(self.accumulation[0]['money'] - self.accumulation[1]['money']) > 10000:
+            if abs(self.accumulation[0]['money'] - self.accumulation[1]['money']) > 10000 * tech_factor:
                 self.description = '经济碾压局'
                 return
             if self.accumulation[self.winner]['sd_pro'] > self.accumulation[1 - self.winner]['sd_pro'] *2:
@@ -1446,6 +1448,9 @@ class GameMain:
             f.write("winner: ")
             json.dump(self.winner,f)
             f.write('  '+self.description)
+            f.write('\n')
+            f.write("turn: ")
+            json.dump(self.turn_num,f)
             f.write('\n')
         for flag in range(2):
             accumulation = json.dumps( self.accumulation[flag] )
