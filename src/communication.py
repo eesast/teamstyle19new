@@ -71,8 +71,18 @@ class MainServer(object):
       #  print('the lenght:',len(map0))
         self.sock[0].send(map0)
         self.sock[1].send(map0)
-        self.sock[0].recv(2)
-        self.sock[1].recv(2)
+        try:
+            self.sock[0].recv(2)
+        except ConnectionResetError:
+            pass
+        except BrokenPipeError:
+            pass
+        try:
+            self.sock[1].recv(2)
+        except ConnectionResetError:
+            pass
+        except BrokenPipeError:
+            pass
         self.sock[0].setblocking(0)  #将sock都设置成非阻塞模式 为了和之后的记时配合
         self.sock[0].settimeout(0.01)
         self.sock[1].setblocking(0)
