@@ -5,6 +5,7 @@
 #include<regex>
 #include<vector>
 #include"api_player.h"
+#include<time.h>
 
 using namespace std;
 extern bool use;
@@ -137,9 +138,11 @@ void MyClient::send_command(bool _update, vector<command1> &v1, vector<command2>
 State* MyClient::recv_state()
 {
 //cout<<"start_recv"<<endl;
+	clock_t s1,s2,t1,t2;
 	char start[6];
 	start[5] = '\0';
 	const char* cpstart = "start";
+	s1=clock();
 	while (true)
 	{
 		int e=0;
@@ -192,11 +195,13 @@ State* MyClient::recv_state()
 	if(h==9)
 		break;
 }
+t1=clock();
+cout<<"wait time:" <<double(t1-s1)/CLOCKS_PER_SEC<<endl;
 //cout<<"len is ok"<<endl;
 	istringstream is(number);
 	int len;
 	is >> len;
-
+s2=clock();
 	char *save;
 	save = new char[len + 1];
 	save[len] = '\0';
@@ -206,7 +211,12 @@ int now;
 int fact;
 	int truth=recv(sockClient, save, len, 0);
 //cout<<truth<<endl;
+cout<<"length"<<len<< endl;
 now=truth;
+
+//start time
+clock_t ss,e;
+
 while(true)
 {
 	if(now<templen)
@@ -223,12 +233,19 @@ while(true)
 	else
 		break;
 }
+t2=clock();
+cout<<"recv time"<<double(t2-s2)/CLOCKS_PER_SEC<<endl;
 //	cout<<"fact   "<<fact<<"save   "<<len<<"now"<<now<<endl;
 //	cout<<save<<endl;
-	regex reg0("(.*);(.*);(.*);(.*);#(.*);(.*);(.*);#");
+clock_t  s3,t3;
+ss=clock();
+s3=clock();
+	regex reg0("([^;]*);([^;]*);([^;]*);([^;]*);#([^;]*);([^;]*);([^;]*);#");
 	smatch m0;
 	string s(save);
 	regex_match(s, m0, reg0);
+	t3=clock();
+	cout<<"reg time"<<double(t3-s3)/CLOCKS_PER_SEC<< endl;
 	int w;
 	istringstream iis(m0.str(1));
 	State* state = new State;
@@ -301,5 +318,7 @@ while(true)
 	use=false;
 	const char* hello = "start";
 	send(sockClient, hello, strlen(hello), 0);
+	e=clock();
+	cout<<"decode time   turn:"<<state->turn<<"     "<<(double(e-ss)/CLOCKS_PER_SEC)<< endl;
 	return state;
 }
