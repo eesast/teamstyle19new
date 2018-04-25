@@ -220,13 +220,16 @@ class MainServer(object):
                         player[0]=0
                     except BrokenPipeError:
                         player[0]=0
-                except :
-                    pass
+                except BrokenPipeError:
+                        pass:
                 finally:
                     self.sock[0].setblocking(0)
                     self.sock[0].settimeout(0.01)
                     self.sock[1].setblocking(0)
                     self.sock[1].settimeout(0.01)
+
+
+
             '''while flag[0]:  #以上部分应该在正常情况下接受完 这里不应该能够接受东西 如果选手端出错发送了过多信息 在这里进行清空
                 try:
                     data=sock.recv(1024)
