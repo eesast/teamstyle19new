@@ -12,6 +12,7 @@ import unit
 import communication
 import zipfile
 
+qit_cycle=True
 
 # 以下为两个将building，solider转化为字典函数，便于写入文件（在通信未完成之前）
 def building2dict(std):
@@ -120,7 +121,10 @@ game.save_num=random.randint(1,9999)
 if len(sys.argv)>1:
     save_path=sys.argv[2]
 else:
-    save_path="./save"+str(game.save_num) +".zip"
+    if qit_cycle==True:
+        save_path="./save.zip"
+    else:
+        save_path="./save"+str(game.save_num) +".zip"
 #save_path="E:/savetest"+str(game.save_num)+".zip"
 map = game._map
 game.map_save()
@@ -186,7 +190,12 @@ os.remove(turn_save_file)
 os.remove(map_save_file)
 os.remove(assessment_file)
 
-
+if qit_cycle==True:
+    with open('temp_result','w') as f:
+        f.write(str(game.winner))
+    sp='save'+str(game.save_num)+game.description+'.zip'
+    with open('this_path','w') as f:
+        f.write(sp)
 
 
 if result_filename:
