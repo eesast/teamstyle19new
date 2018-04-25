@@ -221,7 +221,7 @@ class MainServer(object):
                     except BrokenPipeError:
                         player[0]=0
                 except BrokenPipeError:
-                        pass:
+                        pass
                 finally:
                     self.sock[0].setblocking(0)
                     self.sock[0].settimeout(0.01)
