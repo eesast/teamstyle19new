@@ -1227,6 +1227,16 @@ class GameMain:
             f.write(jmap)
 
     def turn_save(self):
+        bd_number = [[0 for i in range(17)] for _ in range(2)]
+        for flag in range(2):
+            for bd_type,bd_list in self.buildings[flag].items():
+                for bd in bd_list:
+                    bd_number[flag][bd.BuildingType - 1] += 1
+        sd_number = [[0 for i in range(8)] for _ in range(2)]
+        for flag in range(2):
+            for sd_id, sd in self.units[flag].items():
+                sd_number[flag][sd.Soldier_Name] += 1
+                
         junits = [[] for _ in range(2)]
         jbuildings = [{
             'produce': [],
@@ -1293,8 +1303,13 @@ class GameMain:
             jinstruments[i]['produce'] = self.instruments[i]['produce']
             jinstruments[i]['resource']=self.instruments[i]['resource']
 
-        data={'mainbase_0':jbase[0],'mainbase_1':jbase[1],'unit_0':junits[0],'unit_1':junits[1],'buildings_0':jbuildings[0],'buildings_1':jbuildings[1],'status_0':jstatus[0],
-              'status_1':jstatus[1],'instruments_0':jinstruments[0],'instruments_1':jinstruments[1]}
+        data={'building_number0':bd_number[0],'building_number1':bd_number[1],
+              'soldier_number0':sd_number[0],'soldier_number1':sd_number[1],
+              'mainbase_0':jbase[0],'mainbase_1':jbase[1],
+              'unit_0':junits[0],'unit_1':junits[1],
+              'buildings_0':jbuildings[0],'buildings_1':jbuildings[1],
+              'status_0':jstatus[0],'status_1':jstatus[1],
+              'instruments_0':jinstruments[0],'instruments_1':jinstruments[1]}
         jdata = json.dumps(data)
         filename = "turn_save" + (str)(self.save_num) + ".txt"
         with open(filename, 'a') as f:
