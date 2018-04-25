@@ -55,24 +55,24 @@ def logist_platform(server, game, turn):
     player_0, player_1 = server.send_state(turn, status, building, units, winner)
     command, player_0, player_1 = server.recv_command()
     # print(len(command[0]))
-    print("传回的指令:")
-    for flag in range(2):
-        if len(command[flag]) == 0:
-            continue
-        print("flag:",flag)
-        print('upgrade_age:','True' if command[flag][0] == '0' else 'False')
-        for i in range(1, len(command[flag])):
-            command_now = command[flag][i]
-            if command_now['commandid'] == 1:
-                print('Construct type:',command_now['unitid'],
-                      ' pos:',[command_now['buildp'].x, command_now['buildp'].y],
-                      ' pro_pos:',[command_now['soliderp'].x, command_now['soliderp'].y])
-            if command_now['commandid'] == 2:
-                print('Upgrade id:',command_now['unitid'])
-            if command_now['commandid'] == 3:
-                print('Sell id:',command_now['unitid'])
-            if command_now['commandid'] == 4:
-                print('Maintain id:',command_now['unitid'])
+    # print("传回的指令:")
+    # for flag in range(2):
+    #     if len(command[flag]) == 0:
+    #         continue
+    #     print("flag:",flag)
+    #     print('upgrade_age:','True' if command[flag][0] == '0' else 'False')
+    #     for i in range(1, len(command[flag])):
+    #         command_now = command[flag][i]
+    #         if command_now['commandid'] == 1:
+    #             print('Construct type:',command_now['unitid'],
+    #                   ' pos:',[command_now['buildp'].x, command_now['buildp'].y],
+    #                   ' pro_pos:',[command_now['soliderp'].x, command_now['soliderp'].y])
+    #         if command_now['commandid'] == 2:
+    #             print('Upgrade id:',command_now['unitid'])
+    #         if command_now['commandid'] == 3:
+    #             print('Sell id:',command_now['unitid'])
+    #         if command_now['commandid'] == 4:
+    #             print('Maintain id:',command_now['unitid'])
 
     for flag in range(2):
         if len(command[flag]) == 0:
@@ -120,7 +120,7 @@ game.save_num=random.randint(1,9999)
 if len(sys.argv)>1:
     save_path=sys.argv[2]
 else:
-    save_path="./save"+str(game.save_num)+".zip"
+    save_path="./save"+str(game.save_num) +".zip"
 #save_path="E:/savetest"+str(game.save_num)+".zip"
 map = game._map
 game.map_save()
@@ -173,6 +173,7 @@ print(game.winner)
 
 game.assessment()
 
+save_path="./save"+str(game.save_num) + game.description +".zip"
 f = zipfile.ZipFile(save_path,'w',zipfile.ZIP_DEFLATED)
 map_save_file="map_save"+(str)(game.save_num)+".txt"
 turn_save_file="turn_save"+(str)(game.save_num)+".txt"

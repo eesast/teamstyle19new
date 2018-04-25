@@ -1379,21 +1379,21 @@ class GameMain:
 
         # print(self.main_base[0].BuildingType,self.main_base[0].Position.x)
         # self.debug_print()
-        print("执行了的指令：")
-        for flag in range(2):
-            print("flag:",flag)
-            print('construct:',self.instruments[flag]['construct'])
-            print('maintain:',self.instruments[flag]['maintain'])
-            print('upgrade:',self.instruments[flag]['upgrade'])
-            print('sell:',self.instruments[flag]['sell'])
-            print('update_age:',self.instruments[flag]['update_age'])
-        self.raw_instruments = [{
-            'construct': [],  # (BuildingType,(BuildingPos.x,BuildingPos.y),(SoldierPos.x,SoldierPos.y))
-            'maintain': [],  # id
-            'upgrade': [],  # id
-            'sell': [],  # id
-            'update_age': False,
-            } for _ in range(2)]
+        # print("执行了的指令：")
+        # for flag in range(2):
+        #     print("flag:",flag)
+        #     print('construct:',self.instruments[flag]['construct'])
+        #     print('maintain:',self.instruments[flag]['maintain'])
+        #     print('upgrade:',self.instruments[flag]['upgrade'])
+        #     print('sell:',self.instruments[flag]['sell'])
+        #     print('update_age:',self.instruments[flag]['update_age'])
+        # self.raw_instruments = [{
+        #     'construct': [],  # (BuildingType,(BuildingPos.x,BuildingPos.y),(SoldierPos.x,SoldierPos.y))
+        #     'maintain': [],  # id
+        #     'upgrade': [],  # id
+        #     'sell': [],  # id
+        #     'update_age': False,
+        #     } for _ in range(2)]
         
         self.turn_num += 1
     def describe(self):
