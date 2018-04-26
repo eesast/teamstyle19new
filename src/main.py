@@ -177,7 +177,14 @@ print(game.winner)
 
 game.assessment()
 
-save_path="./save"+str(game.save_num) + game.description +".zip"
+if len(sys.argv)>1:
+    save_path=sys.argv[2]
+else:
+    if qit_cycle==True:
+        save_path="./save.zip"
+    else:
+        save_path = "./save" + str(game.save_num) + game.description + ".zip"
+
 f = zipfile.ZipFile(save_path,'w',zipfile.ZIP_DEFLATED)
 map_save_file="map_save"+(str)(game.save_num)+".txt"
 turn_save_file="turn_save"+(str)(game.save_num)+".txt"
