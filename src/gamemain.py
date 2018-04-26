@@ -1415,7 +1415,7 @@ class GameMain:
         tech_factor = max(self.accumulation[0]['tech'],self.accumulation[1]['tech']) * 0.5 + 1
         
         if (self.turn_num >= 10000 and self.winner == 2):
-            self.description = '同时崩溃局'
+            self.description = '同时崩溃'
             return
         if (self.winner == 2):
             if (self.turn_num < 1000):

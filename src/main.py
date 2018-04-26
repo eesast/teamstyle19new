@@ -102,7 +102,7 @@ def logist_platform(server, game, turn):
     #     game.winner = 0
     #     game.turn_num = 1001
     if player_0 == player_1 == 0:
-        game.turn_num = 10000
+        game.turn_num = 10001
                 
     # game在这里处理命令command
 
@@ -177,13 +177,7 @@ print(game.winner)
 
 game.assessment()
 
-if len(sys.argv)>1:
-    save_path=sys.argv[2]
-else:
-    if qit_cycle==True:
-        save_path="./save.zip"
-    else:
-        save_path = "./save" + str(game.save_num) + game.description + ".zip"
+save_path = "./save" + str(game.save_num) + game.description + ".zip"
 
 f = zipfile.ZipFile(save_path,'w',zipfile.ZIP_DEFLATED)
 map_save_file="map_save"+(str)(game.save_num)+".txt"
