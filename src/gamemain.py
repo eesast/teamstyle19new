@@ -10,7 +10,7 @@ import copy
 from unit import *
 
 random.seed(time.time())
-print_info = 0
+print_info = False
 
 class GameMain:
     save_num = 0
@@ -939,7 +939,8 @@ class GameMain:
                     # print("buildingpoint")
                     # print(current_flag,self.status[current_flag]['building'],building_point_cost)
 
-                    building_range = 8  # 建造范围暂设为8
+                    building_range = 10
+                    no_bd_range = 5
                     can_build = False
                     if (abs(building_pos.x - current_flag * (self._map_size - 1)) <= 10 and
                                 abs(building_pos.y - current_flag * (self._map_size - 1)) <= 10):
@@ -957,7 +958,7 @@ class GameMain:
                         if can_build:
                             for building in building_list:
                                 if (abs(building.Position.x - building_pos.x) +
-                                        abs(building.Position.y - building_pos.y) <= 1):
+                                        abs(building.Position.y - building_pos.y) <= no_bd_range):
                                     can_build = False
                                     break
                                     
@@ -965,7 +966,7 @@ class GameMain:
                         if can_build:
                             for building in building_list:
                                 if (abs(building.Position.x - building_pos.x) +
-                                        abs(building.Position.y - building_pos.y) <= 1):
+                                        abs(building.Position.y - building_pos.y) <= no_bd_range):
                                     can_build = False
                                     break
                     if not can_build:
@@ -1134,10 +1135,11 @@ class GameMain:
         """Deal with the update_age instruments"""
 
         basic_consumption = 2000  # 基础升级科技消耗，未定
-        increased_consumption = 1500  # 科技每升一级，下次升级科技资源消耗增量
+        increased_consumption = 750 # 资源消耗与科技平方比值
         for flag in range(2):
             if self.raw_instruments[flag]['update_age']:
-                consumption = basic_consumption + increased_consumption * self.status[flag]['tech']
+                consumption = basic_consumption + \
+                              increased_consumption * self.status[flag]['tech'] * self.status[flag]['tech']
                 if self.status[flag]['money'] > consumption and self.status[flag]['tech'] < Age.AI.value:
                     self.status[flag]['money'] -= consumption
                     self.main_base[flag].HP = (
@@ -1393,22 +1395,23 @@ class GameMain:
         # print('****************************************')
 
         # print(self.main_base[0].BuildingType,self.main_base[0].Position.x)
-        # self.debug_print()
-        # print("执行了的指令：")
-        # for flag in range(2):
-        #     print("flag:",flag)
-        #     print('construct:',self.instruments[flag]['construct'])
-        #     print('maintain:',self.instruments[flag]['maintain'])
-        #     print('upgrade:',self.instruments[flag]['upgrade'])
-        #     print('sell:',self.instruments[flag]['sell'])
-        #     print('update_age:',self.instruments[flag]['update_age'])
-        # self.raw_instruments = [{
-        #     'construct': [],  # (BuildingType,(BuildingPos.x,BuildingPos.y),(SoldierPos.x,SoldierPos.y))
-        #     'maintain': [],  # id
-        #     'upgrade': [],  # id
-        #     'sell': [],  # id
-        #     'update_age': False,
-        #     } for _ in range(2)]
+        self.debug_print()
+        if print_info:
+            print("执行了的指令：")
+            for flag in range(2):
+                print("flag:",flag)
+                print('construct:',self.instruments[flag]['construct'])
+                print('maintain:',self.instruments[flag]['maintain'])
+                print('upgrade:',self.instruments[flag]['upgrade'])
+                print('sell:',self.instruments[flag]['sell'])
+                print('update_age:',self.instruments[flag]['update_age'])
+        self.raw_instruments = [{
+            'construct': [],  # (BuildingType,(BuildingPos.x,BuildingPos.y),(SoldierPos.x,SoldierPos.y))
+            'maintain': [],  # id
+            'upgrade': [],  # id
+            'sell': [],  # id
+            'update_age': False,
+            } for _ in range(2)]
         
         self.turn_num += 1
     def describe(self):

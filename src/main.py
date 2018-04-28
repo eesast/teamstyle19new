@@ -12,6 +12,7 @@ import unit
 import communication
 import zipfile
 
+print_info = False
 qit_cycle=True
 
 # 以下为两个将building，solider转化为字典函数，便于写入文件（在通信未完成之前）
@@ -56,24 +57,25 @@ def logist_platform(server, game, turn):
     player_0, player_1 = server.send_state(turn, status, building, units, winner)
     command, player_0, player_1 = server.recv_command()
     # print(len(command[0]))
-    # print("传回的指令:")
-    # for flag in range(2):
-    #     if len(command[flag]) == 0:
-    #         continue
-    #     print("flag:",flag)
-    #     print('upgrade_age:','True' if command[flag][0] == '0' else 'False')
-    #     for i in range(1, len(command[flag])):
-    #         command_now = command[flag][i]
-    #         if command_now['commandid'] == 1:
-    #             print('Construct type:',command_now['unitid'],
-    #                   ' pos:',[command_now['buildp'].x, command_now['buildp'].y],
-    #                   ' pro_pos:',[command_now['soliderp'].x, command_now['soliderp'].y])
-    #         if command_now['commandid'] == 2:
-    #             print('Upgrade id:',command_now['unitid'])
-    #         if command_now['commandid'] == 3:
-    #             print('Sell id:',command_now['unitid'])
-    #         if command_now['commandid'] == 4:
-    #             print('Maintain id:',command_now['unitid'])
+    if print_info:
+        print("传回的指令:")
+        for flag in range(2):
+            if len(command[flag]) == 0:
+                continue
+            print("flag:",flag)
+            print('upgrade_age:','True' if command[flag][0] == '0' else 'False')
+            for i in range(1, len(command[flag])):
+                command_now = command[flag][i]
+                if command_now['commandid'] == 1:
+                    print('Construct type:',command_now['unitid'],
+                          ' pos:',[command_now['buildp'].x, command_now['buildp'].y],
+                          ' pro_pos:',[command_now['soliderp'].x, command_now['soliderp'].y])
+                if command_now['commandid'] == 2:
+                    print('Upgrade id:',command_now['unitid'])
+                if command_now['commandid'] == 3:
+                    print('Sell id:',command_now['unitid'])
+                if command_now['commandid'] == 4:
+                    print('Maintain id:',command_now['unitid'])
 
     for flag in range(2):
         if len(command[flag]) == 0:
