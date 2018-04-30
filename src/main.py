@@ -179,7 +179,7 @@ print(game.winner)
 
 game.assessment()
 
-save_path = "./save" + str(game.save_num) + game.description + ".zip"
+# save_path = "./save" + str(game.save_num) + game.description + ".zip"
 
 f = zipfile.ZipFile(save_path,'w',zipfile.ZIP_DEFLATED)
 map_save_file="map_save"+(str)(game.save_num)+".txt"
