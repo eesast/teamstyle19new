@@ -219,19 +219,22 @@ class MainServer(object):
                     _len=_len.decode('utf-8')
                     _len=_len.split('#')
                     _len=_len[0]
-                    _len=int(_len)
                     try:
-                        data=sock.recv(_len) #size
-                       # print(data)
-                        data=data.decode('utf-8')
-                        data=data.split(',')  #将commandid和unitid分离
-                        command.append(data)
-                    except ConnectionResetError:
-                        player[0]=0
-                    except BrokenPipeError:
-                        player[0]=0
-                except BrokenPipeError:
+                        _len=int(_len)
+                        try:
+                            data=sock.recv(_len) #size
+                           # print(data)
+                            data=data.decode('utf-8')
+                            data=data.split(',')  #将commandid和unitid分离
+                            command.append(data)
+                        except ConnectionResetError:
+                            player[0]=0
+                        except BrokenPipeError:
+                            player[0]=0
+                    except :
                         pass
+                except BrokenPipeError:
+                            pass
                 finally:
                     self.sock[0].setblocking(0)
                     self.sock[0].settimeout(0.01)
