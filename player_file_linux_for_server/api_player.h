@@ -6,12 +6,13 @@
 
 //global const for player
 const int UPDATE_COST        = 2000;
-const int UPDATE_COST_PLUS   = 1500;
+const int UPDATE_COST_SQUARE = 750;
 const int MAX_BD_NUM         = 40;
 const int MAX_BD_NUM_PLUS    = 20;
 const int MAP_SIZE           = 200;
 const int BASE_SIZE          = 7;
-const int BD_RANGE           = 8;
+const int MAX_BD_RANGE       = 12;
+const int MIN_BD_RANGE       = 6;
 const int BD_RANGE_FROM_BASE = 4;
 const float AGE_INCREASE     = 0.5;
 
