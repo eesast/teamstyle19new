@@ -258,7 +258,7 @@ class MainServer(object):
         th1=threading.Thread(target=listing_command,args=(self.sock[1],command[1],player_1,flag))
         th0.start()
         th1.start()
-        time.sleep(0.2) #主线程等待0.2s
+        time.sleep(0.1) #主线程等待0.1s
         flag[0]=False   #将控制循环的flag改为false 子线程中全部跳出循环 子线程结束
         th0.join()
         th1.join()
