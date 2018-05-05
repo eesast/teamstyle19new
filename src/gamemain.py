@@ -1128,8 +1128,7 @@ class GameMain:
                     self.total_id += 1
                     self.instruments[current_flag]['produce'].append(solider_id)
                     self.accumulation[current_flag]['sd_pro'] += 1
-                else:
-                    building.CD_left = building.CD_left - 1
+                building.CD_left = building.CD_left - 1
 
     def update_age_phase(self):
         """Deal with the update_age instruments"""
