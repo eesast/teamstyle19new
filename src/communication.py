@@ -195,51 +195,55 @@ class MainServer(object):
 
     def recv_command(self):
         def listing_command(sock,command,player,flag): #嵌套定义的一个函数 是子线程中分别接受两个玩家发送过来命令的子线程调用的函数,与闭包无关！！
+            print(sock)
+            if sock==None:
+                print('strange thing happen')
+                return
             while flag[0]:  #flag[0]是用来记数的一个死循环 在0.2s后跳出
                 try:
+                    sock.setblocking(0)
+                    sock.settimeout(0.01)
+                  #  print('try',sock)
                     data=sock.recv(5)   #非阻塞模式
+                   # print('zhe???',sock)
                     data=data.decode('utf-8')
-           #         print(data)
+                   # print(data,sock)
+                    #print('ok',sock)
                     if data=='start':   #接受一个start标记 防止数据混乱
         #                print('start!')
                         break
                 except socket.timeout:
                     pass
+                    print('error1',sock)
+                except ConnectionResetError:
+                    player[0]=0
+                    print('error2',sock)
+                except BrokenPipeError:
+                    player[0]=0
+                    print('error3',sock)
+
+            if flag[0]==True:
+                self.sock[0].setblocking(1)
+                self.sock[1].setblocking(1)
+                _len=sock.recv(10)
+                _len=_len.decode('utf-8')
+                _len=_len.split('#')
+                _len=_len[0]
+                _len=int(_len)
+                try:
+                    data=sock.recv(_len) #size
+                           # print(data)
+                    data=data.decode('utf-8')
+                    data=data.split(',')  #将commandid和unitid分离
+                    command.append(data)
                 except ConnectionResetError:
                     player[0]=0
                 except BrokenPipeError:
                     player[0]=0
-                except :
-                    pass
-            if flag[0]==True:
-                self.sock[0].setblocking(1)
-                self.sock[1].setblocking(1)
-                try:
-                    _len=sock.recv(10)
-                    _len=_len.decode('utf-8')
-                    _len=_len.split('#')
-                    _len=_len[0]
-                    try:
-                        _len=int(_len)
-                        try:
-                            data=sock.recv(_len) #size
-                           # print(data)
-                            data=data.decode('utf-8')
-                            data=data.split(',')  #将commandid和unitid分离
-                            command.append(data)
-                        except ConnectionResetError:
-                            player[0]=0
-                        except BrokenPipeError:
-                            player[0]=0
-                    except :
-                        pass
-                except BrokenPipeError:
-                            pass
-                finally:
-                    self.sock[0].setblocking(0)
-                    self.sock[0].settimeout(0.01)
-                    self.sock[1].setblocking(0)
-                    self.sock[1].settimeout(0.01)
+                self.sock[0].setblocking(0)
+                self.sock[0].settimeout(0.01)
+                self.sock[1].setblocking(0)
+                self.sock[1].settimeout(0.01)
 
 
 
