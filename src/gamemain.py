@@ -1026,7 +1026,7 @@ class GameMain:
                                                             [BuildingAttribute.ORIGINAL_RESOURCE] *
                                                             0.5 * (building.level + 2))
                                 if lost_percent < 0.2:
-                                    if (self.status[current_flag]['money'] > lost_percent * construct_money):
+                                    if (self.status[current_flag]['money'] >= lost_percent * construct_money):
                                         building.HP = max_HP
                                         self.status[current_flag]['money'] -= lost_percent * construct_money
                                         self.instruments[current_flag]['maintain'].append(building.Unit_ID)
@@ -1035,7 +1035,7 @@ class GameMain:
                                             print("修理指令资源不足")
                                     break
                                 else:
-                                    if (self.status[current_flag]['money'] > 0.2 * construct_money):
+                                    if (self.status[current_flag]['money'] >= 0.2 * construct_money):
                                         building.HP = building.HP + 0.2 * max_HP
                                         self.status[current_flag]['money'] -= 0.2 * construct_money
                                         self.instruments[current_flag]['maintain'].append(building.Unit_ID)
@@ -1065,8 +1065,8 @@ class GameMain:
                                 upgrade_diff_max_HP = OriginalBuildingAttribute[building.BuildingType][
                                                           BuildingAttribute.ORIGINAL_HP] * 0.5
 
-                                if (self.status[current_flag]['money'] > upgrade_diff_money
-                                    and self.status[current_flag]['building'] > upgrade_diff_bdpoint
+                                if (self.status[current_flag]['money'] >= upgrade_diff_money
+                                    and self.status[current_flag]['building'] >= upgrade_diff_bdpoint
                                     and self.status[current_flag]['tech'] >= building.level + 1):
                                     building.level += 1
                                     building.HP = (max_HP + upgrade_diff_max_HP) * hp_persent
@@ -1394,7 +1394,7 @@ class GameMain:
         # print('****************************************')
 
         # print(self.main_base[0].BuildingType,self.main_base[0].Position.x)
-        self.debug_print()
+        # self.debug_print()
         if print_info:
             print("执行了的指令：")
             for flag in range(2):
