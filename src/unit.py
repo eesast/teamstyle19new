@@ -276,7 +276,7 @@ OriginalBuildingAttribute = {
                           BuildingAttribute.AGE: Age.AI,
                           BuildingAttribute.ORIGINAL_RESOURCE: 500,
                           BuildingAttribute.ORIGINAL_BUILDING_POINT: 50,
-                          BuildingAttribute.AOE: 1,
+                          BuildingAttribute.AOE: 2,
                           BuildingAttribute.CD: 6},
 
     BuildingType.Programmer: {BuildingAttribute.BUILDING_TYPE: UnitType.RESOURCE_BUILDING,
