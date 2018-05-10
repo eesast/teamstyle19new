@@ -1417,46 +1417,46 @@ class GameMain:
         tech_factor = max(self.accumulation[0]['tech'],self.accumulation[1]['tech']) * 0.5 + 1
         
         if (self.turn_num >= 10000 and self.winner == 2):
-            self.description = '同时崩溃'
+            self.description = 'tongshibengkui'
             return
         if (self.winner == 2):
             if (self.turn_num < 1000):
-                self.description = '同时爆炸'
+                self.description = 'tongshibaozha'
             else:
-                self.description = '龟缩拖平'
+                self.description = 'guisuotuoping'
         else:
             if abs(self.accumulation[0]['tech'] - self.accumulation[1]['tech']) > 1:
                 if self.accumulation[self.winner]['tech'] > self.accumulation[1 - self.winner]['tech']:
-                    self.description = '高科技碾压'
+                    self.description = 'gaokejinianya'
                 else:
                     if self.turn_num <80:
-                        self.description = '低科技速攻'
+                        self.description = 'dikejisugong'
                     else:
-                        self.description = '低科技翻盘'
+                        self.description = 'dikejifanpan'
                 return
             if abs(self.accumulation[0]['base_remain_hp'] - self.accumulation[1]['base_remain_hp']) < 2000 * tech_factor:
                 if self.turn_num <80:
-                    self.description = '光速对拆'
+                    self.description = 'guangsuduichai'
                 else:
-                    self.description = '均势对攻'
+                    self.description = 'junshiduigong'
                 return
             if abs(self.accumulation[0]['money'] - self.accumulation[1]['money']) > 15000 * tech_factor:
                 if self.accumulation[self.winner]['money'] > self.accumulation[1 - self.winner]['money']:
-                    self.description = '经济碾压'
+                    self.description = 'jingjinianya'
                 else:
-                    self.description = '弱经济强攻'
+                    self.description = 'ruojingjiqianggong'
                 return
             if self.accumulation[self.winner]['sd_pro'] > self.accumulation[1 - self.winner]['sd_pro'] *2:
                 if self.turn_num > 80:
-                    self.description = '大军攻坚'
+                    self.description = 'dajungongjian'
                 else:
-                    self.description = '暴兵速推'
+                    self.description = 'baobingsutui'
                 return
             if self.accumulation[self.winner]['sd_pro'] < self.accumulation[1 - self.winner]['sd_pro'] *0.5:
                 if self.turn_num > 80:
-                    self.description = '防守反击'
+                    self.description = 'fangshoufanji'
                 else:
-                    self.description = '精兵强攻'
+                    self.description = 'jingbinqianggong'
                 # if (abs(self.accumulation[0]['tech'] - self.accumulation[1]['tech'])>1)
     def assessment(self):
         for flag in range(2):
